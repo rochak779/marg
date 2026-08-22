@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Avatar } from '@/components/ui';
 import {
   BOT_NAME,
   DUEL_QUESTION_SECONDS,
@@ -29,11 +30,14 @@ export function DuelBattle({
   module,
   onExit,
   initialSummary,
+  avatarSeed,
 }: {
   module: CurriculumModule;
   onExit: () => void;
   initialSummary?: DuelSummary | null;
+  avatarSeed?: string;
 }) {
+  const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [questions, setQuestions] = useState<QuizQuestion[]>(() =>
     pickDuelQuestions(module),
   );
@@ -267,7 +271,7 @@ export function DuelBattle({
         )}
         {saveError && (
           <p className="duel-result-save-error">
-            Couldn&apos;t save this result — your Wins/Streak/Rank may be out
+            Couldn&apos;t save this result. Your Wins/Streak/Rank may be out
             of date until your next duel.
           </p>
         )}
@@ -278,7 +282,7 @@ export function DuelBattle({
             onClick={startRematch}
             disabled={saving}
           >
-            Rematch <span aria-hidden="true">→</span>
+            Rematch
           </button>
           <button type="button" className="duel-text-action" onClick={onExit}>
             Back to challenges
@@ -291,7 +295,18 @@ export function DuelBattle({
   return (
     <article className="duel-battle">
       <header className="duel-battle-header">
+        <button
+          type="button"
+          className="duel-exit-btn"
+          aria-label="Exit challenge"
+          onClick={() => setShowExitConfirm(true)}
+        >
+          <svg viewBox="0 0 24 24">
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
         <div>
+          <Avatar className="avatar" seed={avatarSeed ?? 'you'} />
           <span>You</span>
           <strong>
             {userAnswers.filter(
@@ -306,6 +321,9 @@ export function DuelBattle({
           <span>{secondsLeft}s</span>
         </div>
         <div>
+          <span className="duel-bot-avatar" aria-hidden="true">
+            🤖
+          </span>
           <span>{BOT_NAME}</span>
           <strong>
             {botAnswers
@@ -333,9 +351,6 @@ export function DuelBattle({
                 disabled={locked}
                 onClick={() => selectAnswer(optionIndex)}
               >
-                <span className="duel-option-letter">
-                  {String.fromCharCode(65 + optionIndex)}
-                </span>
                 <span>{option}</span>
               </button>
             );
@@ -355,11 +370,36 @@ export function DuelBattle({
             className="duel-primary-action"
             onClick={goNext}
           >
-            Next <span aria-hidden="true">→</span>
+            Next
           </button>
         )}
         {!locked && <p className="duel-waiting">Answer to continue</p>}
       </footer>
+
+      {showExitConfirm && (
+        <div className="confirm-overlay" role="dialog" aria-modal="true">
+          <div className="confirm-sheet">
+            <h2>Leave this challenge?</h2>
+            <p>Leaving mid-battle counts as a loss.</p>
+            <div className="confirm-sheet-actions">
+              <button
+                type="button"
+                className="confirm-no"
+                onClick={() => setShowExitConfirm(false)}
+              >
+                No
+              </button>
+              <button
+                type="button"
+                className="confirm-yes danger"
+                onClick={onExit}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </article>
   );
 }

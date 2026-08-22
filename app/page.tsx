@@ -1,13 +1,10 @@
 import Link from 'next/link';
-import { Arrow, Brand, Stage } from '../components/ui';
+import { Brand, Stage } from '../components/ui';
 export default function Landing() {
   return (
     <Stage className="landing">
       <header className="top">
         <Brand />
-        <Link className="muted" href="/signin">
-          Skip
-        </Link>
       </header>
       <div className="hero">
         <div className="orbital float">
@@ -38,16 +35,16 @@ export default function Landing() {
         </div>
       </div>
       <div className="landing-copy muted">
-        Not a chatbot doing your work — a path that makes you genuinely good at
+        Not a chatbot doing your work. A path that makes you genuinely good at
         using AI.
       </div>
       <div className="bottom-actions">
         <Link className="btn" href="/onboarding">
-          Get started <Arrow />
+          Get started
         </Link>
         <span className="muted">
           Already learning here?{' '}
-          <Link href="/signin" style={{ color: '#6669b8', fontWeight: 600 }}>
+          <Link href="/signin" style={{ color: 'var(--purple)', fontWeight: 600 }}>
             Sign in
           </Link>
         </span>

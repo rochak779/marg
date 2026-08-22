@@ -15,15 +15,19 @@ export default function NotificationsPage() {
   const courseModule = unit
     ? moduleById(Number(unit.id.split('-')[1]))
     : undefined;
+  const unitDayNumber =
+    unit && courseModule
+      ? courseModule.units.findIndex((item) => item.id === unit.id) + 1
+      : 0;
   const items = [
     {
       kind: 'ready',
       title: unit
-        ? `${unit.kind === 'build' ? 'Build' : unit.kind === 'practice' ? 'Practice' : unit.day} is ready`
+        ? `${unit.kind === 'build' ? 'Build' : unit.kind === 'practice' ? 'Practice' : `Day ${unitDayNumber}`} is ready`
         : 'Your path is complete',
       body:
         unit && courseModule
-          ? `${courseModule.title} — ${unit.title}`
+          ? `${courseModule.title}: ${unit.title}`
           : 'Every assigned unit has been completed.',
       time: 'Now',
       href:
@@ -98,19 +102,6 @@ export default function NotificationsPage() {
             </div>
           </Link>
         ))}
-        <Link className="reminder-card" href="/app/settings">
-          <i>
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="8" />
-              <path d="M12 8v4l3 2" />
-            </svg>
-          </i>
-          <span>
-            <b>Set a daily reminder</b>
-            <small>Choose a preference in Settings</small>
-          </span>
-          <strong>Set</strong>
-        </Link>
       </div>
     </div>
   );

@@ -59,7 +59,6 @@ export function LessonView({
   if (showQuiz)
     return (
       <article className="sixa-flow sixa-quiz">
-        <div className="sixa-quiz-glow" />
         <header className="sixa-flow-header">
           <button
             type="button"
@@ -73,18 +72,10 @@ export function LessonView({
           <span>Day {lessonIndex + 1} quiz</span>
           <i />
         </header>
-        <div
-          className="sixa-question-progress"
+        <section
+          className="sixa-question-heading"
           aria-label={`Question ${questionIndex + 1} of ${unit.quiz.length}`}
         >
-          {unit.quiz.map((question, index) => (
-            <i
-              className={index <= questionIndex ? 'active' : ''}
-              key={question.id}
-            />
-          ))}
-        </div>
-        <section className="sixa-question-heading">
           <span>
             QUESTION {questionIndex + 1} OF {unit.quiz.length}
           </span>
@@ -115,13 +106,7 @@ export function LessonView({
                     )
                   }
                 />
-                <span className="sixa-option-letter">
-                  {String.fromCharCode(65 + optionIndex)}
-                </span>
                 <span>{option}</span>
-                <strong aria-hidden="true">
-                  {isCorrect ? '✓' : isWrong ? '×' : ''}
-                </strong>
               </label>
             );
           })}
@@ -147,9 +132,7 @@ export function LessonView({
                 ? 'Submitting…'
                 : 'See my result'
               : 'Next'}
-            {answered && <span aria-hidden="true">→</span>}
           </button>
-          {!answered && <small>Pick one answer to continue</small>}
         </footer>
       </article>
     );
@@ -167,16 +150,9 @@ export function LessonView({
             </svg>
           </Link>
           <span>
-            Day {lessonIndex + 1} · {unit.estimatedMinutes} min
+            Day {lessonIndex + 1} · {unit.estimatedMinutes} mins
           </span>
-          <span className="sixa-more" aria-hidden="true">
-            •••
-          </span>
-        </div>
-        <div className="sixa-lesson-progress" aria-hidden="true">
-          {Array.from({ length: 4 }, (_, index) => (
-            <i className={index < 2 ? 'active' : ''} key={index} />
-          ))}
+          <span />
         </div>
       </header>
       <div className="sixa-lesson-scroll">
@@ -201,25 +177,15 @@ export function LessonView({
         ))}
         <section className="sixa-example-card">
           <div>
-            <span className="sixa-example-icon">✓</span>
             <strong>EXAMPLE</strong>
           </div>
           <p>{unit.example}</p>
         </section>
         <section className="sixa-task-card">
           <div>
-            <span className="sixa-task-icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M10 4h4v5l4 8a2 2 0 0 1-1.8 3H7.8A2 2 0 0 1 6 17l4-8V4Z" />
-              </svg>
-            </span>
             <strong>Your task · 4 min</strong>
           </div>
           <p>{unit.action}</p>
-        </section>
-        <section className="sixa-save-card">
-          <span>Keep for Saturday</span>
-          <p>{unit.savedComponent}</p>
         </section>
       </div>
       <footer className="sixa-flow-footer">
@@ -228,9 +194,8 @@ export function LessonView({
           className="sixa-primary-action"
           onClick={() => setShowQuiz(true)}
         >
-          Check understanding <span aria-hidden="true">→</span>
+          Check understanding
         </button>
-        <small>{unit.quiz.length} questions · about a minute</small>
       </footer>
     </article>
   );

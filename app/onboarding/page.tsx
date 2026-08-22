@@ -1,40 +1,11 @@
 import Link from 'next/link';
-import { Arrow, Back, Stage } from '../../components/ui';
+import { Back, Stage } from '../../components/ui';
 export default function Onboarding() {
   return (
     <Stage className="onboarding-screen">
       <div className="onboard-head">
         <div className="top">
           <Back href="/" />
-          <span style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-            <i
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: 9,
-                background: '#ffffff66',
-              }}
-            />
-            <i
-              style={{
-                width: 18,
-                height: 6,
-                borderRadius: 9,
-                background: '#fcd197',
-              }}
-            />
-            <i
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: 9,
-                background: '#ffffff66',
-              }}
-            />
-          </span>
-          <Link href="/signup" style={{ fontSize: 12, color: '#ffffffcc' }}>
-            Skip
-          </Link>
         </div>
         <svg
           className="float"
@@ -78,7 +49,7 @@ export default function Onboarding() {
           <div className="label" style={{ color: '#fcd197' }}>
             WHAT IS MARG?
           </div>
-          <h1>A learning path — not another chatbot.</h1>
+          <h1>A learning path, not another chatbot.</h1>
           <p
             style={{
               fontSize: 12.5,
@@ -94,7 +65,7 @@ export default function Onboarding() {
       </div>
       <div className="value-list">
         {[
-          ['10-minute steps', 'Prompting, models, agents — plain language.'],
+          ['10-minute steps', 'Prompting, models, agents, plain language.'],
           ['A live playground', 'Write a real prompt, get real feedback.'],
           ['Progress that adds up', 'Streaks, milestones, one path to finish.'],
         ].map((v, i) => (
@@ -109,9 +80,8 @@ export default function Onboarding() {
       </div>
       <div className="bottom-actions" style={{ padding: '0 24px 28px' }}>
         <Link className="btn" href="/signup">
-          Sounds like me <Arrow />
+          Sounds like me
         </Link>
-        <span className="muted">About 4 hours a month</span>
       </div>
     </Stage>
   );

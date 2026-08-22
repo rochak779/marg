@@ -37,5 +37,5 @@ export function recommendationExplanation(answers: AssessmentAnswers) {
     prototyping:
       'AI prototyping is first because it matches the work you do most often.',
   };
-  return `${start} ${focus[answers.context]}`;
+  return [start, focus[answers.context]];
 }

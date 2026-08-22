@@ -1597,7 +1597,7 @@ Require traceability for important claims using source labels. The final prose c
 
 ### Thursday: Templates create consistency without making every update identical
 
-**Hook:** A blank page asks the writer to remember the format, the audience and every risk—every single week.
+**Hook:** A blank page asks the writer to remember the format, the audience and every risk, every single week.
 
 #### Theory
 

@@ -99,12 +99,8 @@ export default function HomePage() {
             'You completed every assigned unit.'
           )}
         </p>
-        <Link
-          className="hero-arrow"
-          href={href}
-          aria-label={unit ? 'Continue' : 'View progress'}
-        >
-          →
+        <Link className="hero-arrow" href={href}>
+          {unit ? "Take me to today's lesson" : 'View progress'}
         </Link>
       </div>
       <div className="stats">

@@ -52,7 +52,7 @@ export default function CoursesPage() {
         <div className="course-intro">
           <b>Your personalised sequence</b>
           <span>
-            Learn in order — completed material always stays available.
+            Learn in order. Completed material always stays available.
           </span>
         </div>
         {modules.map((module, index) => (

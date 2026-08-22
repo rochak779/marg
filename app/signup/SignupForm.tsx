@@ -45,12 +45,11 @@ export default function SignupForm() {
       <div className="crown">
         <div className="top">
           <Back href="/onboarding" />
-          <span>● ● ━</span>
           <span />
         </div>
         <div className="crown-copy">
-          <div className="label" style={{ color: '#7f2e19' }}>
-            STEP 3 · CREATE ACCOUNT
+          <div className="label" style={{ color: '#fcd197' }}>
+            CREATE ACCOUNT
           </div>
           <h1>
             Save your place
@@ -81,6 +80,7 @@ export default function SignupForm() {
         <button
           type="button"
           className="btn ghost"
+          style={{ fontSize: 14 }}
           onClick={() => signInWithGoogle()}
         >
           <GoogleIcon />
@@ -122,12 +122,21 @@ export default function SignupForm() {
             {error}
           </div>
         )}
-        <label style={{ fontSize: 11, color: 'var(--muted)', marginTop: 12 }}>
-          <input type="checkbox" defaultChecked /> Send me one daily nudge,
-          nothing else
+        <label style={{ fontSize: 14, color: 'var(--muted)', marginTop: 12 }}>
+          <input
+            type="checkbox"
+            defaultChecked
+            style={{ accentColor: 'var(--purple)' }}
+          />{' '}
+          Send me one daily nudge, nothing else
         </label>
         <div style={{ marginTop: 'auto', display: 'grid', gap: 9 }}>
-          <button className="btn" type="submit" disabled={pending}>
+          <button
+            className="btn"
+            type="submit"
+            style={{ fontSize: 14 }}
+            disabled={pending}
+          >
             {pending ? 'Creating account…' : 'Create my learning path'}
           </button>
         </div>

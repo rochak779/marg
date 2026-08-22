@@ -39,7 +39,7 @@ export function QuizResult({
       ? 'Clean sweep. Your next lesson is unlocked.'
       : result.score >= 2
         ? 'Close. Re-read anything that felt uncertain, then move on.'
-        : 'Worth another pass — the lesson only takes 10 minutes.';
+        : `You answered ${result.score} of ${unit.quiz.length} questions correct. A quick re-read will help it stick.`;
   const nextLabel = !next
     ? 'Back to home'
     : next.id.startsWith(`module-${module.id}-`)
@@ -48,7 +48,6 @@ export function QuizResult({
 
   return (
     <article className="sixa-result">
-      <div className="sixa-result-glow" />
       <div className="sixa-result-main">
         <svg viewBox="0 0 120 120" aria-hidden="true">
           <circle cx="60" cy="60" r="44" className="track" />
@@ -67,14 +66,15 @@ export function QuizResult({
         </strong>
         <p>{blurb}</p>
         <div>
-          <span>Day {moduleUnitIndex + 1} complete</span>
+          <span className="sixa-result-day-complete">
+            Day {moduleUnitIndex + 1} complete
+          </span>
           <span>Streak {learningStreak(state)}</span>
         </div>
       </div>
       <footer>
         <Link className="sixa-primary-action" href={nextHref}>
           {nextLabel}
-          <span aria-hidden="true">→</span>
         </Link>
         <Link href={`/app/modules/${module.slug}/${unit.day}`}>
           Re-read the lesson

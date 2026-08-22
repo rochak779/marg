@@ -43,25 +43,12 @@ export function ModuleOverview({ module }: { module: CurriculumModule }) {
   return (
     <article className="sixa-module">
       <header className="sixa-module-hero">
-        <div className="sixa-module-glow" />
-        <svg
-          className="sixa-module-line"
-          viewBox="0 0 340 258"
-          aria-hidden="true"
-        >
-          <path d="M240-14c60 48 6 110 60 148 36 22 42 66 22 102" />
-        </svg>
         <nav className="sixa-module-actions" aria-label="Module actions">
           <Link href="/app/courses" aria-label="Back to courses">
             <svg viewBox="0 0 24 24">
               <path d="m15 18-6-6 6-6" />
             </svg>
           </Link>
-          <button type="button" aria-label="Save module">
-            <svg viewBox="0 0 24 24">
-              <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" />
-            </svg>
-          </button>
         </nav>
         <svg
           className="sixa-module-art"
@@ -86,7 +73,7 @@ export function ModuleOverview({ module }: { module: CurriculumModule }) {
           </div>
           <div>
             <span>TIME</span>
-            <strong>{totalMinutes}m</strong>
+            <strong>{totalMinutes} mins</strong>
           </div>
           <div>
             <span>DONE</span>
@@ -125,7 +112,7 @@ export function ModuleOverview({ module }: { module: CurriculumModule }) {
                 <span className="sixa-unit-copy">
                   <small>{unitLabel(unit, index)}</small>
                   <strong>{unit.title}</strong>
-                  <span>{unit.estimatedMinutes} min</span>
+                  <span>{unit.estimatedMinutes} mins</span>
                   {unit.kind !== 'lesson' && (
                     <em>
                       {unit.kind === 'build'
@@ -161,7 +148,6 @@ export function ModuleOverview({ module }: { module: CurriculumModule }) {
             href={`/app/modules/${module.slug}/${nextUnit.day}`}
           >
             {progress.completed ? 'Continue' : 'Start'} Day {nextIndex + 1}
-            <span aria-hidden="true">→</span>
           </Link>
         )}
       </div>

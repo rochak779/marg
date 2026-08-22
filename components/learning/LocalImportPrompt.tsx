@@ -52,12 +52,12 @@ export function LocalImportPrompt() {
       <p>
         <b>We found progress saved in this browser.</b>{' '}
         {hasServerProgress
-          ? 'Your account already has progress — importing will only add units that fit your current path, and never overwrites what is already saved.'
+          ? 'Your account already has progress. Importing will only add units that fit your current path, and never overwrites what is already saved.'
           : 'Import it into your account so it is here on every device.'}
       </p>
       {status === 'error' && (
         <p className="import-banner-error">
-          Import failed. Your browser progress is untouched — try again.
+          Import failed. Your browser progress is untouched. Try again.
         </p>
       )}
       <div className="import-banner-actions">
