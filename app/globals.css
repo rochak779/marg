@@ -2911,7 +2911,7 @@ a {
 }
 .lesson-chart-head p {
   margin: 3px 0 0;
-  color: var(--muted);
+  color: var(--ink);
   font-size: 9px;
 }
 .module-select {
@@ -2990,7 +2990,7 @@ a {
 }
 .score-chart-summary > div > span {
   margin-top: 4px;
-  color: var(--muted);
+  color: var(--ink);
   font-size: 8px;
 }
 .progress-title > span {
@@ -3451,16 +3451,16 @@ a {
 .build-brand span {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--peach);
   color: var(--dark);
   font-weight: 700;
 }
 .build-brand .user-avatar {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 .build-open-count {
   position: absolute;
@@ -4038,6 +4038,20 @@ a {
 .activity-bars > div {
   grid-template-rows: 96px 18px;
 }
+/* Lesson scores can show as few as one bar (a module with one completed
+   lesson) — keep the bar column the same width as the weekly activity
+   chart's instead of letting flex:1 stretch it to fill the row, and anchor
+   the row to the left instead of centering a single stray bar. */
+.lesson-score-bars {
+  height: 130px;
+  gap: 8px;
+  padding-top: 15px;
+  justify-content: flex-start;
+}
+.lesson-score-bars > div {
+  grid-template-rows: 96px 18px;
+  flex: 0 0 29px;
+}
 .build-unlock-notice {
   min-height: 58px;
   margin: 0 0 16px;
@@ -4318,12 +4332,6 @@ a {
 .duel-brief {
   padding: 38px 20px 0;
 }
-.duel-brief-eyebrow {
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 1.4px;
-  color: var(--orange);
-}
 .duel-brief h1 {
   font-size: 24px;
   line-height: 1.2;
@@ -4469,8 +4477,8 @@ a {
   justify-content: space-between;
   padding: 30px 4px 16px;
 }
-.duel-battle-header > div:first-child,
-.duel-battle-header > div:last-child {
+.duel-battle-header .duel-battle-player,
+.duel-battle-header .duel-battle-opponent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4648,21 +4656,6 @@ a {
   font-size: 12px;
   color: var(--muted);
   margin-top: 14px;
-}
-.duel-battle-footer {
-  padding-top: 16px;
-}
-.duel-waiting {
-  height: 54px;
-  border-radius: 999px;
-  background: #dedee2;
-  color: #9a9aa0;
-  font-size: 15px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
 }
 .duel-result {
   display: flex;

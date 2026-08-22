@@ -115,7 +115,6 @@ export default function DuelsHub() {
           <span>Daily duel</span>
           <i />
         </header>
-        <p className="duel-brief-eyebrow">{selected.title.toUpperCase()}</p>
         <h1>
           Five questions.
           <br />

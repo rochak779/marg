@@ -211,7 +211,7 @@ export default function ProgressPage() {
                 </div>
               ) : (
                 <div
-                  className="module-bars activity-bars"
+                  className="module-bars lesson-score-bars"
                   aria-label={`Module ${safeModuleIndex + 1} lesson scores`}
                 >
                   {lessonScores.map((lesson) => (
