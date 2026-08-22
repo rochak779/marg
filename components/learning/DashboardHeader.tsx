@@ -1,20 +1,27 @@
 import Link from 'next/link';
+import { Avatar } from '@/components/ui';
 
 export function DashboardHeader({
   subtitle,
   progress,
   firstName,
   streak,
+  avatarSeed,
 }: {
   subtitle: string;
   progress: number;
   firstName?: string;
   streak?: number;
+  avatarSeed?: string;
 }) {
   return (
     <div className="hello dashboard-header">
       <div className="hello-person">
-        <span className="avatar">म</span>
+        {avatarSeed ? (
+          <Avatar className="avatar" seed={avatarSeed} />
+        ) : (
+          <span className="avatar">म</span>
+        )}
         <div>
           <b>Welcome {firstName || 'Learner'}</b>
           <div className="muted">

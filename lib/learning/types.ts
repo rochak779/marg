@@ -100,6 +100,6 @@ export interface LearningState {
   quizResults: Record<string, QuizResult>;
   builds: Record<string, BuildProgress>;
   practices: Record<string, PracticeProgress>;
-  profile: { firstName: string; email: string } | null;
+  profile: { firstName: string; email: string; avatarSeed: string } | null;
   completionDates: Record<string, string>;
 }

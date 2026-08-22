@@ -1,4 +1,23 @@
 import Link from 'next/link';
+import { avatarDataUri } from '@/lib/avatar';
+export function Avatar({
+  seed,
+  className = '',
+}: {
+  seed: string;
+  className?: string;
+}) {
+  return (
+    // Generated data URI, not an optimizable remote/static image.
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      className={`user-avatar ${className}`}
+      src={avatarDataUri(seed)}
+      alt=""
+      aria-hidden
+    />
+  );
+}
 export function Stage({
   children,
   className = '',
