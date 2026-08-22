@@ -4268,10 +4268,10 @@ a {
   place-items: center;
   min-height: 48px;
   margin: 16px 18px 0;
-  border: 1px solid #e4d7cf;
+  border: 1px solid #f3b4ac;
   border-radius: 999px;
   background: white;
-  color: #9b4a34;
+  color: #b3261e;
   font-size: var(--type-body);
   font-weight: 700;
 }
