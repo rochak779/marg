@@ -54,6 +54,7 @@ export default function DuelsHub() {
     return (
       <DuelBattle
         module={selected}
+        initialSummary={summary}
         onExit={() => {
           setScreen('list');
           setSelected(null);

@@ -28,9 +28,11 @@ function buildBotAnswers(questions: QuizQuestion[]): BotAnswer[] {
 export function DuelBattle({
   module,
   onExit,
+  initialSummary,
 }: {
   module: CurriculumModule;
   onExit: () => void;
+  initialSummary?: DuelSummary | null;
 }) {
   const [questions, setQuestions] = useState<QuizQuestion[]>(() =>
     pickDuelQuestions(module),
@@ -54,7 +56,9 @@ export function DuelBattle({
     outcome: DuelOutcome;
     xp: number;
   } | null>(null);
-  const [summary, setSummary] = useState<DuelSummary | null>(null);
+  const [summary, setSummary] = useState<DuelSummary | null>(
+    initialSummary ?? null,
+  );
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
 
@@ -143,7 +147,6 @@ export function DuelBattle({
       userTimeMs,
       botScore,
       outcome,
-      xpAwarded: xp,
     });
   }
 
@@ -174,10 +177,20 @@ export function DuelBattle({
   useEffect(() => {
     exitStateRef.current = { phase, module, questions };
   });
+  // Guards against React Strict Mode's synchronous mount->cleanup->remount
+  // cycle in dev (and Fast Refresh remounts) recording a spurious loss
+  // before the learner has seen question 1. A real navigation-away happens
+  // well after mount, so didMountRef.current will be true by then; Strict
+  // Mode's immediate dev-only unmount fires before the timeout ever runs.
+  const didMountRef = useRef(false);
   useEffect(() => {
+    const timer = window.setTimeout(() => {
+      didMountRef.current = true;
+    }, 0);
     return () => {
+      window.clearTimeout(timer);
       const exitState = exitStateRef.current;
-      if (exitState.phase === 'battle') {
+      if (didMountRef.current && exitState.phase === 'battle') {
         void recordDuelResult({
           moduleId: exitState.module.id,
           questionIds: exitState.questions.map((question) => question.id),
@@ -185,7 +198,6 @@ export function DuelBattle({
           userTimeMs: 0,
           botScore: 100,
           outcome: 'loss',
-          xpAwarded: xpForOutcome('loss'),
         });
       }
     };
@@ -297,7 +309,7 @@ export function DuelBattle({
           <span>{BOT_NAME}</span>
           <strong>
             {botAnswers
-              .slice(0, questionIndex + (botHasAnswered ? 1 : 0))
+              .slice(0, questionIndex + 1)
               .filter((bot) => bot.correct).length * 20}
           </strong>
         </div>
