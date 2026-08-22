@@ -19,7 +19,7 @@ export async function getDuelSummary(): Promise<DuelSummary> {
   } = await supabase.auth.getUser();
   if (!user) return { wins: 0, streak: 0, rank: null, totalPlayers: 0 };
 
-  const [{ data: results }, { data: rankRows }] = await Promise.all([
+  const [resultsResponse, rankResponse] = await Promise.all([
     supabase
       .from('duel_results')
       .select('outcome, played_at')
@@ -28,7 +28,15 @@ export async function getDuelSummary(): Promise<DuelSummary> {
     supabase.rpc('get_duel_rank'),
   ]);
 
-  const history = results ?? [];
+  if (resultsResponse.error) {
+    console.error('getDuelSummary read failed', { code: resultsResponse.error.code });
+  }
+  if (rankResponse.error) {
+    console.error('getDuelSummary read failed', { code: rankResponse.error.code });
+  }
+
+  const history = resultsResponse.data ?? [];
+  const rankRows = rankResponse.data;
   const wins = history.filter((row) => row.outcome === 'win').length;
   let streak = 0;
   for (const row of history) {
