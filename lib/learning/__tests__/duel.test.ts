@@ -35,8 +35,8 @@ describe('eligibleDuelModules', () => {
   it('adds a completed module once its units are done, keeping current flag correct', () => {
     let state = pathState();
     const firstModule = state.path!.assignedModuleIds[0];
-    const module = curriculum.find((m) => m.id === firstModule)!;
-    for (const unit of module.units) {
+    const curriculumModule = curriculum.find((m) => m.id === firstModule)!;
+    for (const unit of curriculumModule.units) {
       state = completeUnit(state, unit.id);
     }
     const eligible = eligibleDuelModules(state);
@@ -49,12 +49,12 @@ describe('eligibleDuelModules', () => {
 
 describe('pickDuelQuestions', () => {
   it('draws DUEL_QUESTION_COUNT unique questions from the module pool', () => {
-    const module = curriculum[0];
-    const questions = pickDuelQuestions(module, () => 0.5);
+    const curriculumModule = curriculum[0];
+    const questions = pickDuelQuestions(curriculumModule, () => 0.5);
     expect(questions).toHaveLength(DUEL_QUESTION_COUNT);
     expect(new Set(questions.map((q) => q.id)).size).toBe(DUEL_QUESTION_COUNT);
     const pool = new Set(
-      module.units
+      curriculumModule.units
         .filter((u) => u.kind === 'lesson')
         .flatMap((u) => u.quiz.map((q) => q.id)),
     );
@@ -64,8 +64,8 @@ describe('pickDuelQuestions', () => {
 
 describe('resolveBotAnswer', () => {
   it('stays near BOT_ACCURACY over many trials and within the time cap', () => {
-    const module = curriculum[0];
-    const question = module.units.find((u) => u.kind === 'lesson')!.quiz[0];
+    const curriculumModule = curriculum[0];
+    const question = curriculumModule.units.find((u) => u.kind === 'lesson')!.quiz[0];
     let correct = 0;
     const trials = 2000;
     for (let i = 0; i < trials; i++) {
