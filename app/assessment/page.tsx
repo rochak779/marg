@@ -10,8 +10,7 @@ import type { AppliedContext, AssessmentAnswers } from '@/lib/learning/types';
 type AnswerValue = boolean | AppliedContext;
 const questions = [
   {
-    title:
-      'Do you currently use AI for tasks beyond writing, summarising, brainstorming or generating drafts?',
+    title: 'Do you use AI for more than writing or getting answers?',
     helper:
       'For example: analysing information, categorising inputs, using multiple sources, creating prototypes or completing a multi-step task.',
     options: [
