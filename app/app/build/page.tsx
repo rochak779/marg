@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { Avatar } from '@/components/ui';
 import { useLearning } from '@/app/providers';
 import {
   assignedUnits,
@@ -34,7 +35,13 @@ export default function BuildHub() {
     <div className="build-hub">
       <header>
         <div className="build-brand">
-          <span>म</span>
+          <Link href="/app/settings" aria-label="Open settings">
+            {state.profile?.avatarSeed ? (
+              <Avatar seed={state.profile.avatarSeed} />
+            ) : (
+              <span>म</span>
+            )}
+          </Link>
           <b>Build</b>
         </div>
         <span className="build-open-count">

@@ -81,6 +81,7 @@ export default function ProgressPage() {
         progress={summary.percentage}
         firstName={state.profile?.firstName}
         streak={learningStreak(state)}
+        avatarSeed={state.profile?.avatarSeed}
       />
       <div className="progress-title">
         <h1>Progress</h1>

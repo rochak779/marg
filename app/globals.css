@@ -3648,6 +3648,10 @@ a {
   color: var(--dark);
   font-weight: 700;
 }
+.build-brand .user-avatar {
+  width: 30px;
+  height: 30px;
+}
 .build-open-count {
   position: absolute;
   z-index: 1;
