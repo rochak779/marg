@@ -58,12 +58,43 @@ export function DuelBattle({
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
 
-  // Ticks while a question is live: drives the countdown and the bot's
-  // "thinking…" -> "answered" status line.
+  const timeoutFiredRef = useRef(false);
+
+  // Ticks while a question is live: drives the countdown, the bot's
+  // "thinking…" -> "answered" status line, and auto-locks timed-out questions.
   useEffect(() => {
     if (phase !== 'battle') return;
-    const timer = window.setInterval(() => setNow(Date.now()), 250);
+    timeoutFiredRef.current = false;
+
+    const timer = window.setInterval(() => {
+      const currentNow = Date.now();
+      const currentElapsedMs = currentNow - questionStartAt;
+      const currentSecondsLeft = Math.max(
+        0,
+        DUEL_QUESTION_SECONDS - Math.floor(currentElapsedMs / 1000),
+      );
+
+      setNow(currentNow);
+
+      // Auto-lock the question when the clock runs out (only once per question)
+      if (
+        !timeoutFiredRef.current &&
+        currentSecondsLeft === 0 &&
+        userAnswers[questionIndex] < 0
+      ) {
+        timeoutFiredRef.current = true;
+        const nextTimes = userAnswerMs.map((value, index) =>
+          index === questionIndex ? DUEL_QUESTION_SECONDS * 1000 : value,
+        );
+        setUserAnswerMs(nextTimes);
+        if (questionIndex === questions.length - 1) {
+          finishBattle(userAnswers, nextTimes);
+        }
+      }
+    }, 250);
+
     return () => window.clearInterval(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, questionIndex]);
 
   const elapsedMs = now - questionStartAt;
@@ -124,19 +155,6 @@ export function DuelBattle({
     const nextSummary = await getDuelSummary();
     setSummary(nextSummary);
   }
-
-  // Auto-lock the question as unanswered once the clock runs out.
-  useEffect(() => {
-    if (phase !== 'battle' || answered || secondsLeft > 0) return;
-    const nextTimes = userAnswerMs.map((value, index) =>
-      index === questionIndex ? DUEL_QUESTION_SECONDS * 1000 : value,
-    );
-    setUserAnswerMs(nextTimes);
-    if (questionIndex === questions.length - 1) {
-      finishBattle(userAnswers, nextTimes);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, answered, secondsLeft, questionIndex]);
 
   // Record a loss if the learner leaves mid-battle (house rule #2). Reads
   // the latest state via a ref so the cleanup below (registered once on
