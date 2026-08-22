@@ -8,6 +8,7 @@ import { isUnitUnlocked } from '@/lib/learning/progression';
 import { submitQuiz } from '@/lib/learning/server-actions';
 import { track } from '@/lib/learning/analytics';
 import type { CurriculumModule, LessonUnit } from '@/lib/learning/types';
+import audioManifest from '@/public/audio/lessons/manifest.json';
 
 export function LessonView({
   module,
@@ -183,6 +184,15 @@ export function LessonView({
           {unit.day.toUpperCase()} LESSON
         </span>
         <h1>{unit.title}</h1>
+        {audioManifest[unit.id as keyof typeof audioManifest] && (
+          <audio
+            className="sixa-lesson-audio"
+            controls
+            src={audioManifest[unit.id as keyof typeof audioManifest]}
+          >
+            Your browser does not support audio playback.
+          </audio>
+        )}
         <p className="sixa-lesson-hook">{unit.hook}</p>
         {unit.theory.map((paragraph) => (
           <p className="sixa-theory" key={paragraph}>
