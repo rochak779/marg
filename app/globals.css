@@ -4393,7 +4393,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-bottom: 24px;
+  padding: 38px 20px 24px;
 }
 .duel-hub-header {
   display: flex;
@@ -4533,6 +4533,9 @@ a {
   font-weight: 600;
   color: var(--muted);
 }
+.duel-brief {
+  padding: 38px 20px 0;
+}
 .duel-brief-eyebrow {
   font-size: 10.5px;
   font-weight: 600;
@@ -4635,7 +4638,7 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  padding: 16px 0 24px;
+  padding: 16px 20px 24px;
 }
 .duel-matching-vs {
   display: flex;
@@ -4673,6 +4676,9 @@ a {
 .duel-matching-status {
   font-size: 12.5px;
   color: var(--muted);
+}
+.duel-battle {
+  padding: 38px 20px 0;
 }
 .duel-battle-header {
   display: flex;
