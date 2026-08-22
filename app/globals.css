@@ -2083,6 +2083,11 @@ a {
 .sixa-lesson-hook {
   margin-top: 12px;
 }
+.sixa-lesson-audio {
+  width: 100%;
+  margin-top: 12px;
+  height: 40px;
+}
 .sixa-example-card,
 .sixa-task-card,
 .sixa-save-card {
