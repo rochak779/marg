@@ -1,0 +1,1677 @@
+[
+  {
+    "id": 1,
+    "slug": "module-1",
+    "title": "From Asking AI to Directing AI",
+    "audience": "Basic learners only",
+    "outcome": "By Sunday, the learner can turn messy meeting notes into a clear, reusable set of actions using ChatGPT or Claude, and can explain why the output still needs human review.",
+    "weekdayComponents": [
+      "Monday: AI capability map",
+      "Tuesday: Prompt goal",
+      "Wednesday: Context and constraints",
+      "Thursday: Verification checklist",
+      "Friday: Reusable prompt structure"
+    ],
+    "units": [
+      {
+        "id": "module-1-monday",
+        "day": "monday",
+        "kind": "lesson",
+        "title": "AI is a prediction engine, not a knowledgeable colleague",
+        "hook": "You ask AI a confident question. It gives a confident answer. The dangerous assumption is that confidence means correctness.",
+        "theory": [
+          "Artificial intelligence is a broad name for computer systems that perform tasks we associate with human intelligence, such as recognising patterns, understanding language, making predictions and generating content.",
+          "Tools such as ChatGPT and Claude are powered by large language models, or LLMs. An LLM has learned patterns from very large amounts of text. When you type a message, it predicts a useful continuation one piece at a time. That is why it can explain, rewrite, classify and summarise language so fluently.",
+          "An LLM does not automatically know your company, your customers or what happened in yesterday's meeting. It only has the information available in the conversation and any material you provide. It can also produce plausible information that is incorrect. Treat it as a fast pattern assistant, not as an unquestionable source of truth.",
+          "A useful mental model is: AI proposes; you decide. Use it to accelerate thinking and repetitive language work, while keeping responsibility for facts, judgement and consequences with the human user."
+        ],
+        "example": "Weak expectation: 'AI knows what happened in our meeting.' Better expectation: 'If I give AI accurate meeting notes and clear instructions, it can help organise those notes.'",
+        "action": "Write down one task where AI could help you work with existing information, and one task where you would not trust it without checking.",
+        "savedComponent": "A two-column capability map: 'AI can help' and 'Human must decide'.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m1-monday-q1",
+            "prompt": "What does an LLM mainly do when it generates a response?",
+            "options": [
+              "Search every website in real time",
+              "Predict a useful continuation from patterns",
+              "Recall a guaranteed fact database",
+              "Copy one complete stored answer"
+            ],
+            "correctIndex": 1,
+            "explanation": "LLMs generate language by predicting likely and useful next pieces of text; this does not guarantee factual accuracy."
+          },
+          {
+            "id": "m1-monday-q2",
+            "prompt": "Which is the safest way to think about AI at work?",
+            "options": [
+              "AI proposes; a human decides",
+              "AI is correct when it sounds confident",
+              "AI replaces the need for source material",
+              "AI should make every final decision"
+            ],
+            "correctIndex": 0,
+            "explanation": "The user remains responsible for checking facts, applying judgement and considering consequences."
+          },
+          {
+            "id": "m1-monday-q3",
+            "prompt": "Why might AI struggle with yesterday's internal meeting?",
+            "options": [
+              "It dislikes meeting notes",
+              "It cannot write summaries",
+              "It may not have the meeting information",
+              "It only works with numbers"
+            ],
+            "correctIndex": 2,
+            "explanation": "The model needs the relevant notes or source material in the conversation before it can work reliably with them."
+          }
+        ]
+      },
+      {
+        "id": "module-1-tuesday",
+        "day": "tuesday",
+        "kind": "lesson",
+        "title": "A good prompt begins with a job, not clever wording",
+        "hook": "Most weak prompts are not badly written. They are missing a clear job.",
+        "theory": [
+          "A prompt is the instruction and information you give an AI. Good prompting is not about discovering a magical sentence. It is about making the task unambiguous.",
+          "Start by defining four things: the goal, the input, the expected output and the audience. 'Summarise this' leaves many decisions to the model. 'Turn these meeting notes into five actions for the product team' gives it a job.",
+          "Use an action verb that describes the work: classify, compare, extract, rewrite, challenge, prioritise or summarise. Then state what a successful response must contain.",
+          "Do not add unnecessary role-play such as 'You are the world's best product manager' unless a perspective genuinely changes the task. Specific information is more useful than dramatic language."
+        ],
+        "example": "Before: 'Summarise these notes.' After: 'From the meeting notes below, extract decisions, action items, owners and deadlines. If an owner or deadline is missing, write Not specified.'",
+        "action": "Rewrite this vague prompt: 'Help me with my meeting.' Include a goal, input and output.",
+        "savedComponent": "A one-sentence goal for Saturday: turn meeting notes into decisions and actions.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m1-tuesday-q1",
+            "prompt": "Which prompt gives AI the clearest job?",
+            "options": [
+              "Help with this",
+              "Make this better",
+              "Extract decisions, actions, owners and deadlines from these notes",
+              "Be brilliant and analyse everything"
+            ],
+            "correctIndex": 2,
+            "explanation": "It names the action, source and required output."
+          },
+          {
+            "id": "m1-tuesday-q2",
+            "prompt": "What is usually more valuable than elaborate role-play?",
+            "options": [
+              "More emojis",
+              "Specific task information",
+              "Writing in capital letters",
+              "Calling the AI an expert"
+            ],
+            "correctIndex": 1,
+            "explanation": "Clear context, constraints and output requirements reduce ambiguity."
+          },
+          {
+            "id": "m1-tuesday-q3",
+            "prompt": "Which item is not part of the four-part prompt foundation taught today?",
+            "options": ["Goal", "Input", "Audience", "A dramatic persona"],
+            "correctIndex": 3,
+            "explanation": "A persona can sometimes help, but goal, input, output and audience are the core foundation."
+          }
+        ]
+      },
+      {
+        "id": "module-1-wednesday",
+        "day": "wednesday",
+        "kind": "lesson",
+        "title": "Context and constraints turn a generic answer into a useful one",
+        "hook": "Two people can use the same AI tool and get very different value. Usually, one has supplied the missing context.",
+        "theory": [
+          "Context is the background the model needs to interpret the task: who the audience is, why the work matters, what has already happened and what source material it should use.",
+          "Constraints define the boundaries. Examples include: use only the notes provided, do not invent owners, keep the answer under 200 words, use plain English, or return the result as a table.",
+          "An example can show the desired pattern when words alone are ambiguous. One short example of a good action item can be more effective than a long explanation.",
+          "More context is not always better. Include what changes the answer and remove irrelevant detail. Never paste confidential, personal or commercially sensitive information into an AI tool unless your organisation has approved that use."
+        ],
+        "example": "Context: 'This update is for directors who were not in the meeting.' Constraint: 'Use only the notes. Mark missing information instead of guessing.'",
+        "action": "Add two constraints to yesterday's meeting prompt: one about unsupported information and one about the response format.",
+        "savedComponent": "The context and constraint section of Saturday's prompt.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m1-wednesday-q1",
+            "prompt": "Which instruction is a constraint?",
+            "options": [
+              "The meeting was on Monday",
+              "The audience is the product team",
+              "Do not invent missing owners",
+              "These are meeting notes"
+            ],
+            "correctIndex": 2,
+            "explanation": "It sets a boundary on what the AI is allowed to do."
+          },
+          {
+            "id": "m1-wednesday-q2",
+            "prompt": "When should you paste confidential customer data into a public AI tool?",
+            "options": [
+              "Whenever it saves time",
+              "Only when organisational policy and the tool's approved use allow it",
+              "When names are interesting",
+              "Whenever the prompt says private"
+            ],
+            "correctIndex": 1,
+            "explanation": "A prompt cannot override privacy, security or company policy."
+          },
+          {
+            "id": "m1-wednesday-q3",
+            "prompt": "What kind of context should you include?",
+            "options": [
+              "Every detail you know",
+              "Only information that can change the answer",
+              "No context at all",
+              "Unrelated examples to make the prompt longer"
+            ],
+            "correctIndex": 1,
+            "explanation": "Relevant context improves the response; irrelevant information creates noise."
+          }
+        ]
+      },
+      {
+        "id": "module-1-thursday",
+        "day": "thursday",
+        "kind": "lesson",
+        "title": "A polished answer can still be wrong",
+        "hook": "AI errors are often easy to miss because they arrive in fluent sentences and tidy tables.",
+        "theory": [
+          "A hallucination is information generated by AI that is unsupported or incorrect but presented as if it were true. It may invent a fact, owner, deadline, quotation or source.",
+          "Verification means comparing important claims with the original source. For meeting notes, check every decision, owner and deadline. For research, open the cited source. For calculations, verify the inputs and arithmetic.",
+          "Risk determines how much checking is needed. A draft headline may need a quick review. A compliance decision, financial figure or customer commitment needs stronger evidence and often an authorised human approver.",
+          "You can reduce errors by telling AI to distinguish facts from assumptions, quote supporting text, state when information is missing and avoid filling gaps. These steps reduce risk; they do not make the model infallible."
+        ],
+        "example": "The AI writes 'Priya will deliver the prototype by Friday.' The notes say only 'Prototype should be explored.' The owner and deadline are hallucinated.",
+        "action": "Create a four-item checklist for reviewing an AI-generated meeting summary.",
+        "savedComponent": "A verification checklist covering decisions, owners, deadlines and unsupported claims.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m1-thursday-q1",
+            "prompt": "What is an AI hallucination?",
+            "options": [
+              "A colourful interface",
+              "Unsupported or incorrect information presented as true",
+              "A slow response",
+              "A spelling error made by a user"
+            ],
+            "correctIndex": 1,
+            "explanation": "Fluent language can make fabricated or unsupported details look credible."
+          },
+          {
+            "id": "m1-thursday-q2",
+            "prompt": "What should you do with an important AI-generated deadline?",
+            "options": [
+              "Trust it if it is bold",
+              "Check it against the source",
+              "Assume Friday",
+              "Remove every deadline"
+            ],
+            "correctIndex": 1,
+            "explanation": "Important claims should be verified against the original information."
+          },
+          {
+            "id": "m1-thursday-q3",
+            "prompt": "Does asking AI not to hallucinate guarantee accuracy?",
+            "options": [
+              "Yes, always",
+              "Only in short prompts",
+              "No; it can reduce risk but verification is still needed",
+              "Yes, if the model apologises"
+            ],
+            "correctIndex": 2,
+            "explanation": "Instructions help, but the user must still review consequential output."
+          }
+        ]
+      },
+      {
+        "id": "module-1-friday",
+        "day": "friday",
+        "kind": "lesson",
+        "title": "A workflow is a repeatable path, not one lucky prompt",
+        "hook": "If the result depends on remembering the perfect words every Friday, you have a trick. If the process can be repeated and checked, you have the beginning of a workflow.",
+        "theory": [
+          "A workflow is a repeatable sequence that turns an input into an output. A simple AI workflow can include: receive notes, extract information, format the result, check missing details and review before sharing.",
+          "The workflow does not need to be automated. Reusing a saved prompt and a consistent review checklist is already more reliable than starting from scratch every time.",
+          "A useful workflow defines five elements: trigger, input, AI task, output and human review. The trigger is when the process begins. The human review step makes ownership explicit.",
+          "Save prompts as reusable templates with placeholders such as [PASTE NOTES] and [AUDIENCE]. This makes the process easier to repeat without pretending every input is identical."
+        ],
+        "example": "Trigger: meeting ends. Input: notes. AI task: extract decisions and actions. Output: structured table. Human review: meeting owner checks it before sharing.",
+        "action": "Write the five elements of Saturday's meeting-notes workflow.",
+        "savedComponent": "The complete workflow outline and a reusable prompt template.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m1-friday-q1",
+            "prompt": "What makes a process a workflow?",
+            "options": [
+              "It uses a very long prompt",
+              "It follows a repeatable path from input to reviewed output",
+              "It runs without any human",
+              "It uses paid software"
+            ],
+            "correctIndex": 1,
+            "explanation": "Automation is optional; repeatability and defined steps are essential."
+          },
+          {
+            "id": "m1-friday-q2",
+            "prompt": "Which is a useful workflow element?",
+            "options": [
+              "Human review",
+              "A random writing style",
+              "An unexplained output",
+              "A hidden owner"
+            ],
+            "correctIndex": 0,
+            "explanation": "The workflow should say who checks the result and when."
+          },
+          {
+            "id": "m1-friday-q3",
+            "prompt": "Why use placeholders in a saved prompt?",
+            "options": [
+              "To make it look technical",
+              "To show what must change for each run",
+              "To stop the AI responding",
+              "To hide the workflow"
+            ],
+            "correctIndex": 1,
+            "explanation": "Placeholders make a template reusable while keeping variable inputs visible."
+          }
+        ]
+      },
+      {
+        "id": "module-1-saturday",
+        "day": "saturday",
+        "kind": "build",
+        "title": "Build your first reusable prompt workflow: meeting notes to actions",
+        "outcome": "Use ChatGPT or Claude to turn messy meeting notes into a checked action summary. This is a guided prompting workflow, not an automated system.",
+        "estimate": "25-30 minutes",
+        "estimatedMinutes": 28,
+        "practiceInput": "Meeting: Mobile onboarding review\n- Drop-off appears highest after identity verification, but analytics needs to confirm.\n- Sara suggested shortening the help text. No decision was made.\n- Dev will check event tracking by Thursday.\n- The team agreed to test two versions of the progress indicator. Imran will draft the test plan; no date agreed.\n- Legal wording may need review. Owner not discussed.\n- Next review is 18 September.",
+        "steps": [],
+        "prompt": "You help me organise meeting notes. Use only the notes I provide.\n\nCreate four sections:\n1. Decisions made\n2. Action items in a table with Action, Owner, Deadline and Supporting note\n3. Open questions\n4. Information that needs human review\n\nRules:\n- Do not invent owners, deadlines or decisions.\n- If information is missing, write 'Not specified'.\n- Keep suggestions separate from confirmed decisions.\n- Every action and decision must include a short supporting phrase from the notes.\n- After the output, list any ambiguous statements you could not classify.\n\nWhen you are ready, ask me to paste the meeting notes.\n\n[PASTE MEETING NOTES]",
+        "checks": [
+          "Every claimed decision exists in the notes",
+          "Missing owners and dates are marked, not invented",
+          "Suggestions are not presented as decisions",
+          "The learner saved a reusable prompt",
+          "The learner tested at least one missing-information case"
+        ]
+      },
+      {
+        "id": "module-1-sunday",
+        "day": "sunday",
+        "kind": "practice",
+        "title": "Adapt it yourself: email thread to decisions and actions",
+        "challenge": "Without copying Saturday's instructions word for word, adapt the workflow to turn an email thread into decisions, actions and unresolved questions.",
+        "rules": [
+          "Change the input description from meeting notes to an email thread",
+          "Preserve who said what",
+          "Do not treat a proposal as an agreed decision",
+          "Add a field for the date of the latest relevant message",
+          "Create one test where two people disagree"
+        ],
+        "reflections": [
+          "What did you change and why?",
+          "What mistake did the AI make on the first run?",
+          "Which part of the workflow still requires a human?",
+          "Could you run the adapted prompt again next week without rewriting it?"
+        ],
+        "hints": [
+          "Try adapting this requirement: Change the input description from meeting notes to an email thread",
+          "Try adapting this requirement: Preserve who said what",
+          "Try adapting this requirement: Do not treat a proposal as an agreed decision"
+        ],
+        "estimatedMinutes": 15
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "module-2",
+    "title": "Customer Feedback: From Comments to Evidence-Backed Insights",
+    "audience": "Week 2 for basic learners; Week 1 entry point for advanced learners",
+    "outcome": "By Sunday, the learner can use ChatGPT or Claude to analyse a set of customer comments, connect each insight to evidence and test whether the result is trustworthy.",
+    "weekdayComponents": [
+      "Monday: Grounding rules",
+      "Tuesday: Retrieval mental model",
+      "Wednesday: Meaning-based grouping",
+      "Thursday: Source preparation plan",
+      "Friday: Evaluation checklist"
+    ],
+    "units": [
+      {
+        "id": "module-2-monday",
+        "day": "monday",
+        "kind": "lesson",
+        "title": "Grounding: make the answer stand on evidence",
+        "hook": "A polished customer insight without supporting feedback is only a plausible opinion.",
+        "theory": [
+          "Grounding means requiring an AI response to be based on provided or retrieved source material. In this week, the source is a set of customer comments.",
+          "A grounded insight should be inspectable. A reviewer should be able to move from the conclusion back to the comments that support it. This is why evidence identifiers and short quotations matter.",
+          "Grounding does not prove that the source itself is complete or unbiased. Ten comments from unhappy customers do not automatically represent the entire customer base. AI can organise the evidence; it cannot repair a poor research sample.",
+          "Useful rules include: use only the supplied feedback, separate observation from interpretation, cite comment IDs and say 'insufficient evidence' when the data does not support a conclusion."
+        ],
+        "example": "Unsupported: 'Customers hate onboarding.' Grounded: 'Three of eight comments mention confusion during identity verification: C2, C5 and C8.'",
+        "action": "Rewrite the unsupported insight so it states the evidence, scope and uncertainty.",
+        "savedComponent": "Four grounding rules for Saturday's workflow.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m2-monday-q1",
+            "prompt": "What makes an AI insight grounded?",
+            "options": [
+              "It is written confidently",
+              "It can be traced to relevant source material",
+              "It is longer than the feedback",
+              "It contains business jargon"
+            ],
+            "correctIndex": 1,
+            "explanation": "Grounding connects conclusions to inspectable evidence."
+          },
+          {
+            "id": "m2-monday-q2",
+            "prompt": "What should the workflow do when evidence is too weak?",
+            "options": [
+              "Invent a likely explanation",
+              "Say there is insufficient evidence",
+              "Repeat the claim more strongly",
+              "Remove all source IDs"
+            ],
+            "correctIndex": 1,
+            "explanation": "Uncertainty should be visible rather than filled with plausible text."
+          },
+          {
+            "id": "m2-monday-q3",
+            "prompt": "Does grounding guarantee representative research?",
+            "options": [
+              "Yes",
+              "Only with quotations",
+              "No; source quality and sampling still matter",
+              "Yes, when the answer is a table"
+            ],
+            "correctIndex": 2,
+            "explanation": "Grounding limits the model to evidence but does not correct biased or incomplete evidence."
+          }
+        ]
+      },
+      {
+        "id": "module-2-tuesday",
+        "day": "tuesday",
+        "kind": "lesson",
+        "title": "RAG: retrieve before you generate",
+        "hook": "When the source collection becomes too large, the model should not guess which part matters. It needs a retrieval step.",
+        "theory": [
+          "RAG stands for retrieval-augmented generation. It describes a pattern: first retrieve relevant source material, then give that material to a language model so it can generate an answer grounded in the retrieved evidence.",
+          "Think of an open-book exam. Retrieval is finding the right pages; generation is writing the answer using those pages. A good writer with the wrong pages still produces a poor answer.",
+          "RAG is useful when answers must rely on a changing or private collection such as research reports, policies, customer feedback or product documentation. It is unnecessary for every task.",
+          "This week's ChatGPT/Claude exercise will imitate the grounded behaviour using a small uploaded or pasted dataset. It will not create a production RAG system or vector database."
+        ],
+        "example": "Question: 'Why are customers abandoning onboarding?' Retrieval selects comments about onboarding; generation produces themes and citations using only those comments.",
+        "action": "Draw or describe the three stages: user question, relevant evidence, grounded answer.",
+        "savedComponent": "A plain-English description of retrieval and generation for the workflow.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m2-tuesday-q1",
+            "prompt": "What happens first in RAG?",
+            "options": [
+              "Generate a final answer",
+              "Retrieve relevant source material",
+              "Design a user interface",
+              "Delete the source"
+            ],
+            "correctIndex": 1,
+            "explanation": "The retrieved evidence is supplied to the model before it generates the answer."
+          },
+          {
+            "id": "m2-tuesday-q2",
+            "prompt": "Which task is a strong RAG candidate?",
+            "options": [
+              "Rewrite one sentence",
+              "Answer questions from a changing internal policy collection",
+              "Choose an emoji",
+              "Correct a spelling mistake"
+            ],
+            "correctIndex": 1,
+            "explanation": "RAG helps when responses need relevant evidence from a larger, changing source collection."
+          },
+          {
+            "id": "m2-tuesday-q3",
+            "prompt": "Will Saturday create a production RAG system?",
+            "options": [
+              "Yes",
+              "No; it demonstrates grounded behaviour with a small source set",
+              "Yes, including a vector database",
+              "Only if the prompt is long"
+            ],
+            "correctIndex": 1,
+            "explanation": "The MVP exercise teaches the pattern honestly without claiming that a chat prompt is a deployed RAG application."
+          }
+        ]
+      },
+      {
+        "id": "module-2-wednesday",
+        "day": "wednesday",
+        "kind": "lesson",
+        "title": "Embeddings and vectors: finding meaning, not just matching words",
+        "hook": "A customer can say 'I got stuck proving who I am' without ever using the words 'identity verification'. A keyword search may miss the connection.",
+        "theory": [
+          "An embedding is a numerical representation of meaning. The numbers form a vector. Text with similar meaning tends to be represented closer together in this numerical space.",
+          "Vector search uses this representation to find semantically similar material, even when the wording is different. This is why 'login keeps failing' can be connected with 'cannot access my account'.",
+          "A vector database stores and searches these representations efficiently. Product managers do not need to calculate the vectors, but they should understand the product behaviour: what content is indexed, what gets retrieved and what happens when retrieval is poor.",
+          "Semantic similarity is not the same as truth or importance. A similar comment may still be irrelevant to the user's question. Retrieval results need filters, ranking and evaluation."
+        ],
+        "example": "Keyword match looks for 'verification'. Semantic search may also find 'the selfie check kept rejecting me' because the meaning is related.",
+        "action": "Group three differently worded phrases that mean the same customer problem.",
+        "savedComponent": "Two pairs of differently worded but semantically similar feedback statements.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m2-wednesday-q1",
+            "prompt": "What is an embedding?",
+            "options": [
+              "A visual dashboard",
+              "A numerical representation of meaning",
+              "A final AI answer",
+              "A privacy policy"
+            ],
+            "correctIndex": 1,
+            "explanation": "Embeddings allow systems to compare semantic similarity mathematically."
+          },
+          {
+            "id": "m2-wednesday-q2",
+            "prompt": "Why can vector search outperform keyword search?",
+            "options": [
+              "It always knows the truth",
+              "It can find similar meanings expressed with different words",
+              "It removes the need for source data",
+              "It writes longer answers"
+            ],
+            "correctIndex": 1,
+            "explanation": "Semantic representations capture related meaning beyond exact word matches."
+          },
+          {
+            "id": "m2-wednesday-q3",
+            "prompt": "Does semantic similarity prove relevance?",
+            "options": [
+              "Always",
+              "No; similar items can still be wrong for the question",
+              "Only for customer feedback",
+              "Yes, if stored in a vector database"
+            ],
+            "correctIndex": 1,
+            "explanation": "Retrieval quality must be evaluated in the context of the user's need."
+          }
+        ]
+      },
+      {
+        "id": "module-2-thursday",
+        "day": "thursday",
+        "kind": "lesson",
+        "title": "Chunking and metadata decide what the AI can find",
+        "hook": "If you cut a document in the wrong places, the answer may retrieve half a thought and lose the evidence around it.",
+        "theory": [
+          "Large source collections are often divided into smaller pieces called chunks before retrieval. A chunk might be a paragraph, a feedback comment, a support ticket or a section of a document.",
+          "Chunks that are too large can mix unrelated ideas. Chunks that are too small can lose context. For customer feedback, keeping one full comment with its ID and metadata is usually a sensible starting point.",
+          "Metadata is information about the source, such as date, customer type, product area, geography or research round. It allows retrieval and analysis to filter the evidence instead of mixing everything together.",
+          "Never split evidence in a way that disconnects a quotation from its source ID. The goal is not merely to help the model answer; it is to make the answer auditable."
+        ],
+        "example": "Useful feedback record: C07 | 14 Aug | New customer | Onboarding | 'The selfie check failed three times.'",
+        "action": "Turn one paragraph of feedback into a clean record with ID, date, segment, topic and full comment.",
+        "savedComponent": "The feedback record format that will be used on Saturday.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m2-thursday-q1",
+            "prompt": "What is chunking?",
+            "options": [
+              "Deleting difficult feedback",
+              "Dividing source material into retrievable pieces",
+              "Generating a final report",
+              "Changing every comment into one word"
+            ],
+            "correctIndex": 1,
+            "explanation": "Retrieval systems commonly work with smaller source units rather than an entire collection at once."
+          },
+          {
+            "id": "m2-thursday-q2",
+            "prompt": "Why keep a source ID with each comment?",
+            "options": [
+              "To make the table longer",
+              "To trace conclusions back to evidence",
+              "To reveal customer identity",
+              "To improve grammar"
+            ],
+            "correctIndex": 1,
+            "explanation": "Stable IDs make citations and review possible without exposing personal details."
+          },
+          {
+            "id": "m2-thursday-q3",
+            "prompt": "What can metadata help the workflow do?",
+            "options": [
+              "Filter by segment or product area",
+              "Guarantee every conclusion",
+              "Replace the comment text",
+              "Avoid all human review"
+            ],
+            "correctIndex": 0,
+            "explanation": "Metadata provides useful constraints for retrieval and analysis."
+          }
+        ]
+      },
+      {
+        "id": "module-2-friday",
+        "day": "friday",
+        "kind": "lesson",
+        "title": "Evals: test the workflow, not just the demo",
+        "hook": "A workflow that succeeds on one carefully chosen example has shown a demo, not reliability.",
+        "theory": [
+          "An evaluation, often shortened to eval, is a structured way to test whether an AI system produces acceptable results. An eval needs an input, an expected behaviour and a way to judge the output.",
+          "For feedback analysis, useful criteria include evidence coverage, citation accuracy, unsupported claims, correct separation of themes and visibility of uncertainty.",
+          "Create a small test set containing normal cases and edge cases. Edge cases might include one comment with two themes, contradictory comments, an empty comment or a claim with no supporting evidence.",
+          "Some checks can be objective, such as whether every cited ID exists. Others require human judgement, such as whether two themes were merged incorrectly. Record both rather than pretending quality is a single automatic score."
+        ],
+        "example": "Test: one comment praises speed but criticises unclear fees. Expected behaviour: preserve both themes rather than labelling the entire comment positive or negative.",
+        "action": "Write three test cases: a normal comment, a two-theme comment and an irrelevant comment.",
+        "savedComponent": "A five-point evaluation checklist and three test cases.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m2-friday-q1",
+            "prompt": "What does an eval require?",
+            "options": [
+              "Only a polished output",
+              "Input, expected behaviour and a judgement method",
+              "A vector database",
+              "A public leaderboard"
+            ],
+            "correctIndex": 1,
+            "explanation": "An eval defines what good behaviour looks like and how it will be checked."
+          },
+          {
+            "id": "m2-friday-q2",
+            "prompt": "Which is an edge case for feedback analysis?",
+            "options": [
+              "A clear single-theme comment",
+              "A comment containing praise and criticism",
+              "A table header",
+              "The workflow title"
+            ],
+            "correctIndex": 1,
+            "explanation": "Mixed or ambiguous inputs test whether the workflow oversimplifies evidence."
+          },
+          {
+            "id": "m2-friday-q3",
+            "prompt": "Can all feedback quality checks be fully automatic?",
+            "options": [
+              "Yes",
+              "No; some require human judgement",
+              "Only citation checks need humans",
+              "Yes, when using RAG"
+            ],
+            "correctIndex": 1,
+            "explanation": "Interpretation quality and theme boundaries often need a reviewer."
+          }
+        ]
+      },
+      {
+        "id": "module-2-saturday",
+        "day": "saturday",
+        "kind": "build",
+        "title": "Build a grounded customer-feedback analysis workflow",
+        "outcome": "Use ChatGPT or Claude to turn a small feedback dataset into themes with traceable evidence. This is a manual, source-grounded workflow inside a chat tool, not a production RAG implementation.",
+        "estimate": "30-40 minutes",
+        "estimatedMinutes": 35,
+        "practiceInput": "C01 | Existing user | Search | 'I can never find last month's saved report.'\nC02 | New user | Onboarding | 'The identity check rejected my photo twice and I nearly gave up.'\nC03 | Existing user | Reporting | 'Export is fast, but the CSV column names are confusing.'\nC04 | New user | Onboarding | 'Setup was quick. The progress indicator helped.'\nC05 | Existing user | Search | 'Saved reports disappear from the first page, so I recreate them.'\nC06 | Existing user | Reporting | 'I need a PDF for directors; CSV is not enough.'\nC07 | New user | Onboarding | 'I did not understand why a selfie was required.'\nC08 | Existing user | General | 'The new colours look nice.'\nC09 | Existing user | Search | 'Could not locate a report after renaming it.'\nC10 | New user | Onboarding | 'Verification worked first time, but I was worried about how the photo would be used.'",
+        "steps": [],
+        "prompt": "Analyse the customer feedback provided below using only that source material.\n\nQuestion: What are the most evidenced customer problems, and what should the product team investigate next?\n\nReturn:\n1. A theme table with Theme, Description, Number of supporting comments, Comment IDs, Short evidence excerpts and Confidence (High/Medium/Low).\n2. Contradictory or positive evidence that challenges each theme.\n3. Comments that do not provide enough evidence for a product conclusion.\n4. Three investigation questions for the product team.\n\nRules:\n- Do not invent customers, causes, frequencies or quotations.\n- Do not claim that this small sample represents all customers.\n- A theme needs at least two supporting comments; otherwise label it 'Emerging signal'.\n- Preserve multiple meanings when one comment contains more than one point.\n- Cite comment IDs for every conclusion.\n\nBefore answering, confirm how many comments you received.\n\n[PASTE FEEDBACK RECORDS]",
+        "checks": [
+          "Every theme cites valid comment IDs",
+          "Quotations match the source",
+          "Small-sample limitations are visible",
+          "Contradictory evidence is not hidden",
+          "The learner ran at least two edge cases"
+        ]
+      },
+      {
+        "id": "module-2-sunday",
+        "day": "sunday",
+        "kind": "practice",
+        "title": "Adapt it yourself: research notes to evidence-backed findings",
+        "challenge": "Adapt Saturday's workflow to analyse short research notes rather than customer comments.",
+        "rules": [
+          "Replace customer IDs with source-note IDs",
+          "Separate observed behaviour from participant opinion",
+          "Add a field for research question",
+          "Do not count repeated notes from the same participant as separate people",
+          "Create one note that contradicts the dominant theme"
+        ],
+        "reflections": [
+          "Did every finding remain traceable?",
+          "What did the AI overgeneralise?",
+          "Which source-preparation choice improved the result?",
+          "What would need to change before this could be used with real company research?"
+        ],
+        "hints": [
+          "Try adapting this requirement: Replace customer IDs with source-note IDs",
+          "Try adapting this requirement: Separate observed behaviour from participant opinion",
+          "Try adapting this requirement: Add a field for research question"
+        ],
+        "estimatedMinutes": 15
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "module-3",
+    "title": "Feature Requests: Classify, Prioritise and Route Work",
+    "audience": "Applied module for both learner paths",
+    "outcome": "By Sunday, the learner can create and test a repeatable ChatGPT/Claude workflow that classifies incoming requests, explains its reasoning and sends uncertain items for human review.",
+    "weekdayComponents": [
+      "Monday: Taxonomy",
+      "Tuesday: Classification criteria",
+      "Wednesday: Structured schema",
+      "Thursday: Confidence and review rules",
+      "Friday: Routing tests"
+    ],
+    "units": [
+      {
+        "id": "module-3-monday",
+        "day": "monday",
+        "kind": "lesson",
+        "title": "A taxonomy gives AI a shared filing system",
+        "hook": "If your categories overlap, AI will not repair them. It will simply make the inconsistency faster.",
+        "theory": [
+          "A taxonomy is a defined system of categories. For feature requests, categories might represent product area, request type or customer problem.",
+          "Good categories are understandable, useful for a decision and as distinct as practical. 'Dashboard', 'Reporting' and 'Better experience' overlap unless each has a definition.",
+          "Include an Other or Needs review category. Forcing every request into a named category makes the data look tidy while hiding uncertainty.",
+          "Start with a small taxonomy that supports a real downstream action. Add categories only when repeated evidence shows they are needed."
+        ],
+        "example": "Category: Reporting export. Include requests about PDF, CSV or scheduled export. Exclude requests about finding saved reports; those belong to Search and discovery.",
+        "action": "Define four categories for a product inbox, including what belongs and what does not.",
+        "savedComponent": "A four-category taxonomy plus Needs review.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m3-monday-q1",
+            "prompt": "What is a taxonomy?",
+            "options": [
+              "A generated summary",
+              "A defined system of categories",
+              "A model price list",
+              "A design prototype"
+            ],
+            "correctIndex": 1,
+            "explanation": "A taxonomy creates a shared structure for classification."
+          },
+          {
+            "id": "m3-monday-q2",
+            "prompt": "Why include Needs review?",
+            "options": [
+              "To hide difficult requests",
+              "To make uncertainty visible",
+              "To reduce the number of inputs",
+              "To replace every category"
+            ],
+            "correctIndex": 1,
+            "explanation": "Some inputs will not fit cleanly and should not be forced."
+          },
+          {
+            "id": "m3-monday-q3",
+            "prompt": "Which taxonomy is more useful?",
+            "options": [
+              "Good/Bad/Interesting",
+              "Defined categories linked to downstream work",
+              "A new category for every ticket",
+              "Categories with no definitions"
+            ],
+            "correctIndex": 1,
+            "explanation": "A taxonomy should support consistent decisions and actions."
+          }
+        ]
+      },
+      {
+        "id": "module-3-tuesday",
+        "day": "tuesday",
+        "kind": "lesson",
+        "title": "Classification needs criteria, not vibes",
+        "hook": "Two requests can use different words and still belong to the same category. The classifier needs rules for meaning.",
+        "theory": [
+          "Classification assigns an input to one or more predefined categories. The quality depends on category definitions, examples and decision rules.",
+          "Give the model positive examples and difficult boundary examples. A request to 'download a saved report' could involve export or search; the user's actual problem determines the category.",
+          "Decide whether an item may have more than one label. Multi-label classification can preserve meaning, but it can also create noisy data when used without rules.",
+          "Require a short evidence phrase from the request. This makes the classification easier to inspect and helps reviewers see whether the model focused on the right words."
+        ],
+        "example": "Request: 'Let me receive a PDF every Monday.' Labels: Reporting export + Scheduled delivery. Evidence: 'PDF every Monday'.",
+        "action": "Write one clear example and one boundary example for each of two categories.",
+        "savedComponent": "Classification rules and examples.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m3-tuesday-q1",
+            "prompt": "What should drive classification?",
+            "options": [
+              "The longest word",
+              "Defined meaning and criteria",
+              "The requester's job title only",
+              "Random choice"
+            ],
+            "correctIndex": 1,
+            "explanation": "The system needs explicit category boundaries and evidence."
+          },
+          {
+            "id": "m3-tuesday-q2",
+            "prompt": "Why request an evidence phrase?",
+            "options": [
+              "To make outputs longer",
+              "To inspect why the label was chosen",
+              "To hide the source",
+              "To guarantee the model is correct"
+            ],
+            "correctIndex": 1,
+            "explanation": "Evidence improves traceability but still needs review."
+          },
+          {
+            "id": "m3-tuesday-q3",
+            "prompt": "When is multi-label classification useful?",
+            "options": [
+              "When an item genuinely contains multiple relevant meanings",
+              "For every input",
+              "When categories have no definitions",
+              "Only for positive feedback"
+            ],
+            "correctIndex": 0,
+            "explanation": "Multi-label output should preserve real overlap, not become a default escape route."
+          }
+        ]
+      },
+      {
+        "id": "module-3-wednesday",
+        "day": "wednesday",
+        "kind": "lesson",
+        "title": "Structured output makes AI results usable",
+        "hook": "A paragraph can sound smart and still be difficult to sort, compare or pass to another step.",
+        "theory": [
+          "Structured output means asking the AI to return information in defined fields. For a request, fields might include ID, category, problem statement, urgency, evidence and recommended owner.",
+          "A consistent schema makes results easier to review and eventually easier to pass into another tool. The field definitions matter as much as the table itself.",
+          "Do not confuse format compliance with correctness. A perfectly formatted row can still contain an invented priority or the wrong category.",
+          "Use allowed values where consistency matters. For example, confidence must be High, Medium or Low rather than any phrase the model chooses."
+        ],
+        "example": "ID: R04 | Category: Reporting export | Confidence: High | Evidence: 'Need PDF download' | Review: No.",
+        "action": "Create a seven-field output schema for the Saturday workflow.",
+        "savedComponent": "The final request-classification schema.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m3-wednesday-q1",
+            "prompt": "What is a structured output?",
+            "options": [
+              "Any long answer",
+              "An answer returned in defined fields",
+              "A colourful answer",
+              "An answer without a source"
+            ],
+            "correctIndex": 1,
+            "explanation": "Defined fields make results easier to compare, review and reuse."
+          },
+          {
+            "id": "m3-wednesday-q2",
+            "prompt": "Does correct formatting guarantee correct classification?",
+            "options": [
+              "Yes",
+              "No",
+              "Only in a table",
+              "Only with seven fields"
+            ],
+            "correctIndex": 1,
+            "explanation": "Structure improves usability, not factual or judgement accuracy."
+          },
+          {
+            "id": "m3-wednesday-q3",
+            "prompt": "Why use allowed values for confidence?",
+            "options": [
+              "To make comparison consistent",
+              "To remove every uncertainty",
+              "To generate more categories",
+              "To avoid defining confidence"
+            ],
+            "correctIndex": 0,
+            "explanation": "A controlled set prevents inconsistent labels such as 'fairly sure' and 'almost high'."
+          }
+        ]
+      },
+      {
+        "id": "module-3-thursday",
+        "day": "thursday",
+        "kind": "lesson",
+        "title": "Confidence should change what happens next",
+        "hook": "A confidence label is decoration unless it changes the workflow.",
+        "theory": [
+          "Confidence represents how strongly the available evidence supports a classification. It should be defined using observable conditions, not the model's mood.",
+          "For example: High means the request clearly matches one category and includes direct evidence; Medium means two categories are plausible; Low means the request is incomplete or outside the taxonomy.",
+          "Human-in-the-loop means a person reviews or decides at an appropriate point. Low-confidence items, high-impact requests and policy exceptions are common review candidates.",
+          "The goal is not to remove humans from the process. It is to focus human attention where judgement is most valuable."
+        ],
+        "example": "'Make reports better' lacks a specific problem. Confidence: Low. Route: Needs clarification, not Reporting backlog.",
+        "action": "Define High, Medium and Low confidence and attach a next action to each.",
+        "savedComponent": "Confidence thresholds and human-review rules.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m3-thursday-q1",
+            "prompt": "When is a confidence label useful?",
+            "options": [
+              "When it changes the next action",
+              "When every item is High",
+              "When it has no definition",
+              "When reviewers never see it"
+            ],
+            "correctIndex": 0,
+            "explanation": "Confidence should control routing, review or clarification."
+          },
+          {
+            "id": "m3-thursday-q2",
+            "prompt": "Which item most likely needs human review?",
+            "options": [
+              "A clear request matching one category",
+              "An incomplete request matching two categories",
+              "A correctly formatted ID",
+              "A known duplicate"
+            ],
+            "correctIndex": 1,
+            "explanation": "Ambiguity and missing information reduce confidence."
+          },
+          {
+            "id": "m3-thursday-q3",
+            "prompt": "What is human-in-the-loop?",
+            "options": [
+              "A human reviews or decides at a defined point",
+              "A fully manual process with no AI",
+              "A hidden prompt",
+              "A confidence score only"
+            ],
+            "correctIndex": 0,
+            "explanation": "The workflow explicitly reserves consequential or uncertain decisions for people."
+          }
+        ]
+      },
+      {
+        "id": "module-3-friday",
+        "day": "friday",
+        "kind": "lesson",
+        "title": "Routing turns classification into action",
+        "hook": "Sorting a ticket is not the outcome. The outcome is getting it to the right next step.",
+        "theory": [
+          "Routing uses classification and rules to decide what happens next. A request may go to a product area, a clarification queue, a duplicate review or a high-impact escalation.",
+          "Keep classification and priority separate. A request can clearly belong to Reporting but still have unknown urgency. Priority should use defined evidence such as affected users, business impact, risk and strategic fit.",
+          "Test routing with boundary cases: missing context, multiple categories, emotionally strong wording without evidence, duplicate requests and possible security or legal issues.",
+          "A good routing output explains the reason and makes escalation visible. It should not silently make irreversible decisions."
+        ],
+        "example": "Category: Access. Security indicator: Possible. Confidence: Medium. Route: Security review before product backlog.",
+        "action": "Create five IF/THEN routing rules and one rule that always requires human review.",
+        "savedComponent": "Routing rules plus a Friday test set.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m3-friday-q1",
+            "prompt": "What does routing determine?",
+            "options": [
+              "The next action or destination",
+              "The font used in the output",
+              "Whether the AI is popular",
+              "The length of the source"
+            ],
+            "correctIndex": 0,
+            "explanation": "Classification becomes useful when it leads to an appropriate next step."
+          },
+          {
+            "id": "m3-friday-q2",
+            "prompt": "Are category and priority the same?",
+            "options": [
+              "Yes",
+              "No; they answer different questions",
+              "Only for urgent tickets",
+              "Only in a spreadsheet"
+            ],
+            "correctIndex": 1,
+            "explanation": "Category describes what the request concerns; priority evaluates importance using separate evidence."
+          },
+          {
+            "id": "m3-friday-q3",
+            "prompt": "Which should trigger special review?",
+            "options": [
+              "Possible security or legal impact",
+              "A correctly spelled request",
+              "A common category",
+              "A short ticket ID"
+            ],
+            "correctIndex": 0,
+            "explanation": "Consequential exceptions should be escalated rather than handled as ordinary classification."
+          }
+        ]
+      },
+      {
+        "id": "module-3-saturday",
+        "day": "saturday",
+        "kind": "build",
+        "title": "Build a request classification and routing workflow",
+        "outcome": "Use ChatGPT or Claude to classify mock product requests, return a structured result and create an exception queue for uncertain or sensitive items.",
+        "estimate": "30-40 minutes",
+        "estimatedMinutes": 35,
+        "practiceInput": "R01 | 'Please let me export the dashboard as PDF.'\nR02 | 'I renamed a saved report and now cannot find it.'\nR03 | 'Make the homepage nicer.'\nR04 | 'Can finance receive a CSV automatically every Monday?'\nR05 | 'The app showed another customer's name for one second.'\nR06 | 'Add dark mode.'\nR07 | 'The selfie check failed, but I do not know whether it was the camera or my connection.'\nR08 | 'We need the same dashboard our competitor has.'",
+        "steps": [],
+        "prompt": "Classify and route each product request using only the request text and the rules below.\n\nCategories:\n- Search and discovery\n- Reporting export\n- Scheduled delivery\n- Onboarding\n- Interface preference\n- Needs review\n\nConfidence:\n- High: one category clearly matches direct evidence\n- Medium: more than one category is plausible\n- Low: the request is vague, incomplete or outside the taxonomy\n\nReturn a table with: ID, Category, Customer problem, Evidence phrase, Confidence, Route, Human-review reason.\n\nRouting rules:\n- Low confidence -> Clarification queue\n- Medium confidence -> Product review\n- High confidence -> Named category backlog\n- Any possible privacy, security, legal or customer-data issue -> Urgent human review\n- Do not infer priority from emotional wording alone\n- Do not invent customer impact or scale\n\nAfter the table, list possible duplicates and inputs that need a new category.\n\n[PASTE REQUESTS]",
+        "checks": [
+          "Every label uses the defined taxonomy",
+          "Every row includes evidence",
+          "Ambiguous items are not forced",
+          "Sensitive items reach human review",
+          "The learner distinguishes category from priority"
+        ]
+      },
+      {
+        "id": "module-3-sunday",
+        "day": "sunday",
+        "kind": "practice",
+        "title": "Adapt it yourself: support tickets to product signals",
+        "challenge": "Adapt the workflow to classify support tickets by issue type and route them either to support, engineering, product review or urgent escalation.",
+        "rules": [
+          "Create a new support-ticket taxonomy",
+          "Preserve the original ticket ID",
+          "Add a field for reproduction information",
+          "Escalate possible account or data exposure",
+          "Test one ticket with two plausible categories"
+        ],
+        "reflections": [
+          "Which categories overlapped?",
+          "What information was most often missing?",
+          "Did confidence lead to the correct next action?",
+          "Which routes should never be decided by AI alone?"
+        ],
+        "hints": [
+          "Try adapting this requirement: Create a new support-ticket taxonomy",
+          "Try adapting this requirement: Preserve the original ticket ID",
+          "Try adapting this requirement: Add a field for reproduction information"
+        ],
+        "estimatedMinutes": 15
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "module-4",
+    "title": "Product Communication: Turn Messy Inputs into Clear Updates",
+    "audience": "Applied module for both learner paths",
+    "outcome": "By Sunday, the learner can build a reusable ChatGPT/Claude workflow that converts verified product inputs into different stakeholder updates without inventing progress or hiding risk.",
+    "weekdayComponents": [
+      "Monday: Audience contract",
+      "Tuesday: Source hierarchy",
+      "Wednesday: Synthesis rules",
+      "Thursday: Output templates",
+      "Friday: Quality checks"
+    ],
+    "units": [
+      {
+        "id": "module-4-monday",
+        "day": "monday",
+        "kind": "lesson",
+        "title": "The audience changes the answer",
+        "hook": "A useful engineering update and a useful executive update may describe the same week without using the same detail.",
+        "theory": [
+          "Audience design means deciding what a particular reader needs to know, decide or do. Tone is only one part; relevance and level of detail matter more.",
+          "Define the reader, purpose, decision and expected length before asking AI to write. An executive may need progress, risk and decisions. A delivery team may need dependencies, owners and next steps.",
+          "Do not ask AI to make an update 'sound positive' when the real requirement is clarity. The workflow should preserve material risks even when it shortens the source.",
+          "A useful audience contract says what must always remain and what can be removed. This prevents personalisation from becoming distortion."
+        ],
+        "example": "Executive: outcome, change, risk, decision. Delivery team: completed work, blockers, owner, dependency, next action.",
+        "action": "Write an audience contract for a director receiving a weekly product update.",
+        "savedComponent": "Audience, purpose, required information and length.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m4-monday-q1",
+            "prompt": "What should be defined before generating an update?",
+            "options": [
+              "Only the tone",
+              "Reader, purpose, decision and length",
+              "A dramatic persona",
+              "The number of adjectives"
+            ],
+            "correctIndex": 1,
+            "explanation": "These choices determine relevance and detail."
+          },
+          {
+            "id": "m4-monday-q2",
+            "prompt": "What must happen to a material risk in a shorter update?",
+            "options": [
+              "It should remain visible",
+              "It should be removed",
+              "It should become a success",
+              "It should be replaced by jargon"
+            ],
+            "correctIndex": 0,
+            "explanation": "Compression must not hide important risk."
+          },
+          {
+            "id": "m4-monday-q3",
+            "prompt": "What is an audience contract?",
+            "options": [
+              "A legal agreement",
+              "A definition of what the reader needs and what must be preserved",
+              "A list of model names",
+              "A hidden system prompt"
+            ],
+            "correctIndex": 1,
+            "explanation": "It guides useful adaptation without distorting facts."
+          }
+        ]
+      },
+      {
+        "id": "module-4-tuesday",
+        "day": "tuesday",
+        "kind": "lesson",
+        "title": "Source hierarchy: tell AI what wins when inputs disagree",
+        "hook": "The roadmap says launch is Friday. The delivery notes say the security review is unfinished. Which source should the update trust?",
+        "theory": [
+          "Product updates often combine metrics, meeting notes, ticket status and informal comments. These sources can conflict or have different levels of authority.",
+          "A source hierarchy tells the workflow which information is authoritative. For example, verified analytics may outrank an estimate; the current delivery tracker may outrank an old planning document.",
+          "The workflow should surface conflicts rather than silently choosing the most convenient statement. Ask it to list disagreements and missing evidence before drafting the final update.",
+          "Give every input a label such as VERIFIED METRIC, DELIVERY STATUS, DECISION LOG or UNCONFIRMED NOTE. Labels make the model's job and the human review clearer."
+        ],
+        "example": "Verified delivery tracker: launch blocked. Old roadmap: launch Friday. Output: 'Launch date at risk; roadmap is not yet updated.'",
+        "action": "Rank four product sources from most to least authoritative and explain the choice.",
+        "savedComponent": "A source hierarchy and conflict rule.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m4-tuesday-q1",
+            "prompt": "Why define a source hierarchy?",
+            "options": [
+              "To decide which source is authoritative when inputs conflict",
+              "To make the prompt longer",
+              "To remove all sources",
+              "To guarantee a launch date"
+            ],
+            "correctIndex": 0,
+            "explanation": "The workflow needs an explicit rule rather than silently choosing."
+          },
+          {
+            "id": "m4-tuesday-q2",
+            "prompt": "What should AI do with conflicting sources?",
+            "options": [
+              "Hide the conflict",
+              "Surface it for review",
+              "Choose the most positive statement",
+              "Average the sentences"
+            ],
+            "correctIndex": 1,
+            "explanation": "Conflicts can be material and need human judgement."
+          },
+          {
+            "id": "m4-tuesday-q3",
+            "prompt": "Which label signals that a statement needs caution?",
+            "options": [
+              "VERIFIED METRIC",
+              "UNCONFIRMED NOTE",
+              "DECISION LOG",
+              "APPROVED STATUS"
+            ],
+            "correctIndex": 1,
+            "explanation": "The label prevents speculation from being presented as settled fact."
+          }
+        ]
+      },
+      {
+        "id": "module-4-wednesday",
+        "day": "wednesday",
+        "kind": "lesson",
+        "title": "Synthesis is selection with accountability",
+        "hook": "Summarising removes information. Good synthesis explains what deserves to survive that removal.",
+        "theory": [
+          "Summarisation compresses information. Synthesis connects information from several sources to produce a useful view. It may identify progress, dependencies, changes, risks and decisions.",
+          "A synthesis rule tells AI what to preserve: material changes since last week, blocked outcomes, decisions required and metrics that changed beyond a defined threshold.",
+          "Ask the model to separate fact, interpretation and recommendation. 'Conversion fell 4%' is a fact if verified. 'Users dislike the new design' is an interpretation unless supported by research.",
+          "Require traceability for important claims using source labels. The final prose can be concise while the review version retains references."
+        ],
+        "example": "Fact: completion fell from 62% to 58%. Interpretation: identity verification may be contributing. Recommendation: review verification-stage analytics before changing the flow.",
+        "action": "Separate three statements into fact, interpretation and recommendation.",
+        "savedComponent": "Synthesis rules and the fact/interpretation/recommendation structure.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m4-wednesday-q1",
+            "prompt": "How does synthesis differ from simple summarisation?",
+            "options": [
+              "It connects and selects information for a purpose",
+              "It is always shorter",
+              "It removes sources",
+              "It guarantees a recommendation"
+            ],
+            "correctIndex": 0,
+            "explanation": "Synthesis combines sources around a decision or question."
+          },
+          {
+            "id": "m4-wednesday-q2",
+            "prompt": "Which statement is an interpretation?",
+            "options": [
+              "Completion changed from 62% to 58%",
+              "Users may be confused by verification",
+              "Review the funnel",
+              "The tracker was updated Tuesday"
+            ],
+            "correctIndex": 1,
+            "explanation": "It explains a possible cause and needs supporting evidence."
+          },
+          {
+            "id": "m4-wednesday-q3",
+            "prompt": "Why retain source labels during review?",
+            "options": [
+              "To trace important claims",
+              "To improve the colour of the update",
+              "To remove human judgement",
+              "To guarantee positive tone"
+            ],
+            "correctIndex": 0,
+            "explanation": "Reviewers can check how a conclusion was formed."
+          }
+        ]
+      },
+      {
+        "id": "module-4-thursday",
+        "day": "thursday",
+        "kind": "lesson",
+        "title": "Templates create consistency without making every update identical",
+        "hook": "A blank page asks the writer to remember the format, the audience and every risk—every single week.",
+        "theory": [
+          "A template defines the stable structure of an output while placeholders hold changing information. It reduces the effort of starting and makes omissions easier to notice.",
+          "For an executive product update, a useful template might include outcome, evidence, progress, risk, decision required and next milestone. For the team version, it might include owner and dependency.",
+          "Templates should not force content where none exists. If no decision is required, write 'No decision required' rather than inventing one.",
+          "Create separate templates for genuinely different audiences, but reuse a shared factual core. This reduces contradictory versions."
+        ],
+        "example": "Shared core: verified facts and risks. Executive output: three bullets. Team output: detailed actions and owners.",
+        "action": "Design a six-section executive update template with instructions for missing information.",
+        "savedComponent": "Executive and team output templates.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m4-thursday-q1",
+            "prompt": "What is the main benefit of an output template?",
+            "options": [
+              "Consistent structure and fewer omissions",
+              "Guaranteed truth",
+              "No need for source data",
+              "The same wording every week"
+            ],
+            "correctIndex": 0,
+            "explanation": "Templates support repeatability while content still changes."
+          },
+          {
+            "id": "m4-thursday-q2",
+            "prompt": "What should happen if no decision is required?",
+            "options": [
+              "Invent a decision",
+              "State that no decision is required",
+              "Delete every section",
+              "Ask the model to guess"
+            ],
+            "correctIndex": 1,
+            "explanation": "A template should expose absence rather than manufacture content."
+          },
+          {
+            "id": "m4-thursday-q3",
+            "prompt": "How can multiple audience versions remain consistent?",
+            "options": [
+              "Use a shared factual core",
+              "Generate each from memory",
+              "Hide risks in one version",
+              "Use different source data"
+            ],
+            "correctIndex": 0,
+            "explanation": "Audience adaptation should change detail, not the underlying facts."
+          }
+        ]
+      },
+      {
+        "id": "module-4-friday",
+        "day": "friday",
+        "kind": "lesson",
+        "title": "Critique before polish",
+        "hook": "Once AI has polished the prose, missing evidence becomes harder to see.",
+        "theory": [
+          "Use a two-pass workflow. Pass one creates a factual review table with sources, conflicts and gaps. Pass two creates the audience-ready update only after the human checks pass one.",
+          "A critique prompt asks the model to identify weaknesses rather than rewrite immediately. Useful checks include unsupported claims, hidden risks, conflicting dates, vague ownership and invented certainty.",
+          "Do not use the model as the only evaluator of its own answer. Combine automated critique with source comparison and human judgement.",
+          "Define completion criteria: every metric matches the source, every risk remains visible, conflicts are resolved or flagged and the decision request is explicit."
+        ],
+        "example": "Pass one flags that 'on track' conflicts with an unresolved security dependency. Pass two says 'Target remains Friday, subject to security approval.'",
+        "action": "Create a five-question pre-publication checklist.",
+        "savedComponent": "The two-pass process and final quality checklist.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m4-friday-q1",
+            "prompt": "Why use a factual review pass before polished prose?",
+            "options": [
+              "To expose conflicts and missing evidence",
+              "To make the update longer",
+              "To remove source labels early",
+              "To avoid human review"
+            ],
+            "correctIndex": 0,
+            "explanation": "Polish can make weak claims look more credible."
+          },
+          {
+            "id": "m4-friday-q2",
+            "prompt": "Should AI be the only evaluator of its own update?",
+            "options": [
+              "Yes",
+              "No",
+              "Only for executives",
+              "Only when the prose is short"
+            ],
+            "correctIndex": 1,
+            "explanation": "Source checks and human judgement remain necessary."
+          },
+          {
+            "id": "m4-friday-q3",
+            "prompt": "Which is a strong completion criterion?",
+            "options": [
+              "The tone sounds confident",
+              "Every metric matches its source",
+              "The update uses five adjectives",
+              "Every risk is removed"
+            ],
+            "correctIndex": 1,
+            "explanation": "Completion criteria should test accuracy and decision usefulness."
+          }
+        ]
+      },
+      {
+        "id": "module-4-saturday",
+        "day": "saturday",
+        "kind": "build",
+        "title": "Build a two-pass stakeholder update workflow",
+        "outcome": "Use ChatGPT or Claude to review mixed product inputs, flag conflicts and then produce an executive update and a delivery-team update from one factual core.",
+        "estimate": "30-40 minutes",
+        "estimatedMinutes": 35,
+        "practiceInput": "[VERIFIED METRIC] Onboarding completion: 62% last week, 58% this week.\n[DELIVERY STATUS] New progress indicator built; QA starts Wednesday.\n[DELIVERY STATUS] Security review for analytics events is not complete.\n[OLD ROADMAP] Release target: Friday.\n[DECISION LOG] No decision to delay release has been made.\n[UNCONFIRMED NOTE] The verification vendor may be causing the conversion decline.\n[RISK] If security approval is not received by Thursday noon, Friday release is unlikely.\n[ACTION] Maya owns QA. Dev owns the security follow-up.\n[NEXT MILESTONE] Go/no-go review Thursday 15:00.",
+        "steps": [],
+        "prompt": "You will create a product update in two passes using only the labelled inputs I provide.\n\nPASS 1 - FACTUAL REVIEW\nReturn a table with: Claim, Type (Fact/Interpretation/Recommendation), Source label, Conflict or gap, Human check required.\nThen list:\n- material changes since the previous period\n- risks and dependencies\n- decisions required\n- statements that must not appear as confirmed\nDo not draft the stakeholder update yet. Ask me to confirm or correct the factual review.\n\nPASS 2 - ONLY AFTER I CONFIRM\nCreate:\nA. Executive update: Outcome, Evidence, Progress, Risk, Decision required, Next milestone. Maximum 180 words.\nB. Delivery-team update: Completed, In progress, Blockers, Owners, Dependencies, Next actions.\n\nRules:\n- Use one shared factual core.\n- Never invent status, cause, owner or date.\n- Preserve material risks in both versions.\n- If sources conflict, state the conflict.\n- Keep unconfirmed explanations labelled as unconfirmed.\n\n[PASTE LABELLED INPUTS]",
+        "checks": [
+          "Pass one happens before prose",
+          "Conflicts and gaps remain visible",
+          "Both versions use the same facts",
+          "Material risk appears in both versions",
+          "No unconfirmed cause is presented as fact"
+        ]
+      },
+      {
+        "id": "module-4-sunday",
+        "day": "sunday",
+        "kind": "practice",
+        "title": "Adapt it yourself: convert the workflow into a launch update",
+        "challenge": "Adapt Saturday's workflow for a product launch update sent to commercial, support and operations leaders.",
+        "rules": [
+          "Add readiness areas such as product, operations, support and compliance",
+          "Keep one shared factual core",
+          "Create a red/amber/green status rule",
+          "Require evidence for every status",
+          "Add an explicit owner for every blocker"
+        ],
+        "reflections": [
+          "Did the audience change the facts or only the presentation?",
+          "Which conflict needed human resolution?",
+          "Was any RAG status unsupported?",
+          "What would make the workflow safe to reuse weekly?"
+        ],
+        "hints": [
+          "Try adapting this requirement: Add readiness areas such as product, operations, support and compliance",
+          "Try adapting this requirement: Keep one shared factual core",
+          "Try adapting this requirement: Create a red/amber/green status rule"
+        ],
+        "estimatedMinutes": 15
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "module-5",
+    "title": "AI Prototyping: Turn an Idea into Testable Behaviour",
+    "audience": "Applied module for both learner paths",
+    "outcome": "By Sunday, the learner can use ChatGPT or Claude to simulate an AI product behaviour, test it with realistic cases and distinguish a conversational prototype from a production product.",
+    "weekdayComponents": [
+      "Monday: User problem",
+      "Tuesday: Behaviour contract",
+      "Wednesday: Interaction flow",
+      "Thursday: Guardrails",
+      "Friday: Test plan"
+    ],
+    "units": [
+      {
+        "id": "module-5-monday",
+        "day": "monday",
+        "kind": "lesson",
+        "title": "Prototype the risky behaviour, not the entire product",
+        "hook": "The fastest prototype is not the one with the fewest screens. It is the one that tests the biggest uncertainty.",
+        "theory": [
+          "An AI prototype is a quick representation of how an AI-powered experience might behave. Its purpose is to learn, not to prove that the finished product already exists.",
+          "Start with a user problem and risky assumption. For example: can an AI turn a rough feature idea into useful clarification questions without pretending the idea is already good?",
+          "Choose one narrow behaviour to simulate. Do not attempt authentication, databases, analytics and production automation when the key question is whether the AI interaction is useful.",
+          "State what the prototype will not test. A chat-based simulation can test instructions, questions and output usefulness; it cannot prove scalability, security, latency or integration feasibility."
+        ],
+        "example": "Problem: PMs jump from idea to solution. Prototype behaviour: ask five evidence-seeking questions before generating a feature brief.",
+        "action": "Write one user problem, one risky assumption and one behaviour to prototype.",
+        "savedComponent": "The prototype learning goal and scope boundary.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m5-monday-q1",
+            "prompt": "What should an early prototype focus on?",
+            "options": [
+              "Every production feature",
+              "The riskiest assumption or behaviour",
+              "A perfect visual design",
+              "A complete database"
+            ],
+            "correctIndex": 1,
+            "explanation": "The prototype should maximise learning with minimal scope."
+          },
+          {
+            "id": "m5-monday-q2",
+            "prompt": "What can a chat-based prototype test well?",
+            "options": [
+              "Interaction instructions and output usefulness",
+              "Production scalability",
+              "Enterprise security certification",
+              "Database performance"
+            ],
+            "correctIndex": 0,
+            "explanation": "A conversational simulation tests behaviour, not production infrastructure."
+          },
+          {
+            "id": "m5-monday-q3",
+            "prompt": "Why define what the prototype will not test?",
+            "options": [
+              "To avoid misleading conclusions",
+              "To make it look unfinished",
+              "To stop user feedback",
+              "To hide the learning goal"
+            ],
+            "correctIndex": 0,
+            "explanation": "Clear boundaries prevent a useful simulation from being mistaken for a production-ready product."
+          }
+        ]
+      },
+      {
+        "id": "module-5-tuesday",
+        "day": "tuesday",
+        "kind": "lesson",
+        "title": "A behaviour contract tells the AI how to act",
+        "hook": "A prototype becomes testable when expected behaviour is explicit enough to pass or fail.",
+        "theory": [
+          "A behaviour contract describes the AI's role, goal, allowed information, sequence, output and boundaries. It is more precise than a general request to 'be helpful'.",
+          "Define the interaction sequence. The prototype might first ask questions, then wait, then produce a brief. Without a stop-and-wait instruction, models often jump directly to an answer.",
+          "Specify what the AI should do when information is missing: ask, label an assumption or refuse to conclude. Missing information is part of the interaction design.",
+          "Use observable language. 'Ask no more than five questions, one at a time' is testable. 'Be thoughtful' is not."
+        ],
+        "example": "Before creating a brief, ask one question at a time about user, problem evidence, current alternative, success measure and constraints.",
+        "action": "Write five observable behaviours for the prototype.",
+        "savedComponent": "A behaviour contract with sequence and stop conditions.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m5-tuesday-q1",
+            "prompt": "What makes a behaviour testable?",
+            "options": [
+              "It is observable and specific",
+              "It sounds intelligent",
+              "It is very long",
+              "It contains a model name"
+            ],
+            "correctIndex": 0,
+            "explanation": "A reviewer must be able to determine whether the behaviour occurred."
+          },
+          {
+            "id": "m5-tuesday-q2",
+            "prompt": "Why include a stop-and-wait instruction?",
+            "options": [
+              "To prevent the AI jumping ahead",
+              "To make the response slower",
+              "To remove interaction",
+              "To guarantee accuracy"
+            ],
+            "correctIndex": 0,
+            "explanation": "The prototype should follow the intended conversation sequence."
+          },
+          {
+            "id": "m5-tuesday-q3",
+            "prompt": "What should happen when key information is missing?",
+            "options": [
+              "The AI invents it",
+              "The contract defines whether to ask or label an assumption",
+              "The prototype silently ends",
+              "The output becomes longer"
+            ],
+            "correctIndex": 1,
+            "explanation": "Missing information needs explicit behaviour."
+          }
+        ]
+      },
+      {
+        "id": "module-5-wednesday",
+        "day": "wednesday",
+        "kind": "lesson",
+        "title": "Design the interaction as states",
+        "hook": "A good AI conversation is not one endless prompt. It moves through recognisable stages.",
+        "theory": [
+          "A state is a stage of the interaction with a purpose and an allowed next step. A simple prototype may have Discovery, Clarification, Draft and Review states.",
+          "State design helps prevent premature answers. The prototype should not enter Draft until the minimum information is collected or the missing assumptions are explicitly accepted.",
+          "Define transitions using simple conditions: after five questions, produce a summary; if the user corrects a fact, update the summary; if sensitive data appears, warn and ask for a redacted version.",
+          "The user should know what is happening. Short messages such as 'I have enough information to draft the brief' create clarity and control."
+        ],
+        "example": "Discovery -> five questions -> Confirm understanding -> Draft brief -> User critique -> Revised brief.",
+        "action": "Create four states and one transition rule between each state.",
+        "savedComponent": "The prototype state flow.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m5-wednesday-q1",
+            "prompt": "What is a state in an AI interaction?",
+            "options": [
+              "A stage with a purpose and allowed next step",
+              "A model's physical location",
+              "A random response",
+              "A visual colour"
+            ],
+            "correctIndex": 0,
+            "explanation": "States make conversational behaviour easier to design and test."
+          },
+          {
+            "id": "m5-wednesday-q2",
+            "prompt": "When should the prototype move into Draft?",
+            "options": [
+              "Immediately",
+              "When minimum information is present or assumptions are explicit",
+              "After one compliment",
+              "Whenever the user says AI"
+            ],
+            "correctIndex": 1,
+            "explanation": "The transition should depend on defined readiness."
+          },
+          {
+            "id": "m5-wednesday-q3",
+            "prompt": "Why tell the user when the state changes?",
+            "options": [
+              "To create clarity and control",
+              "To expose hidden reasoning",
+              "To make every response longer",
+              "To avoid questions"
+            ],
+            "correctIndex": 0,
+            "explanation": "The interface should communicate progress without revealing private chain-of-thought."
+          }
+        ]
+      },
+      {
+        "id": "module-5-thursday",
+        "day": "thursday",
+        "kind": "lesson",
+        "title": "Guardrails define what the prototype must not do",
+        "hook": "The most important prototype instruction may be the action it refuses to take.",
+        "theory": [
+          "Guardrails are rules or controls that constrain unsafe, misleading or unwanted behaviour. They may concern privacy, unsupported claims, harmful content, sensitive decisions or product scope.",
+          "Prompt instructions are one layer, not a complete safety system. A production product may also need access controls, data handling rules, moderation, monitoring, audit logs and human approval.",
+          "Design a graceful fallback. Instead of inventing evidence, the prototype can say what is missing and ask a focused question. Instead of handling personal data, it can ask for anonymised input.",
+          "Avoid presenting the prototype as an authority. It can help structure a feature idea, but it should not approve a roadmap, make legal conclusions or claim customer demand without evidence."
+        ],
+        "example": "If the user provides no evidence, respond: 'I can draft this as a hypothesis, but I cannot describe it as a validated customer problem.'",
+        "action": "Write three prohibited behaviours and a safe fallback for each.",
+        "savedComponent": "The prototype guardrails and fallback messages.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m5-thursday-q1",
+            "prompt": "What is a guardrail?",
+            "options": [
+              "A rule or control limiting unwanted behaviour",
+              "A visual border",
+              "A success metric only",
+              "A longer output"
+            ],
+            "correctIndex": 0,
+            "explanation": "Guardrails constrain how the AI should behave in risky or uncertain situations."
+          },
+          {
+            "id": "m5-thursday-q2",
+            "prompt": "Are prompt instructions a complete production safety system?",
+            "options": [
+              "Yes",
+              "No",
+              "Only for prototypes",
+              "Only when written in capitals"
+            ],
+            "correctIndex": 1,
+            "explanation": "Production safety may require technical, operational and governance controls beyond prompts."
+          },
+          {
+            "id": "m5-thursday-q3",
+            "prompt": "What is a graceful fallback?",
+            "options": [
+              "Invent missing evidence",
+              "Explain what is missing and ask for a safe next input",
+              "End without explanation",
+              "Approve the idea anyway"
+            ],
+            "correctIndex": 1,
+            "explanation": "A fallback preserves usefulness without pretending certainty."
+          }
+        ]
+      },
+      {
+        "id": "module-5-friday",
+        "day": "friday",
+        "kind": "lesson",
+        "title": "Test conversations reveal more than one perfect demo",
+        "hook": "Your prototype is not the happy path. It is how the behaviour changes when the input becomes messy.",
+        "theory": [
+          "A conversation test is a planned interaction used to check the behaviour contract. Create a normal case, a missing-information case, a contradictory case, a sensitive-data case and an out-of-scope case.",
+          "Write expected behaviour before running the test. Otherwise, it is easy to accept whatever the model produces and call it successful.",
+          "Capture failures as specific observations: asked two questions at once, invented evidence, skipped confirmation or ignored a constraint. Then change one instruction and rerun the same test.",
+          "A prototype is successful when it answers the learning question, even if the result shows the idea is not useful. Learning is the outcome; polish is secondary."
+        ],
+        "example": "Test: user says 'Everyone wants this feature' but provides no evidence. Expected: label it as an assumption and ask for the source.",
+        "action": "Write five test conversations and expected behaviours.",
+        "savedComponent": "The Friday test plan and success criteria.",
+        "estimatedMinutes": 10,
+        "quiz": [
+          {
+            "id": "m5-friday-q1",
+            "prompt": "When should expected behaviour be written?",
+            "options": [
+              "Before running the test",
+              "After seeing the output",
+              "Only after launch",
+              "Never"
+            ],
+            "correctIndex": 0,
+            "explanation": "Predefined expectations reduce the temptation to accept any result."
+          },
+          {
+            "id": "m5-friday-q2",
+            "prompt": "Which is a specific failure observation?",
+            "options": [
+              "It was bad",
+              "It asked two questions at once despite the rule",
+              "I did not like it",
+              "The model is strange"
+            ],
+            "correctIndex": 1,
+            "explanation": "Specific observations can guide a targeted change and retest."
+          },
+          {
+            "id": "m5-friday-q3",
+            "prompt": "Can a prototype succeed by showing that an idea is not useful?",
+            "options": [
+              "Yes, if it answers the learning question",
+              "No",
+              "Only with a polished interface",
+              "Only after automation"
+            ],
+            "correctIndex": 0,
+            "explanation": "The goal of prototyping is learning, including evidence against the idea."
+          }
+        ]
+      },
+      {
+        "id": "module-5-saturday",
+        "day": "saturday",
+        "kind": "build",
+        "title": "Build a conversational Feature Brief Copilot prototype",
+        "outcome": "Use ChatGPT or Claude to simulate an AI feature that questions a rough product idea before creating an evidence-aware feature brief. This tests conversational behaviour; it is not a coded or production-ready product.",
+        "estimate": "35-45 minutes",
+        "estimatedMinutes": 40,
+        "practiceInput": "Initial idea to test: 'We should add an AI chatbot to the onboarding screen because competitors have one.'",
+        "steps": [],
+        "prompt": "You are simulating a Feature Brief Copilot for product managers. Your purpose is to improve the definition of an early product idea before drafting a brief.\n\nBEHAVIOUR\n1. Ask for the rough idea.\n2. Ask no more than five clarification questions, one at a time, covering: target user, problem evidence, current alternative, desired outcome and constraints. Wait after every question.\n3. Separate facts supplied by the user from assumptions. Never invent research, metrics or customer demand.\n4. After the questions, summarise your understanding under Facts, Assumptions and Missing information. Ask the user to confirm or correct it. Do not draft until confirmed.\n5. After confirmation, create a feature brief with: User, Problem, Evidence, Hypothesis, Proposed behaviour, Non-goals, Success measures, Risks, Open questions and Smallest test.\n6. End with the three assumptions that should be tested first.\n\nGUARDRAILS\n- Do not describe an unvalidated idea as a validated problem.\n- If personal or confidential data is offered, ask for an anonymised version.\n- Do not make legal, compliance or security approval decisions.\n- If evidence is missing, label it clearly and ask for the next useful evidence.\n- Stay within product discovery; do not claim that this prototype proves technical feasibility.\n\nAcknowledge these rules in one sentence, then ask for the rough product idea.",
+        "checks": [
+          "The prototype asks one question at a time",
+          "Facts and assumptions are separated",
+          "It waits for confirmation before drafting",
+          "Privacy and authority boundaries are respected",
+          "The learner reruns a failed test after one change"
+        ]
+      },
+      {
+        "id": "module-5-sunday",
+        "day": "sunday",
+        "kind": "practice",
+        "title": "Adapt it yourself: create a different AI behaviour prototype",
+        "challenge": "Choose one behaviour to prototype: PRD critic, research-plan coach or experiment-design assistant. Adapt the behaviour contract rather than starting from a blank prompt.",
+        "rules": [
+          "Write one learning question",
+          "Define at least three states",
+          "Add three prohibited behaviours",
+          "Create five test conversations before running them",
+          "State what the chat prototype cannot prove"
+        ],
+        "reflections": [
+          "What was the riskiest assumption?",
+          "Which test exposed the biggest failure?",
+          "What instruction changed the behaviour most?",
+          "What would require code, data integration or organisational approval before production?"
+        ],
+        "hints": [
+          "Try adapting this requirement: Write one learning question",
+          "Try adapting this requirement: Define at least three states",
+          "Try adapting this requirement: Add three prohibited behaviours"
+        ],
+        "estimatedMinutes": 15
+      }
+    ]
+  }
+]

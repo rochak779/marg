@@ -1,0 +1,13 @@
+node_modules/
+.next/
+.env
+.env.local
+.env*.local
+*.tsbuildinfo
+.pnpm-store/
+test-results/
+playwright-report/
+.DS_Store
+.idea/
+.impeccable/
+supabase/.temp/
