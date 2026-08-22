@@ -1,11 +1,12 @@
 'use client';
 import { useState } from 'react';
 import { signInWithGoogle, signUpWithPassword } from '@/lib/auth/actions';
-import { Back, GoogleIcon, Stage } from '../../components/ui';
+import { Back, Close, GoogleIcon, Stage } from '../../components/ui';
 
 const ERROR_COPY: Record<string, string> = {
   already_registered: 'An account already exists for that email.',
   invalid_input: 'Check your name, email and password (8+ characters).',
+  rate_limited: 'Too many signup attempts. Wait a few minutes and try again.',
   unavailable: 'Something went wrong. Try again.',
 };
 
@@ -21,9 +22,9 @@ export default function SignupForm() {
     return (
       <Stage>
         <div className="top">
-          <Back href="/signup" />
           <span />
           <span />
+          <Close href="/signin" />
         </div>
         <div className="crown-copy">
           <div className="label" style={{ color: '#7f2e19' }}>
@@ -89,10 +90,11 @@ export default function SignupForm() {
         <div className="form">
           <input
             className="field"
+            type="text"
             aria-label="Name"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="First name"
+            placeholder="Name"
             required
           />
           <input
@@ -101,7 +103,7 @@ export default function SignupForm() {
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            placeholder="Work email"
+            placeholder="Email"
             required
           />
           <input
