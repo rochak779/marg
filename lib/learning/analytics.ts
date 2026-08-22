@@ -4,7 +4,8 @@ export type LearningEvent =
   | 'quiz_submitted'
   | 'build_completed'
   | 'practice_completed'
-  | 'assessment_retaken';
+  | 'assessment_retaken'
+  | 'duel_completed';
 export function track(
   _event: LearningEvent,
   _payload: Record<string, string | number | boolean> = {},
