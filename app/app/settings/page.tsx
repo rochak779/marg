@@ -1,7 +1,9 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useLearning } from '@/app/providers';
+import { signOut } from '@/lib/auth/actions';
 
 const Icon = ({
   type,
@@ -44,6 +46,7 @@ const Icon = ({
 );
 export default function SettingsPage() {
   const { state } = useLearning();
+  const r = useRouter();
   const [reminders, setReminders] = useState(true);
   const [notifications, setNotifications] = useState(true);
   return (
@@ -141,9 +144,17 @@ export default function SettingsPage() {
           </span>
         </div>
       </div>
-      <Link className="settings-signout" href="/signin">
+      <button
+        type="button"
+        className="settings-signout"
+        onClick={async () => {
+          await signOut();
+          r.push('/signin');
+          r.refresh();
+        }}
+      >
         Sign out
-      </Link>
+      </button>
       <p className="settings-foot">Marg — Every expert was once a beginner.</p>
     </div>
   );

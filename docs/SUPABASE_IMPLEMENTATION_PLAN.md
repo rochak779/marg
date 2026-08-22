@@ -52,6 +52,7 @@ The current state shape is a useful migration contract, but it must not become a
 - Live AI execution, embeddings or a vector database.
 - Realtime subscriptions.
 - Audio narration of lesson text. Candidate post-launch enhancement; would require new object storage (not covered by this plan) and should be evaluated against real usage data after launch.
+- Leaderboard. Candidate post-launch enhancement; would require cross-user readable progress/scoring (a new authorization model distinct from the owner-only RLS in section 7) and a product decision on what's ranked and whether it's opt-in. Revisit after launch.
 
 ## 4. Architecture
 
