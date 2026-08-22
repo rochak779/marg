@@ -128,6 +128,21 @@ export function DuelBattle({
   const currentBotAnswer = botAnswers[questionIndex];
   const botHasAnswered = elapsedMs >= currentBotAnswer.delayMs;
 
+  // Once both the learner and the bot have shown their answer for this
+  // question, auto-advance to the next one after a short beat so the
+  // correct/wrong highlight is still visible. The last question skips this —
+  // finishBattle already transitions straight to the result screen.
+  useEffect(() => {
+    if (phase !== 'battle') return;
+    if (!locked || !botHasAnswered) return;
+    if (questionIndex >= questions.length - 1) return;
+    const timer = window.setTimeout(() => {
+      goNext();
+    }, 1400);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, locked, botHasAnswered, questionIndex]);
+
   function finishBattle(finalAnswers: number[], finalTimes: number[]) {
     const userCorrect = finalAnswers.filter(
       (answer, index) => answer === questions[index].correctIndex,
@@ -305,7 +320,7 @@ export function DuelBattle({
             <path d="M6 6l12 12M18 6 6 18" />
           </svg>
         </button>
-        <div>
+        <div className="duel-battle-player">
           <Avatar className="avatar" seed={avatarSeed ?? 'you'} />
           <span>You</span>
           <strong>
@@ -320,7 +335,7 @@ export function DuelBattle({
           </span>
           <span>{secondsLeft}s</span>
         </div>
-        <div>
+        <div className="duel-battle-opponent">
           <span className="duel-bot-avatar" aria-hidden="true">
             🤖
           </span>
@@ -362,19 +377,6 @@ export function DuelBattle({
             : `${BOT_NAME} is thinking…`}
         </p>
       </section>
-
-      <footer className="duel-battle-footer">
-        {locked && questionIndex < questions.length - 1 && (
-          <button
-            type="button"
-            className="duel-primary-action"
-            onClick={goNext}
-          >
-            Next
-          </button>
-        )}
-        {!locked && <p className="duel-waiting">Answer to continue</p>}
-      </footer>
 
       {showExitConfirm && (
         <div className="confirm-overlay" role="dialog" aria-modal="true">

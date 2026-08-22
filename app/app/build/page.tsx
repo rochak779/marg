@@ -56,7 +56,6 @@ export default function BuildHub() {
           <circle cx="84" cy="112" r="3.5" />
         </svg>
         <div className="build-title">
-          <small>HANDS ON</small>
           <h1>
             Build it,
             <br />
