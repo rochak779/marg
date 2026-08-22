@@ -189,6 +189,24 @@ export type Database = {
           },
         ]
       }
+      local_state_imports: {
+        Row: {
+          idempotency_key: string
+          imported_at: string
+          user_id: string
+        }
+        Insert: {
+          idempotency_key: string
+          imported_at?: string
+          user_id: string
+        }
+        Update: {
+          idempotency_key?: string
+          imported_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       practice_progress: {
         Row: {
           checked_rules: number[]
@@ -341,6 +359,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      record_local_state_import: {
+        Args: { p_idempotency_key: string }
+        Returns: boolean
+      }
       submit_assessment: {
         Args: {
           p_beyond_drafting: boolean

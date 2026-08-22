@@ -4314,3 +4314,27 @@ a {
     padding-bottom: 4px;
   }
 }
+
+.import-banner {
+  margin: 12px 16px 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #eef0fd;
+  border: 1px solid #d7dafc;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.import-banner p {
+  margin: 0 0 10px;
+}
+.import-banner-error {
+  color: #b3261e;
+}
+.import-banner-actions {
+  display: flex;
+  gap: 8px;
+}
+.import-banner-actions .btn {
+  padding: 8px 14px;
+  font-size: 13px;
+}
