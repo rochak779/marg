@@ -155,18 +155,20 @@ test('screen 5a navigation opens every refined destination', async ({
   await expect(page).toHaveURL('/app');
 });
 
-test('signup persists the learner name and email for the dashboard', async ({
+test('signup calls real Supabase auth and asks for email confirmation', async ({
   page,
 }) => {
+  // Sign-up now creates a real Supabase account and requires email
+  // confirmation, so it can no longer complete the assessment inline.
+  // Uses a unique email per run since Supabase rejects re-registration.
+  const email = `aarav+${Date.now()}@example.com`;
   await page.goto('/signup');
   await page.getByLabel('Name').fill('Aarav Sharma');
-  await page.getByLabel('Email').fill('aarav@example.com');
+  await page.getByLabel('Email').fill(email);
   await page.getByLabel('Password').fill('a-secure-password');
   await page.getByRole('button', { name: 'Create my learning path' }).click();
-  await expect(page).toHaveURL(/\/assessment$/);
-  const profile = await page.evaluate(() => {
-    const value = localStorage.getItem('marg-learning-state-v1');
-    return value ? JSON.parse(value).profile : null;
-  });
-  expect(profile).toEqual({ firstName: 'Aarav', email: 'aarav@example.com' });
+  await expect(
+    page.getByRole('heading', { name: 'Confirm your account to continue.' }),
+  ).toBeVisible();
+  await expect(page.getByText(email)).toBeVisible();
 });

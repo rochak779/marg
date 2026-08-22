@@ -8,7 +8,7 @@ import { track } from '@/lib/learning/analytics';
 
 export default function Recommendation() {
   const router = useRouter();
-  const { state, ready, update } = useLearning();
+  const { state, ready } = useLearning();
   if (!ready)
     return (
       <Stage>
@@ -41,7 +41,8 @@ export default function Recommendation() {
       )
     )
       return;
-    update((current) => ({ ...current, assessment: null, path: null }));
+    // No client state to clear: submitting the assessment again supersedes
+    // the current path server-side (see submit_assessment in the DB).
     track('assessment_retaken');
     router.push('/assessment');
   };

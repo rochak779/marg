@@ -4,7 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLearning } from '@/app/providers';
-import { completeUnit, isUnitUnlocked } from '@/lib/learning/progression';
+import { isUnitUnlocked } from '@/lib/learning/progression';
+import { submitQuiz } from '@/lib/learning/server-actions';
 import { track } from '@/lib/learning/analytics';
 import type { CurriculumModule, LessonUnit } from '@/lib/learning/types';
 
@@ -16,12 +17,13 @@ export function LessonView({
   unit: LessonUnit;
 }) {
   const router = useRouter();
-  const { state, ready, update } = useLearning();
+  const { state, ready, setState } = useLearning();
   const [answers, setAnswers] = useState<number[]>(() =>
     unit.quiz.map(() => -1),
   );
   const [showQuiz, setShowQuiz] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
   if (!ready) return <div className="state-message">Loading lesson…</div>;
   if (
     !isUnitUnlocked(state, unit.id) &&
@@ -41,28 +43,14 @@ export function LessonView({
   const selectedAnswer = answers[questionIndex];
   const answered = selectedAnswer >= 0;
   const lessonIndex = module.units.findIndex((item) => item.id === unit.id);
-  const submit = () => {
-    const score = answers.reduce(
-      (sum, answer, index) =>
-        sum + (answer === unit.quiz[index].correctIndex ? 1 : 0),
-      0,
-    );
-    update((current) => {
-      const previous = current.quizResults[unit.id];
-      const completed = completeUnit(current, unit.id);
-      return {
-        ...completed,
-        quizResults: {
-          ...completed.quizResults,
-          [unit.id]: {
-            answers,
-            score,
-            attempts: (previous?.attempts ?? 0) + 1,
-            completedAt: new Date().toISOString(),
-          },
-        },
-      };
-    });
+  const submit = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    const result = await submitQuiz({ unitId: unit.id, answers });
+    setSubmitting(false);
+    if (!result.ok) return;
+    setState(result.state);
+    const score = result.state.quizResults[unit.id]?.score ?? 0;
     track('quiz_submitted', { moduleId: module.id, unitId: unit.id, score });
     router.push(`/app/modules/${module.slug}/${unit.day}/result`);
   };
@@ -146,14 +134,18 @@ export function LessonView({
           <button
             type="button"
             className="sixa-primary-action"
-            disabled={!answered}
+            disabled={!answered || submitting}
             onClick={() =>
               questionIndex === unit.quiz.length - 1
                 ? submit()
                 : setQuestionIndex((index) => index + 1)
             }
           >
-            {questionIndex === unit.quiz.length - 1 ? 'See my result' : 'Next'}
+            {questionIndex === unit.quiz.length - 1
+              ? submitting
+                ? 'Submitting…'
+                : 'See my result'
+              : 'Next'}
             {answered && <span aria-hidden="true">→</span>}
           </button>
           {!answered && <small>Pick one answer to continue</small>}
