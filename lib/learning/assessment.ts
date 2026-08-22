@@ -4,23 +4,40 @@ import type {
   PathConfiguration,
 } from './types';
 
-export const APPLIED_ROTATIONS: Record<AppliedContext, readonly number[]> = {
-  feedback: [2, 3, 4, 5],
-  requests: [3, 4, 5, 2],
-  communication: [4, 5, 2, 3],
-  prototyping: [5, 2, 3, 4],
+// Module 1 (How Software Actually Works) is the universal foundation for
+// basic learners. Module 2 (From Asking AI to Directing AI) is the AI
+// foundation shown whenever the learner hasn't built a workflow yet.
+const FOUNDATIONS_MODULE_ID = 1;
+const AI_FOUNDATIONS_MODULE_ID = 2;
+const APPLIED_MODULE_IDS = [3, 4, 5, 6] as const;
+
+// Which applied module leads the rotation for each context. The remaining
+// applied modules keep their natural order behind it.
+const APPLIED_PRIORITY: Record<AppliedContext, number> = {
+  feedback: 3,
+  requests: 4,
+  communication: 5,
+  prototyping: 6,
 };
+
+function orderAppliedModules(context: AppliedContext): number[] {
+  const priority = APPLIED_PRIORITY[context];
+  return [priority, ...APPLIED_MODULE_IDS.filter((id) => id !== priority)];
+}
 
 export function derivePath(answers: AssessmentAnswers): PathConfiguration {
   const entryLevel = answers.beyondDrafting ? 'advanced' : 'basic';
-  return {
-    entryLevel,
-    guidanceLevel: answers.builtWorkflow ? 'reduced' : 'full',
-    assignedModuleIds:
-      entryLevel === 'basic'
-        ? [1, ...APPLIED_ROTATIONS[answers.context]]
-        : [...APPLIED_ROTATIONS[answers.context]],
-  };
+  const guidanceLevel = answers.builtWorkflow ? 'reduced' : 'full';
+  const appliedOrder = orderAppliedModules(answers.context);
+
+  const assignedModuleIds =
+    entryLevel === 'basic'
+      ? [FOUNDATIONS_MODULE_ID, AI_FOUNDATIONS_MODULE_ID, ...appliedOrder]
+      : guidanceLevel === 'full'
+        ? [AI_FOUNDATIONS_MODULE_ID, ...appliedOrder]
+        : appliedOrder;
+
+  return { entryLevel, guidanceLevel, assignedModuleIds };
 }
 
 export function recommendationExplanation(answers: AssessmentAnswers) {

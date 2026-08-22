@@ -5,10 +5,10 @@ import { curriculumIntegrity } from '../progression';
 describe('curriculum', () => {
   it('contains the complete brief', () => {
     expect(curriculumIntegrity()).toEqual({
-      modules: 5,
-      units: 35,
-      lessons: 25,
-      questions: 75,
+      modules: 6,
+      units: 42,
+      lessons: 30,
+      questions: 90,
     });
   });
   it('has stable unique unit IDs', () => {

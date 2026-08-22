@@ -9,7 +9,14 @@ export type DaySlug =
   | 'thursday'
   | 'friday'
   | 'saturday'
-  | 'sunday';
+  | 'sunday'
+  | 'day1'
+  | 'day2'
+  | 'day3'
+  | 'day4'
+  | 'day5'
+  | 'day6'
+  | 'day7';
 
 export interface AssessmentAnswers {
   beyondDrafting: boolean;
@@ -43,7 +50,7 @@ export interface LessonUnit {
 }
 export interface BuildUnit {
   id: string;
-  day: 'saturday';
+  day: 'saturday' | 'day6';
   kind: 'build';
   title: string;
   outcome: string;
@@ -56,7 +63,7 @@ export interface BuildUnit {
 }
 export interface PracticeUnit {
   id: string;
-  day: 'sunday';
+  day: 'sunday' | 'day7';
   kind: 'practice';
   title: string;
   challenge: string;
