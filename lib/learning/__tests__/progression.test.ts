@@ -24,7 +24,7 @@ describe('progression', () => {
     const first = nextUnit(state)!;
     expect(isUnitUnlocked(state, first.id)).toBe(true);
     state = completeUnit(state, first.id);
-    expect(progressSummary(state)).toMatchObject({ completed: 1, total: 28 });
+    expect(progressSummary(state)).toMatchObject({ completed: 1, total: 35 });
     expect(nextUnit(state)?.id).not.toBe(first.id);
   });
 

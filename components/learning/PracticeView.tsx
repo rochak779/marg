@@ -40,7 +40,7 @@ export function PracticeView({
     return (
       <div className="state-message">
         <h1>Practice is still locked.</h1>
-        <p className="muted">Complete Saturday’s Build first.</p>
+        <p className="muted">Complete the Build first.</p>
         <Link className="btn" href={`/app/modules/${courseModule.slug}`}>
           Back to module
         </Link>
@@ -95,7 +95,7 @@ export function PracticeView({
         <b>Make it your own</b>
         <p>
           Change at least one input, rule, output field or test case. Using a
-          hint is completely acceptable; copying Saturday’s prompt unchanged is
+          hint is completely acceptable; copying the Build’s prompt unchanged is
           not independent practice.
         </p>
       </div>

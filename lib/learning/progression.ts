@@ -38,6 +38,22 @@ export function completeUnit(
       };
 }
 
+const unitKindById = new Map(
+  curriculum.flatMap((module) =>
+    module.units.map((unit) => [unit.id, unit.kind] as const),
+  ),
+);
+
+// Lesson-only activity should exclude weekend build/practice units. Known
+// unit IDs are checked against the curriculum directly so this keeps working
+// regardless of how a module names its days (monday/tuesday vs day1/day2).
+// Unknown IDs (e.g. test fixtures) fall back to the legacy weekday suffix.
+function isLessonUnitId(unitId: string) {
+  const kind = unitKindById.get(unitId);
+  if (kind) return kind === 'lesson';
+  return !unitId.endsWith('saturday') && !unitId.endsWith('sunday');
+}
+
 export function localDateKey(date: Date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -76,9 +92,7 @@ export function weeklyLessonActivity(state: LearningState, today = new Date()) {
       label: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][index],
       value: Object.entries(state.completionDates).filter(
         ([unitId, completedDate]) =>
-          completedDate === key &&
-          !unitId.endsWith('saturday') &&
-          !unitId.endsWith('sunday'),
+          completedDate === key && isLessonUnitId(unitId),
       ).length,
     };
   });
@@ -99,9 +113,7 @@ export function monthlyLessonActivity(
       label: date.toLocaleDateString('en-GB', { month: 'short' }),
       value: Object.entries(state.completionDates).filter(
         ([unitId, completedDate]) =>
-          completedDate.startsWith(prefix) &&
-          !unitId.endsWith('saturday') &&
-          !unitId.endsWith('sunday'),
+          completedDate.startsWith(prefix) && isLessonUnitId(unitId),
       ).length,
     };
   });

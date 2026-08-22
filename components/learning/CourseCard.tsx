@@ -6,29 +6,35 @@ const ModuleIcon = ({ id }: { id: number }) => (
   <svg viewBox="0 0 24 24">
     {id === 1 && (
       <>
+        <rect x="4" y="5" width="16" height="11" rx="1.5" />
+        <path d="M4 16v2h16v-2M9 20h6" />
+      </>
+    )}
+    {id === 2 && (
+      <>
         <circle cx="12" cy="12" r="8" />
         <path d="m14.8 9.2-1.5 4.1-4.1 1.5 1.5-4.1 4.1-1.5Z" />
       </>
     )}
-    {id === 2 && (
+    {id === 3 && (
       <>
         <path d="M5 6h14v9H9l-4 3V6Z" />
         <path d="M9 10h6" />
       </>
     )}
-    {id === 3 && (
+    {id === 4 && (
       <>
         <path d="M5 6h14v12H5z" />
         <path d="M5 13h4l2 2h2l2-2h4" />
       </>
     )}
-    {id === 4 && (
+    {id === 5 && (
       <>
         <path d="M7 4h8l3 3v13H7z" />
         <path d="M10 10h5m-5 4h5" />
       </>
     )}
-    {id === 5 && (
+    {id === 6 && (
       <>
         <circle cx="7" cy="7" r="2" />
         <circle cx="17" cy="7" r="2" />

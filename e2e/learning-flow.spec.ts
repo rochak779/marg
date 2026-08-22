@@ -21,7 +21,8 @@ const seed = async (
           path: {
             entryLevel: 'advanced',
             guidanceLevel,
-            assignedModuleIds: [2, 3, 4, 5],
+            assignedModuleIds:
+              guidanceLevel === 'reduced' ? [3, 4, 5, 6] : [2, 3, 4, 5, 6],
           },
           completedUnitIds,
           quizResults: {},
@@ -48,16 +49,16 @@ test('assessment creates the expected basic path and starts Module 1', async ({
   await expect(page).toHaveURL(/recommendation/);
   await expect(page.getByText('BASIC FOUNDATIONS')).toBeVisible();
   await expect(
-    page.getByRole('heading', { name: 'From Asking AI to Directing AI' }),
+    page.getByRole('heading', { name: 'How Software Actually Works' }),
   ).toBeVisible();
   await page.getByRole('button', { name: /Start first lesson/ }).click();
-  await expect(page).toHaveURL(/module-1\/monday/);
+  await expect(page).toHaveURL(/module-1\/day1/);
 });
 
-test('advanced path excludes Module 1 and persists after refresh', async ({
+test('advanced path with reduced guidance excludes AI Foundations and persists after refresh', async ({
   page,
 }) => {
-  await seed(page);
+  await seed(page, [], 'reduced');
   await page.goto('/app/courses');
   await expect(
     page.getByText('Customer Feedback', { exact: true }),
@@ -69,9 +70,21 @@ test('advanced path excludes Module 1 and persists after refresh', async ({
   await expect(page.getByText('4 modules')).toBeVisible();
 });
 
-test('weekday quiz reveals results and unlocks Tuesday', async ({ page }) => {
+test('advanced path with full guidance includes AI Foundations first', async ({
+  page,
+}) => {
   await seed(page);
-  await page.goto('/app/modules/module-2/monday');
+  await page.goto('/app/courses');
+  await expect(page.getByText('AI Foundations', { exact: true })).toBeVisible();
+  await expect(
+    page.getByText('Customer Feedback', { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText('5 modules')).toBeVisible();
+});
+
+test('weekday quiz reveals results and unlocks Tuesday', async ({ page }) => {
+  await seed(page, [], 'reduced');
+  await page.goto('/app/modules/module-3/monday');
   await page.getByRole('button', { name: /Check my understanding/ }).click();
   const groups = page.locator('fieldset');
   for (let index = 0; index < 3; index++)
@@ -82,7 +95,7 @@ test('weekday quiz reveals results and unlocks Tuesday', async ({ page }) => {
   await expect(
     page.getByText('Answer:', { exact: false }).first(),
   ).toBeVisible();
-  await page.goto('/app/modules/module-2');
+  await page.goto('/app/modules/module-3');
   await expect(page.getByText('Tuesday').locator('..')).toContainText('Ready');
 });
 
@@ -90,10 +103,10 @@ test('Build and Practice enforce their completion requirements', async ({
   page,
 }) => {
   const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].map(
-    (day) => `module-2-${day}`,
+    (day) => `module-3-${day}`,
   );
-  await seed(page, weekdays);
-  await page.goto('/app/modules/module-2/saturday');
+  await seed(page, weekdays, 'reduced');
+  await page.goto('/app/modules/module-3/saturday');
   await expect(page.getByText('Protect workplace data')).toBeVisible();
   const buildChecks = page.getByRole('checkbox');
   for (let index = 0; index < (await buildChecks.count()); index++)
@@ -102,7 +115,7 @@ test('Build and Practice enforce their completion requirements', async ({
   await expect(
     page.getByRole('button', { name: 'Build complete' }),
   ).toBeDisabled();
-  await page.goto('/app/modules/module-2/sunday');
+  await page.goto('/app/modules/module-3/sunday');
   await expect(page.getByText('Make it your own')).toBeVisible();
   const ruleChecks = page.getByRole('checkbox');
   for (let index = 0; index < (await ruleChecks.count()); index++)

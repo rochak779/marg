@@ -86,7 +86,7 @@ export default function Recommendation() {
           <b>Build guidance</b>
           <p>
             {state.path.guidanceLevel === 'full'
-              ? 'Expanded explanations, open hints and detailed checklists will guide your Saturday Builds.'
+              ? 'Expanded explanations, open hints and detailed checklists will guide your weekend Builds.'
               : 'Hints stay available but collapsed, so you can work more independently.'}
           </p>
         </div>
@@ -94,7 +94,9 @@ export default function Recommendation() {
       <div className="bottom-actions">
         <button
           className="btn"
-          onClick={() => router.push(`/app/modules/${first.slug}/monday`)}
+          onClick={() =>
+            router.push(`/app/modules/${first.slug}/${first.units[0].day}`)
+          }
         >
           Start first lesson
         </button>

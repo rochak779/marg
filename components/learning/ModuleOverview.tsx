@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useLearning } from '@/app/providers';
 import { moduleDetailTitle } from '@/content/modules';
 import {
+  assignedModules,
   isUnitComplete,
   isUnitUnlocked,
   moduleProgress,
@@ -29,6 +30,8 @@ function LockIcon() {
 export function ModuleOverview({ module }: { module: CurriculumModule }) {
   const { state, ready } = useLearning();
   if (!ready) return <div className="state-message">Loading module…</div>;
+  const position =
+    assignedModules(state).findIndex((m) => m.id === module.id) + 1;
   const progress = moduleProgress(state, module);
   const currentIndex = module.units.findIndex(
     (unit) => isUnitUnlocked(state, unit.id) && !isUnitComplete(state, unit.id),
@@ -61,7 +64,7 @@ export function ModuleOverview({ module }: { module: CurriculumModule }) {
           <path d="m86 76 6 6 11-12" />
         </svg>
         <div className="sixa-module-title">
-          <span>MODULE {module.id}</span>
+          <span>MODULE {position || module.id}</span>
           <h1>{moduleDetailTitle(module.id)}</h1>
         </div>
       </header>

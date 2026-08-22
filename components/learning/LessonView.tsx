@@ -157,7 +157,7 @@ export function LessonView({
       </header>
       <div className="sixa-lesson-scroll">
         <span className="sixa-section-label">
-          {unit.day.toUpperCase()} LESSON
+          DAY {lessonIndex + 1} LESSON
         </span>
         <h1>{unit.title}</h1>
         {audioManifest[unit.id as keyof typeof audioManifest] && (
