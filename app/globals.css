@@ -4822,3 +4822,7 @@ a {
   color: #d9534f;
   margin-top: 8px;
 }
+.duel-result-actions {
+  width: 100%;
+  margin-top: 24px;
+}
