@@ -59,6 +59,13 @@ export function DuelBattle({
   const [saveError, setSaveError] = useState(false);
 
   const timeoutFiredRef = useRef(false);
+  const answerStateRef = useRef({ userAnswers, userAnswerMs });
+
+  // Keep answerStateRef fresh on every render so the interval callback
+  // doesn't use stale closures when checking/recording the timeout
+  useEffect(() => {
+    answerStateRef.current = { userAnswers, userAnswerMs };
+  });
 
   // Ticks while a question is live: drives the countdown, the bot's
   // "thinking…" -> "answered" status line, and auto-locks timed-out questions.
@@ -77,18 +84,22 @@ export function DuelBattle({
       setNow(currentNow);
 
       // Auto-lock the question when the clock runs out (only once per question)
+      // Read from answerStateRef to avoid stale closures when user answered early
+      const currentAnswerState = answerStateRef.current;
       if (
         !timeoutFiredRef.current &&
         currentSecondsLeft === 0 &&
-        userAnswers[questionIndex] < 0
+        currentAnswerState.userAnswers[questionIndex] < 0
       ) {
         timeoutFiredRef.current = true;
-        const nextTimes = userAnswerMs.map((value, index) =>
+        const nextTimes = currentAnswerState.userAnswerMs.map((value, index) =>
           index === questionIndex ? DUEL_QUESTION_SECONDS * 1000 : value,
         );
         setUserAnswerMs(nextTimes);
         if (questionIndex === questions.length - 1) {
-          finishBattle(userAnswers, nextTimes);
+          // Use the fresh answer state for finishBattle, but get fresh userAnswers
+          // from the ref since finishBattle needs the correct answer record
+          finishBattle(currentAnswerState.userAnswers, nextTimes);
         }
       }
     }, 250);
