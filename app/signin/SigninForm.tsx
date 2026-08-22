@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { signInWithGoogle, signInWithPassword } from '@/lib/auth/actions';
-import { Arrow, Back, Brand, GoogleIcon, Stage } from '../../components/ui';
+import { Back, Brand, GoogleIcon, Stage } from '../../components/ui';
 
 const ERROR_COPY: Record<string, string> = {
   invalid_credentials: 'That email or password isn’t right.',
-  email_not_confirmed: 'Confirm your email first — check your inbox.',
+  email_not_confirmed: 'Confirm your email first. Check your inbox.',
   invalid_input: 'Enter a valid email and password.',
   unavailable: 'Something went wrong. Try again.',
 };
@@ -73,7 +73,7 @@ export default function SigninForm() {
           </div>
         )}
         <button className="btn" type="submit" disabled={pending}>
-          {pending ? 'Signing in…' : 'Continue learning'} <Arrow />
+          {pending ? 'Signing in…' : 'Continue learning'}
         </button>
         <div className="divider">or</div>
         <button

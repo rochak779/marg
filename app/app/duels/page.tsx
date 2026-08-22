@@ -55,6 +55,7 @@ export default function DuelsHub() {
       <DuelBattle
         module={selected}
         initialSummary={summary}
+        avatarSeed={state.profile?.avatarSeed}
         onExit={() => {
           setScreen('list');
           setSelected(null);
@@ -82,7 +83,7 @@ export default function DuelsHub() {
         </header>
         <div className="duel-matching-vs">
           <div className="duel-matching-side">
-            <Avatar seed={state.profile?.avatarSeed ?? 'you'} />
+            <Avatar className="avatar" seed={state.profile?.avatarSeed ?? 'you'} />
             <span>You</span>
           </div>
           <span className="duel-matching-vs-label">VS</span>
@@ -122,7 +123,7 @@ export default function DuelsHub() {
         </h1>
         <p className="duel-brief-copy">
           20 seconds a question. Right answers score 20, speed breaks ties.
-          You&apos;ll duel Marg Bot — live matchmaking with other learners is
+          You&apos;ll duel Marg Bot. Live matchmaking with other learners is
           coming later.
         </p>
         <div className="duel-brief-stats">
@@ -153,7 +154,7 @@ export default function DuelsHub() {
             className="duel-primary-action"
             onClick={() => setScreen('matching')}
           >
-            Start challenge <span aria-hidden="true">→</span>
+            Start challenge
           </button>
         </footer>
       </article>
@@ -166,12 +167,12 @@ export default function DuelsHub() {
         <div className="duel-hub-brand">
           <Link href="/app/settings" aria-label="Open settings">
             {state.profile?.avatarSeed ? (
-              <Avatar seed={state.profile.avatarSeed} />
+              <Avatar className="avatar" seed={state.profile.avatarSeed} />
             ) : (
-              <span>म</span>
+              <span className="avatar">म</span>
             )}
           </Link>
-          <b>Challenges</b>
+          <b className="duel-hub-title">Challenges</b>
         </div>
       </header>
       <div className="duel-hub-stats">
@@ -185,7 +186,7 @@ export default function DuelsHub() {
         </div>
         <div className="duel-stat duel-stat-orange">
           <span>RANK</span>
-          <strong>{summary?.rank ? `#${summary.rank}` : '—'}</strong>
+          <strong>{summary?.rank ? `#${summary.rank}` : '-'}</strong>
         </div>
       </div>
       <div className="duel-hub-list">
@@ -222,7 +223,6 @@ export default function DuelsHub() {
               <b>{entry.module.title}</b>
               <p>5 questions · 60 XP</p>
             </div>
-            <span aria-hidden="true">→</span>
           </div>
         ))}
       </div>

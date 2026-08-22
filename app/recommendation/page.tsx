@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useLearning } from '@/app/providers';
-import { Arrow, Brand, Stage } from '@/components/ui';
+import { Brand, Stage } from '@/components/ui';
 import { moduleById } from '@/content/modules';
 import { recommendationExplanation } from '@/lib/learning/assessment';
 import { track } from '@/lib/learning/analytics';
@@ -20,14 +20,15 @@ export default function Recommendation() {
   if (!state.path || !state.assessment)
     return (
       <Stage>
-        <div className="state-message">
+        <div className="state-message post-auth-landing">
           <Brand />
           <h1>Let’s find your starting point.</h1>
-          <p className="muted">
-            Complete three short questions to create your path.
-          </p>
-          <button className="btn" onClick={() => router.push('/assessment')}>
-            Start assessment <Arrow />
+          <p>Complete three short questions to create your path.</p>
+          <button
+            className="btn post-auth-landing-btn"
+            onClick={() => router.push('/assessment')}
+          >
+            Start assessment
           </button>
         </div>
       </Stage>
@@ -55,7 +56,11 @@ export default function Recommendation() {
       </div>
       <div className="result recommendation">
         <h1>Your path is set.</h1>
-        <p className="muted">{recommendationExplanation(state.assessment)}</p>
+        {recommendationExplanation(state.assessment).map((sentence) => (
+          <p className="muted" key={sentence}>
+            {sentence}
+          </p>
+        ))}
         <div className="result-card">
           <span className="pill">
             {state.path.entryLevel === 'basic'
@@ -73,6 +78,9 @@ export default function Recommendation() {
               <p>{module!.title}</p>
             </div>
           ))}
+          <p className="path-list-note muted">
+            Each module unlocks only after you complete the one before it.
+          </p>
         </div>
         <div className="guidance-note">
           <b>Build guidance</b>
@@ -88,7 +96,7 @@ export default function Recommendation() {
           className="btn"
           onClick={() => router.push(`/app/modules/${first.slug}/monday`)}
         >
-          Start first lesson <Arrow />
+          Start first lesson
         </button>
         <button className="nav-btn" onClick={retake}>
           Retake assessment

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useLearning } from '@/app/providers';
 import { signOut } from '@/lib/auth/actions';
+import { deleteAccount } from '@/lib/auth/account-actions';
 import { saveAvatar } from '@/lib/learning/server-actions';
 import { Avatar } from '@/components/ui';
 import { avatarChoices } from '@/lib/avatar';
@@ -11,7 +12,7 @@ import { avatarChoices } from '@/lib/avatar';
 const Icon = ({
   type,
 }: {
-  type: 'clock' | 'chart' | 'path' | 'bell' | 'lock' | 'help';
+  type: 'clock' | 'chart' | 'path' | 'bell' | 'help' | 'logout' | 'trash';
 }) => (
   <svg viewBox="0 0 24 24" aria-hidden>
     {type === 'clock' && (
@@ -33,16 +34,21 @@ const Icon = ({
         <path d="M10 20h4" />
       </>
     )}
-    {type === 'lock' && (
-      <>
-        <rect x="5" y="11" width="14" height="9" rx="3" />
-        <path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3" />
-      </>
-    )}
     {type === 'help' && (
       <>
         <circle cx="12" cy="12" r="8" />
         <path d="M9.8 9a2.4 2.4 0 1 1 3.6 2c-.9.5-1.4 1-1.4 2M12 16.5v.01" />
+      </>
+    )}
+    {type === 'logout' && (
+      <>
+        <path d="M15 4h-4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4" />
+        <path d="M19 12H9m10 0-3.5-3.5M19 12l-3.5 3.5" />
+      </>
+    )}
+    {type === 'trash' && (
+      <>
+        <path d="M5 7h14M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m-9 0 1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13" />
       </>
     )}
   </svg>
@@ -53,10 +59,40 @@ export default function SettingsPage() {
   const [reminders, setReminders] = useState(true);
   const [notifications, setNotifications] = useState(true);
   const [pickingAvatar, setPickingAvatar] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
+  const [confirmText, setConfirmText] = useState('');
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const avatarSeed = state.profile?.avatarSeed;
   const choices = avatarSeed
     ? avatarChoices(avatarSeed.replace(/-\d+$/, ''))
     : [];
+
+  const closeDeleteFlow = () => {
+    setShowDeleteConfirm(false);
+    setShowDeleteForm(false);
+    setConfirmText('');
+    setDeleteError(null);
+  };
+
+  const handleDelete = async () => {
+    setDeleteError(null);
+    setDeleting(true);
+    const result = await deleteAccount(confirmText);
+    setDeleting(false);
+    if (!result.ok) {
+      setDeleteError(
+        result.error === 'confirmation_required'
+          ? 'Type DELETE exactly to confirm.'
+          : 'Could not delete your account. Try again.',
+      );
+      return;
+    }
+    r.push('/signup');
+    r.refresh();
+  };
+
   return (
     <div className="settings-view">
       <h1>Settings</h1>
@@ -140,7 +176,6 @@ export default function SettingsPage() {
             <b>Retake the assessment</b>
             <small>Your completed units stay saved</small>
           </span>
-          <strong>›</strong>
         </Link>
       </div>
       <h2>APP</h2>
@@ -164,16 +199,6 @@ export default function SettingsPage() {
             }
           />
         </button>
-        <Link className="settings-row" href="/app/settings/account">
-          <i>
-            <Icon type="lock" />
-          </i>
-          <span>
-            <b>Account & security</b>
-            <small>Export or delete your account</small>
-          </span>
-          <strong>›</strong>
-        </Link>
         <div className="settings-row disabled" aria-disabled="true">
           <i>
             <Icon type="help" />
@@ -184,18 +209,107 @@ export default function SettingsPage() {
           </span>
         </div>
       </div>
-      <button
-        type="button"
-        className="settings-signout"
-        onClick={async () => {
-          await signOut();
-          r.push('/signin');
-          r.refresh();
-        }}
-      >
-        Sign out
-      </button>
-      <p className="settings-foot">Marg — Every expert was once a beginner.</p>
+      <h2>ACCOUNT</h2>
+      <div className="settings-group">
+        <button
+          type="button"
+          className="settings-row"
+          onClick={async () => {
+            await signOut();
+            r.push('/signin');
+            r.refresh();
+          }}
+        >
+          <i>
+            <Icon type="logout" />
+          </i>
+          <span>
+            <b>Log out</b>
+          </span>
+        </button>
+        <button
+          type="button"
+          className="settings-row settings-row-danger"
+          onClick={() => setShowDeleteConfirm(true)}
+        >
+          <i>
+            <Icon type="trash" />
+          </i>
+          <span>
+            <b>Delete my account</b>
+          </span>
+        </button>
+      </div>
+
+      {showDeleteConfirm && (
+        <div className="confirm-overlay" role="dialog" aria-modal="true">
+          <div className="confirm-sheet">
+            <h2>Delete your account?</h2>
+            <p>
+              This permanently deletes your account and all learning
+              progress. This cannot be undone.
+            </p>
+            <div className="confirm-sheet-actions">
+              <button
+                type="button"
+                className="confirm-no"
+                onClick={closeDeleteFlow}
+              >
+                No
+              </button>
+              <button
+                type="button"
+                className="confirm-yes danger"
+                onClick={() => {
+                  setShowDeleteConfirm(false);
+                  setShowDeleteForm(true);
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showDeleteForm && (
+        <div className="confirm-overlay" role="dialog" aria-modal="true">
+          <div className="confirm-sheet">
+            <h2>Type DELETE to confirm</h2>
+            <p>Last check before we permanently delete everything.</p>
+            <label className="confirm-delete-input">
+              <input
+                className="field"
+                value={confirmText}
+                onChange={(event) => setConfirmText(event.target.value)}
+                placeholder="DELETE"
+              />
+            </label>
+            {deleteError && (
+              <div role="alert" className="confirm-delete-error">
+                {deleteError}
+              </div>
+            )}
+            <div className="confirm-sheet-actions">
+              <button
+                type="button"
+                className="confirm-no"
+                onClick={closeDeleteFlow}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="confirm-yes danger"
+                disabled={confirmText !== 'DELETE' || deleting}
+                onClick={handleDelete}
+              >
+                {deleting ? 'Deleting…' : 'Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

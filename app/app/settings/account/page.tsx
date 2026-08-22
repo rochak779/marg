@@ -59,7 +59,7 @@ export default function AccountSettings() {
         <b>Export your data</b>
         <p className="muted" style={{ margin: '4px 0 12px' }}>
           Download everything Marg has stored for your account as a JSON
-          file — your profile, assessment, path and all progress.
+          file: your profile, assessment, path and all progress.
         </p>
         <button className="btn ghost" onClick={handleExport} disabled={exporting}>
           {exporting ? 'Preparing…' : 'Download my data'}

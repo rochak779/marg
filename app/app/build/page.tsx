@@ -37,9 +37,9 @@ export default function BuildHub() {
         <div className="build-brand">
           <Link href="/app/settings" aria-label="Open settings">
             {state.profile?.avatarSeed ? (
-              <Avatar seed={state.profile.avatarSeed} />
+              <Avatar className="avatar" seed={state.profile.avatarSeed} />
             ) : (
-              <span>म</span>
+              <span className="avatar">म</span>
             )}
           </Link>
           <b>Build</b>

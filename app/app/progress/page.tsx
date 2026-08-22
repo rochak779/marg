@@ -19,6 +19,7 @@ export default function ProgressPage() {
     'activity',
   );
   const [selectedModuleIndex, setSelectedModuleIndex] = useState(0);
+  const [moduleMenuOpen, setModuleMenuOpen] = useState(false);
   const swipeStart = useRef<number | null>(null);
   if (!ready) return <div className="state-message">Loading progress…</div>;
   if (!state.path)
@@ -58,11 +59,11 @@ export default function ProgressPage() {
         label: `L${index + 1}`,
         title: unit.title,
         correct: result?.score ?? 0,
-        incorrect: result ? unit.quiz.length - result.score : 0,
         total: unit.quiz.length,
         complete: Boolean(result),
       };
-    });
+    })
+    .filter((lesson) => lesson.complete);
   const moduleCorrect = lessonScores.reduce(
     (total, lesson) => total + lesson.correct,
     0,
@@ -108,28 +109,7 @@ export default function ProgressPage() {
               className="progress-chart-slide"
               aria-label="Learning activity chart"
             >
-              <div className="chart-top">
-                <span className="chart-icon">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M6 18V9m6 9V5m6 13v-6" />
-                  </svg>
-                </span>
-                <div>
-                  <b>Your path</b>
-                  <span>
-                    {summary.completed} of {summary.total} units
-                  </span>
-                </div>
-              </div>
-              <div className="chart-totals">
-                <strong>
-                  {summary.completed} <i>units</i>
-                </strong>
-                <strong>
-                  {summary.minutes} <i>minutes</i>
-                </strong>
-              </div>
-              <div className="period-toggle" aria-label="Progress period">
+              <div className="period-toggle period-toggle-top" aria-label="Progress period">
                 <button
                   className={period === 'weekly' ? 'active' : ''}
                   onClick={() => setPeriod('weekly')}
@@ -142,6 +122,14 @@ export default function ProgressPage() {
                 >
                   Monthly
                 </button>
+              </div>
+              <div className="chart-totals">
+                <strong>
+                  {summary.completed} <i>units</i>
+                </strong>
+                <strong>
+                  {summary.minutes} <i>minutes</i>
+                </strong>
               </div>
               {summary.completed === 0 ? (
                 <div className="progress-empty">
@@ -171,24 +159,43 @@ export default function ProgressPage() {
                   <h2>Lesson scores</h2>
                   <p>Swipe or select a module</p>
                 </div>
-                <label className="module-select">
-                  <span className="sr-only">Choose module</span>
-                  <select
-                    value={safeModuleIndex}
-                    onChange={(event) =>
-                      changeModule(Number(event.target.value))
-                    }
+                <div className="module-select">
+                  <button
+                    type="button"
+                    className="module-select-trigger"
+                    aria-haspopup="listbox"
+                    aria-expanded={moduleMenuOpen}
+                    onClick={() => setModuleMenuOpen((value) => !value)}
                   >
-                    {modules.map((courseModule, index) => (
-                      <option key={courseModule.id} value={index}>
-                        Module {index + 1}
-                      </option>
-                    ))}
-                  </select>
-                  <svg viewBox="0 0 20 20" aria-hidden="true">
-                    <path d="m6 8 4 4 4-4" />
-                  </svg>
-                </label>
+                    Module {safeModuleIndex + 1}
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="m6 8 4 4 4-4" />
+                    </svg>
+                  </button>
+                  {moduleMenuOpen && (
+                    <div className="module-select-menu" role="listbox">
+                      {modules.map((courseModule, index) => (
+                        <button
+                          type="button"
+                          key={courseModule.id}
+                          role="option"
+                          aria-selected={index === safeModuleIndex}
+                          className={
+                            index === safeModuleIndex
+                              ? 'module-select-option selected'
+                              : 'module-select-option'
+                          }
+                          onClick={() => {
+                            changeModule(index);
+                            setModuleMenuOpen(false);
+                          }}
+                        >
+                          Module {index + 1}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="score-chart-summary">
                 <div>
@@ -197,93 +204,35 @@ export default function ProgressPage() {
                   </strong>
                   <span>correct answers</span>
                 </div>
-                <div className="score-legend" aria-label="Chart legend">
-                  <span>
-                    <i className="correct" />
-                    Correct
-                  </span>
-                  <span>
-                    <i className="incorrect" />
-                    Incorrect
-                  </span>
-                  <span>
-                    <i className="total" />
-                    Total
-                  </span>
-                </div>
               </div>
-              <div
-                className="lesson-score-chart"
-                aria-label={`Module ${safeModuleIndex + 1} lesson scores`}
-              >
-                <div className="score-axis" aria-hidden="true">
-                  <span>3</span>
-                  <span>2</span>
-                  <span>1</span>
-                  <span>0</span>
+              {lessonScores.length === 0 ? (
+                <div className="progress-empty">
+                  Complete a lesson quiz in this module to see scores.
                 </div>
-                <div className="lesson-score-bars">
+              ) : (
+                <div
+                  className="module-bars activity-bars"
+                  aria-label={`Module ${safeModuleIndex + 1} lesson scores`}
+                >
                   {lessonScores.map((lesson) => (
                     <div
-                      className="lesson-score-column"
                       key={lesson.id}
-                      aria-label={`${lesson.title}: ${lesson.complete ? `${lesson.correct} correct, ${lesson.incorrect} incorrect, ${lesson.total} total` : 'not completed'}`}
+                      aria-label={`${lesson.title}: ${lesson.correct} of ${lesson.total} correct`}
                     >
-                      <span className="score-total">{lesson.total}</span>
-                      <div className="score-track">
-                        <i
-                          className="score-incorrect"
-                          style={{
-                            height: `${(lesson.incorrect / lesson.total) * 100}%`,
-                          }}
-                        />
-                        <i
-                          className="score-correct"
-                          style={{
-                            height: `${(lesson.correct / lesson.total) * 100}%`,
-                          }}
-                        />
-                      </div>
-                      <b>{lesson.label}</b>
-                      <small>
-                        {lesson.complete
-                          ? `${lesson.correct}/${lesson.total}`
-                          : '—'}
-                      </small>
+                      <span
+                        style={{
+                          height: `${Math.max(8, (lesson.correct / lesson.total) * 100)}%`,
+                        }}
+                      >
+                        <b>
+                          {lesson.correct}/{lesson.total}
+                        </b>
+                      </span>
+                      <small>{lesson.label}</small>
                     </div>
                   ))}
                 </div>
-              </div>
-              <div className="module-swipe-controls">
-                <button
-                  onClick={() => changeModule(safeModuleIndex - 1)}
-                  disabled={safeModuleIndex === 0}
-                  aria-label="Previous module"
-                >
-                  <svg viewBox="0 0 20 20">
-                    <path d="m12 5-5 5 5 5" />
-                  </svg>
-                </button>
-                <div
-                  aria-label={`Module ${safeModuleIndex + 1} of ${modules.length}`}
-                >
-                  {modules.map((courseModule, index) => (
-                    <i
-                      key={courseModule.id}
-                      className={index === safeModuleIndex ? 'active' : ''}
-                    />
-                  ))}
-                </div>
-                <button
-                  onClick={() => changeModule(safeModuleIndex + 1)}
-                  disabled={safeModuleIndex === modules.length - 1}
-                  aria-label="Next module"
-                >
-                  <svg viewBox="0 0 20 20">
-                    <path d="m8 5 5 5-5 5" />
-                  </svg>
-                </button>
-              </div>
+              )}
             </div>
           )}
         </div>

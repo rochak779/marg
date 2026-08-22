@@ -1,7 +1,7 @@
 import './globals.css';
 import { Providers } from './providers';
 export const metadata = {
-  title: 'Marg — Learn AI for work',
+  title: 'Marg: Learn AI for work',
   description: 'A personalised path to practical AI skills.',
 };
 export const viewport = {
