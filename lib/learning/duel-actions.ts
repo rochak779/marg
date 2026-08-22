@@ -1,7 +1,7 @@
 'use server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
-import { DUEL_QUESTION_COUNT } from './duel';
+import { DUEL_QUESTION_COUNT, XP_BY_OUTCOME } from './duel';
 
 export type DuelSummary = {
   wins: number;
@@ -56,7 +56,6 @@ const recordDuelSchema = z.object({
   userTimeMs: z.number().int().min(0),
   botScore: z.number().int().min(0).max(100),
   outcome: z.enum(['win', 'loss', 'draw']),
-  xpAwarded: z.number().int().min(0),
 });
 // The function still takes `unknown` and validates defensively (it's a
 // server action, reachable from any client), but callers can type-check
@@ -75,6 +74,8 @@ export async function recordDuelResult(
   } = await supabase.auth.getUser();
   if (!user) return { ok: false, error: 'unauthenticated' };
 
+  const xpAwarded = XP_BY_OUTCOME[parsed.data.outcome];
+
   const { error } = await supabase.rpc('record_duel_result', {
     p_module_id: parsed.data.moduleId,
     p_question_ids: parsed.data.questionIds,
@@ -82,7 +83,7 @@ export async function recordDuelResult(
     p_user_time_ms: parsed.data.userTimeMs,
     p_bot_score: parsed.data.botScore,
     p_outcome: parsed.data.outcome,
-    p_xp_awarded: parsed.data.xpAwarded,
+    p_xp_awarded: xpAwarded,
   });
   if (error) {
     console.error('record_duel_result failed', { code: error.code });
