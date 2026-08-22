@@ -1,7 +1,9 @@
 'use client';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useLearning } from '@/app/providers';
-import { completeUnit, isUnitUnlocked } from '@/lib/learning/progression';
+import { isUnitUnlocked } from '@/lib/learning/progression';
+import { savePractice } from '@/lib/learning/server-actions';
 import { track } from '@/lib/learning/analytics';
 import type {
   CurriculumModule,
@@ -24,8 +26,12 @@ export function PracticeView({
   courseModule: CurriculumModule;
   unit: PracticeUnit;
 }) {
-  const { state, ready, update } = useLearning();
-  const progress = state.practices[unit.id] ?? emptyProgress;
+  const { state, ready, setState } = useLearning();
+  const [progress, setProgress] = useState<PracticeProgress>(
+    () => state.practices[unit.id] ?? emptyProgress,
+  );
+  const [finishing, setFinishing] = useState(false);
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   if (!ready) return <div className="state-message">Loading Practice…</div>;
   if (
     !isUnitUnlocked(state, unit.id) &&
@@ -40,25 +46,39 @@ export function PracticeView({
         </Link>
       </div>
     );
-  const patchProgress = (next: Partial<PracticeProgress>) =>
-    update((current) => ({
-      ...current,
-      practices: {
-        ...current.practices,
-        [unit.id]: {
-          ...(current.practices[unit.id] ?? emptyProgress),
-          ...next,
-        },
-      },
-    }));
+  const patchProgress = (
+    next: Partial<PracticeProgress>,
+    debounceMs = 0,
+  ) => {
+    const updated = { ...progress, ...next };
+    setProgress(updated);
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    const save = () =>
+      savePractice({ unitId: unit.id, progress: updated, complete: false }).catch(
+        () => {},
+      );
+    if (debounceMs > 0) {
+      saveTimer.current = setTimeout(save, debounceMs);
+    } else {
+      save();
+    }
+  };
   const hasReflection = Object.values(progress.reflections).some(
     (value) => value.trim().length > 0,
   );
   const canComplete =
     progress.checkedRules.length === unit.rules.length && hasReflection;
-  const finish = () => {
-    if (!canComplete) return;
-    update((current) => completeUnit(current, unit.id));
+  const finish = async () => {
+    if (!canComplete || finishing) return;
+    setFinishing(true);
+    const result = await savePractice({
+      unitId: unit.id,
+      progress,
+      complete: true,
+    });
+    setFinishing(false);
+    if (!result.ok) return;
+    setState(result.state);
     track('practice_completed', { moduleId: courseModule.id, unitId: unit.id });
   };
   return (
@@ -117,7 +137,8 @@ export function PracticeView({
       <section className="reflections">
         <h2>Reflect</h2>
         <p className="muted">
-          Write at least one short response. Your answers stay in this browser.
+          Write at least one short response. Saved to your account so
+          it&rsquo;s there if you switch devices.
         </p>
         {unit.reflections.map((reflection, index) => (
           <label key={reflection}>
@@ -126,12 +147,15 @@ export function PracticeView({
               maxLength={400}
               value={progress.reflections[index] ?? ''}
               onChange={(event) =>
-                patchProgress({
-                  reflections: {
-                    ...progress.reflections,
-                    [index]: event.target.value,
+                patchProgress(
+                  {
+                    reflections: {
+                      ...progress.reflections,
+                      [index]: event.target.value,
+                    },
                   },
-                })
+                  600,
+                )
               }
               placeholder="Your reflection"
             />
@@ -140,12 +164,16 @@ export function PracticeView({
       </section>
       <button
         className="btn"
-        disabled={!canComplete || state.completedUnitIds.includes(unit.id)}
+        disabled={
+          !canComplete || finishing || state.completedUnitIds.includes(unit.id)
+        }
         onClick={finish}
       >
         {state.completedUnitIds.includes(unit.id)
           ? 'Practice complete'
-          : 'Complete Practice →'}
+          : finishing
+            ? 'Saving…'
+            : 'Complete Practice →'}
       </button>
     </article>
   );

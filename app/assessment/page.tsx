@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Arrow, Brand, Stage } from '@/components/ui';
 import { useLearning } from '@/app/providers';
-import { derivePath } from '@/lib/learning/assessment';
+import { saveAssessment } from '@/lib/learning/server-actions';
 import { track } from '@/lib/learning/analytics';
 import type { AppliedContext, AssessmentAnswers } from '@/lib/learning/types';
 
@@ -52,7 +52,7 @@ const questions = [
 
 export default function Assessment() {
   const router = useRouter();
-  const { state, update } = useLearning();
+  const { state, setState } = useLearning();
   const [step, setStep] = useState(0);
   const [selected, setSelected] = useState<(AnswerValue | null)[]>(
     state.assessment
@@ -63,20 +63,21 @@ export default function Assessment() {
         ]
       : [null, null, null],
   );
+  const [submitting, setSubmitting] = useState(false);
   const question = questions[step];
-  const continueFlow = () => {
-    if (selected[step] === null) return;
+  const continueFlow = async () => {
+    if (selected[step] === null || submitting) return;
     if (step < 2) return setStep(step + 1);
     const answers: AssessmentAnswers = {
       beyondDrafting: selected[0] as boolean,
       context: selected[1] as AppliedContext,
       builtWorkflow: selected[2] as boolean,
     };
-    update((current) => ({
-      ...current,
-      assessment: answers,
-      path: derivePath(answers),
-    }));
+    setSubmitting(true);
+    const result = await saveAssessment(answers);
+    setSubmitting(false);
+    if (!result.ok) return;
+    setState(result.state);
     track('assessment_completed', {
       context: answers.context,
       beyondDrafting: answers.beyondDrafting,
@@ -183,10 +184,11 @@ export default function Assessment() {
       <div className="quiz-actions">
         <button
           className="btn"
-          disabled={selected[step] === null}
+          disabled={selected[step] === null || submitting}
           onClick={continueFlow}
         >
-          {step === 2 ? 'See my path' : 'Continue'} <Arrow />
+          {step === 2 && submitting ? 'Saving…' : step === 2 ? 'See my path' : 'Continue'}{' '}
+          <Arrow />
         </button>
         <small className="muted">
           Takes about 30 seconds · shapes your whole path

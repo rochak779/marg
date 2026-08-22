@@ -341,7 +341,26 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      submit_assessment: {
+        Args: {
+          p_beyond_drafting: boolean
+          p_built_workflow: boolean
+          p_entry_level: string
+          p_guidance_level: string
+          p_module_ids: number[]
+          p_work_context: string
+        }
+        Returns: string
+      }
+      submit_quiz_attempt: {
+        Args: {
+          p_answers: number[]
+          p_path_id: string
+          p_score: number
+          p_unit_id: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

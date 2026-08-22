@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useLearning } from '@/app/providers';
-import { completeUnit, isUnitUnlocked } from '@/lib/learning/progression';
+import { isUnitUnlocked } from '@/lib/learning/progression';
+import { saveBuild } from '@/lib/learning/server-actions';
 import { track } from '@/lib/learning/analytics';
 import type {
   BuildProgress,
@@ -27,9 +28,12 @@ export function BuildView({
   courseModule: CurriculumModule;
   unit: BuildUnit;
 }) {
-  const { state, ready, update } = useLearning();
+  const { state, ready, setState } = useLearning();
   const [copied, setCopied] = useState(false);
-  const progress = state.builds[unit.id] ?? emptyProgress;
+  const [progress, setProgress] = useState<BuildProgress>(
+    () => state.builds[unit.id] ?? emptyProgress,
+  );
+  const [finishing, setFinishing] = useState(false);
   if (!ready) return <div className="state-message">Loading Build…</div>;
   if (
     !isUnitUnlocked(state, unit.id) &&
@@ -44,21 +48,31 @@ export function BuildView({
         </Link>
       </div>
     );
-  const patchProgress = (next: Partial<BuildProgress>) =>
-    update((current) => ({
-      ...current,
-      builds: {
-        ...current.builds,
-        [unit.id]: { ...(current.builds[unit.id] ?? emptyProgress), ...next },
-      },
-    }));
+  const patchProgress = (next: Partial<BuildProgress>) => {
+    const updated = { ...progress, ...next };
+    setProgress(updated);
+    // Fire-and-forget: instant local UI, background sync. A failed toggle
+    // save just means the next toggle (or Complete) retries with the
+    // latest local state, since this upsert is idempotent per unit.
+    saveBuild({ unitId: unit.id, progress: updated, complete: false }).catch(
+      () => {},
+    );
+  };
   const canComplete =
     progress.checkedSteps.length === unit.steps.length &&
     progress.checkedCriteria.length === unit.checks.length &&
     progress.ranWorkflow;
-  const finish = () => {
-    if (!canComplete) return;
-    update((current) => completeUnit(current, unit.id));
+  const finish = async () => {
+    if (!canComplete || finishing) return;
+    setFinishing(true);
+    const result = await saveBuild({
+      unitId: unit.id,
+      progress,
+      complete: true,
+    });
+    setFinishing(false);
+    if (!result.ok) return;
+    setState(result.state);
     track('build_completed', {
       moduleId: courseModule.id,
       unitId: unit.id,
@@ -183,12 +197,16 @@ export function BuildView({
         </label>
         <button
           className="btn"
-          disabled={!canComplete || state.completedUnitIds.includes(unit.id)}
+          disabled={
+            !canComplete || finishing || state.completedUnitIds.includes(unit.id)
+          }
           onClick={finish}
         >
           {state.completedUnitIds.includes(unit.id)
             ? 'Build complete'
-            : 'Complete Build →'}
+            : finishing
+              ? 'Saving…'
+              : 'Complete Build →'}
         </button>
       </section>
     </article>
