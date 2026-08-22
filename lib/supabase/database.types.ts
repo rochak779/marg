@@ -250,6 +250,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          avatar_seed: string | null
           created_at: string
           daily_nudge_enabled: boolean
           first_name: string | null
@@ -258,6 +259,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          avatar_seed?: string | null
           created_at?: string
           daily_nudge_enabled?: boolean
           first_name?: string | null
@@ -266,6 +268,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          avatar_seed?: string | null
           created_at?: string
           daily_nudge_enabled?: boolean
           first_name?: string | null

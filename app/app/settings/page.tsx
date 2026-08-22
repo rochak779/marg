@@ -4,6 +4,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useLearning } from '@/app/providers';
 import { signOut } from '@/lib/auth/actions';
+import { saveAvatar } from '@/lib/learning/server-actions';
+import { Avatar } from '@/components/ui';
+import { avatarChoices } from '@/lib/avatar';
 
 const Icon = ({
   type,
@@ -45,10 +48,15 @@ const Icon = ({
   </svg>
 );
 export default function SettingsPage() {
-  const { state } = useLearning();
+  const { state, setState } = useLearning();
   const r = useRouter();
   const [reminders, setReminders] = useState(true);
   const [notifications, setNotifications] = useState(true);
+  const [pickingAvatar, setPickingAvatar] = useState(false);
+  const avatarSeed = state.profile?.avatarSeed;
+  const choices = avatarSeed
+    ? avatarChoices(avatarSeed.replace(/-\d+$/, ''))
+    : [];
   return (
     <div className="settings-view">
       <h1>Settings</h1>
@@ -57,13 +65,44 @@ export default function SettingsPage() {
           <circle cx="274" cy="2" r="60" />
           <path d="m256 92 3 7 7 3-7 3-3 7-3-7-7-3 7-3Z" />
         </svg>
-        <span className="settings-avatar">म</span>
+        {avatarSeed ? (
+          <button
+            type="button"
+            className="settings-avatar-btn"
+            onClick={() => setPickingAvatar((value) => !value)}
+            aria-label="Change avatar"
+          >
+            <Avatar className="settings-avatar" seed={avatarSeed} />
+          </button>
+        ) : (
+          <span className="settings-avatar">म</span>
+        )}
         <div>
           <b>{state.profile?.firstName || 'Learner'}</b>
           <p>{state.profile?.email || 'No email linked yet'}</p>
-          <small>Progress saved in this browser</small>
+          <small>Synced to your account</small>
         </div>
       </section>
+      {pickingAvatar && (
+        <section className="avatar-picker">
+          {choices.map((seed) => (
+            <button
+              type="button"
+              key={seed}
+              className={seed === avatarSeed ? 'selected' : ''}
+              onClick={async () => {
+                const result = await saveAvatar({ seed });
+                if (result.ok) {
+                  setState(result.state);
+                  setPickingAvatar(false);
+                }
+              }}
+            >
+              <Avatar seed={seed} />
+            </button>
+          ))}
+        </section>
+      )}
       <h2>LEARNING</h2>
       <div className="settings-group">
         <button

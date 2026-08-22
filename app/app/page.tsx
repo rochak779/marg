@@ -50,6 +50,7 @@ export default function HomePage() {
         progress={summary.percentage}
         firstName={state.profile?.firstName}
         streak={learningStreak(state)}
+        avatarSeed={state.profile?.avatarSeed}
       />
       <div className="app-hero path-hero">
         <svg className="float path-orbit" viewBox="0 0 130 120" aria-hidden>

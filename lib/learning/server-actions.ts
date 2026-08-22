@@ -33,7 +33,7 @@ export async function loadSnapshot(): Promise<LearningState> {
     await Promise.all([
       supabase
         .from('profiles')
-        .select('first_name')
+        .select('first_name, avatar_seed')
         .eq('user_id', user.id)
         .maybeSingle(),
       supabase
@@ -56,6 +56,7 @@ export async function loadSnapshot(): Promise<LearningState> {
   state.profile = {
     firstName: profile?.first_name ?? user.email?.split('@')[0] ?? 'Learner',
     email: user.email ?? '',
+    avatarSeed: profile?.avatar_seed ?? user.id,
   };
 
   if (assessment) {
@@ -407,6 +408,34 @@ export async function savePractice(input: unknown): Promise<ActionResult> {
       console.error('unit_progress upsert failed', { code: unitError.code });
       return { ok: false, error: 'unavailable' };
     }
+  }
+
+  return { ok: true, state: await loadSnapshot() };
+}
+
+// ---------------------------------------------------------------------------
+// saveAvatar
+// ---------------------------------------------------------------------------
+
+const avatarSchema = z.object({ seed: z.string().min(1).max(200) });
+
+export async function saveAvatar(input: unknown): Promise<ActionResult> {
+  const parsed = avatarSchema.safeParse(input);
+  if (!parsed.success) return { ok: false, error: 'invalid_input' };
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { ok: false, error: 'unauthenticated' };
+
+  const { error } = await supabase
+    .from('profiles')
+    .update({ avatar_seed: parsed.data.seed })
+    .eq('user_id', user.id);
+  if (error) {
+    console.error('avatar_seed update failed', { code: error.code });
+    return { ok: false, error: 'unavailable' };
   }
 
   return { ok: true, state: await loadSnapshot() };

@@ -36,7 +36,13 @@ export const learningStateSchema = z.object({
   builds: z.record(z.string(), build),
   practices: z.record(z.string(), practice),
   profile: z
-    .object({ firstName: z.string(), email: z.string() })
+    .object({
+      firstName: z.string(),
+      email: z.string(),
+      // Optional/defaulted: older localStorage snapshots (pre-avatar
+      // feature) never had this field.
+      avatarSeed: z.string().optional().default(''),
+    })
     .nullable()
     .default(null),
   completionDates: z.record(z.string(), z.string()).default({}),
