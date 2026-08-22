@@ -109,6 +109,13 @@ function mapAuthError(message: string): string {
     'Invalid login credentials': 'invalid_credentials',
     'Email not confirmed': 'email_not_confirmed',
     'User already registered': 'already_registered',
+    'email rate limit exceeded': 'rate_limited',
   };
-  return known[message] ?? 'unavailable';
+  const mapped = known[message];
+  if (!mapped) {
+    // Unmapped provider errors collapse to a generic message in the UI —
+    // log the raw message so we can diagnose what actually happened.
+    console.error('Unmapped auth error', { message });
+  }
+  return mapped ?? 'unavailable';
 }

@@ -66,6 +66,26 @@ export function Back({ href }: { href: string }) {
   );
 }
 
+export function Close({ href }: { href: string }) {
+  return (
+    <Link className="icon-btn" href={href} aria-label="Close">
+      <svg
+        viewBox="0 0 24 24"
+        width="17"
+        height="17"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M18 6 6 18M6 6l12 12" />
+      </svg>
+    </Link>
+  );
+}
+
 export function GoogleIcon() {
   return (
     <svg className="google-icon" viewBox="0 0 24 24" aria-hidden>
