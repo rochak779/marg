@@ -19,6 +19,11 @@ const items = [
     <path key="b" d="M10 4h4v5l4 8a2 2 0 0 1-2 3H8a2 2 0 0 1-2-3l4-8Z" />,
   ],
   [
+    'Duels',
+    '/app/duels',
+    <path key="d" d="M6 4h12M8 4v5a4 4 0 0 0 8 0V4M12 13v4M9 20h6" />,
+  ],
+  [
     'Settings',
     '/app/settings',
     <g key="s">
