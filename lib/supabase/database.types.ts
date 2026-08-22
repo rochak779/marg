@@ -119,6 +119,45 @@ export type Database = {
           },
         ]
       }
+      duel_results: {
+        Row: {
+          bot_score: number
+          id: string
+          module_id: number
+          outcome: string
+          played_at: string
+          question_ids: string[]
+          user_id: string
+          user_score: number
+          user_time_ms: number
+          xp_awarded: number
+        }
+        Insert: {
+          bot_score: number
+          id?: string
+          module_id: number
+          outcome: string
+          played_at?: string
+          question_ids: string[]
+          user_id: string
+          user_score: number
+          user_time_ms: number
+          xp_awarded: number
+        }
+        Update: {
+          bot_score?: number
+          id?: string
+          module_id?: number
+          outcome?: string
+          played_at?: string
+          question_ids?: string[]
+          user_id?: string
+          user_score?: number
+          user_time_ms?: number
+          xp_awarded?: number
+        }
+        Relationships: []
+      }
       learning_path_modules: {
         Row: {
           module_id: number
@@ -362,6 +401,22 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_duel_rank: {
+        Args: Record<PropertyKey, never>
+        Returns: { rank: number; total_players: number }[]
+      }
+      record_duel_result: {
+        Args: {
+          p_bot_score: number
+          p_module_id: number
+          p_outcome: string
+          p_question_ids: string[]
+          p_user_score: number
+          p_user_time_ms: number
+          p_xp_awarded: number
+        }
+        Returns: string
+      }
       record_local_state_import: {
         Args: { p_idempotency_key: string }
         Returns: boolean
