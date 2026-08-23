@@ -44,6 +44,7 @@ A new learner must be able to:
 - No instructor dashboard, social leaderboard, cohort management or payment flow.
 - No forced real-calendar gating. The labels Monday-Sunday communicate the learning rhythm, but users may continue sequentially during MVP testing.
 - No upload of confidential workplace data. All supplied exercises use mock data; personal practice must show a privacy warning.
+- No lesson audio/narration for now. Tried on 2026-08-23: ElevenLabs ran out of credits; local open-source Chatterbox TTS (CPU) was evaluated as a free alternative and produced audio for all 30 lessons, but the run was scrapped — quality wasn't aligned with the lesson text — and fully reverted (manifest, generated mp3s, generation scripts, scratch venv all removed). `scripts/generate-lesson-audio.mjs` (ElevenLabs) and the `public/audio/lessons/` manifest pattern from Module 1's original 5 files still exist as the intended plumbing if audio is picked back up later, but it's explicitly out of scope until then.
 
 ## 5. Existing product and visual constraints
 

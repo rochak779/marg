@@ -4,7 +4,7 @@
     "slug": "module-1",
     "title": "How Software Actually Works",
     "audience": "Basic learners only",
-    "outcome": "By Day 7, the learner can use one reusable mental model to explain how a modern software product works — from what the user sees, to how systems communicate, where information is stored, how access is controlled, and where software runs.",
+    "outcome": "By Day 7, the learner can use one reusable mental model to explain how a modern software product works: from what the user sees, to how systems communicate, where information is stored, how access is controlled, and where software runs.",
     "weekdayComponents": [
       "Day 1: Frontend vs backend",
       "Day 2: APIs, requests, responses and JSON",
@@ -17,7 +17,7 @@
         "id": "module-1-day1",
         "day": "day1",
         "kind": "lesson",
-        "title": "Frontend vs backend — what runs where?",
+        "title": "Frontend vs backend: what runs where?",
         "hook": "You tap \"View Order\" in a shopping app and immediately see your order details. It looks like one simple action, but different parts of the software are responsible for what you see and what happens behind the screen.",
         "theory": [
           "The frontend is the part of a software product that the user sees and interacts with. It includes screens, buttons, forms, menus, text, images and other user-facing elements.",
@@ -29,7 +29,7 @@
         ],
         "example": "A shopping app may already have a finished \"Order History\" screen. However, if the backend service that retrieves previous orders is not ready, the screen may exist without being able to display the user's orders.",
         "action": "Pick one app you use regularly. Write down two things you can see or interact with and one thing the backend probably needs to do to make that experience work.",
-        "savedComponent": "A simple two-column mental model: Frontend — what the user sees and interacts with / Backend — what happens behind the screen.",
+        "savedComponent": "A simple two-column mental model: Frontend: what the user sees and interacts with / Backend: what happens behind the screen.",
         "estimatedMinutes": 10,
         "quiz": [
           {
@@ -74,7 +74,7 @@
         "id": "module-1-day2",
         "day": "day2",
         "kind": "lesson",
-        "title": "APIs, requests, responses and JSON — how systems communicate",
+        "title": "APIs, requests, responses and JSON: how systems communicate",
         "hook": "The frontend needs information from the backend. But how does one software system actually ask another system for something?",
         "theory": [
           "An API, or Application Programming Interface, provides a defined way for software systems to communicate.",
@@ -133,7 +133,7 @@
         "id": "module-1-day3",
         "day": "day3",
         "kind": "lesson",
-        "title": "Databases, tables and the basic SQL mental model — where information lives",
+        "title": "Databases, tables and the basic SQL mental model: where information lives",
         "hook": "Yesterday, the application could ask the backend for information. But where does that information actually live so the system can retrieve it later?",
         "theory": [
           "A database is a system used to store and retrieve information. Applications use databases to persist information so it can be accessed later.",
@@ -195,7 +195,7 @@
         "id": "module-1-day4",
         "day": "day4",
         "kind": "lesson",
-        "title": "Authentication vs authorization + integrations — who are you and what can you do?",
+        "title": "Authentication vs authorization + integrations: who are you and what can you do?",
         "hook": "You successfully log in to a product, but you still cannot open the Admin Dashboard. How does the system know who you are and what you are allowed to access?",
         "theory": [
           "Authentication answers the question: \"Who are you?\"",
@@ -256,7 +256,7 @@
         "id": "module-1-day5",
         "day": "day5",
         "kind": "lesson",
-        "title": "Cloud, environments, deployment and logs — where software runs",
+        "title": "Cloud, environments, deployment and logs: where software runs",
         "hook": "An engineer tells you, \"The fix is written and tested, but it hasn't been deployed to production yet.\" Does that mean customers already have the fix? No. Understanding where software runs and how changes reach customers is an important part of a PM's technical mental model.",
         "theory": [
           "An environment is a place where a version of software runs. Software teams commonly maintain separate environments for different purposes.",
@@ -334,7 +334,7 @@
           "The simplified technical flow is now: Mobile App → API → Order Service → Database → Delivery Location Service → API → App. Draw this flow and add one sentence explaining the role of each component.",
           "Failure challenge: Imagine the delivery partner's location does not appear on the map. Choose one component that could be responsible, then answer what the user might experience, which component engineering might investigate, and what evidence could help confirm the problem."
         ],
-        "prompt": "Draw the flow: Mobile App → API → Order Service → Database → Delivery Location Service → API → App. Add one sentence explaining the role of each component (for example: Mobile App — the frontend where the customer views the order; API — provides the communication mechanism between the app and backend; Order Service — handles order-related backend logic; Database — stores persistent order information; Delivery Location Service — provides the delivery partner's current location). Then complete the failure challenge: choose one component that could fail and explain the user impact, which component engineering would investigate, and what evidence would help confirm the problem.",
+        "prompt": "Draw the flow: Mobile App → API → Order Service → Database → Delivery Location Service → API → App. Add one sentence explaining the role of each component (for example: Mobile App: the frontend where the customer views the order; API: provides the communication mechanism between the app and backend; Order Service: handles order-related backend logic; Database: stores persistent order information; Delivery Location Service: provides the delivery partner's current location). Then complete the failure challenge: choose one component that could fail and explain the user impact, which component engineering would investigate, and what evidence would help confirm the problem.",
         "checks": [
           "The frontend/mobile app is identified.",
           "An API is included in the flow.",
