@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 :root {
   --purple: #4820a9;
   --purple-dark: #37187e;
@@ -29,7 +28,7 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  font-family: Montserrat, system-ui, sans-serif;
+  font-family: var(--font-montserrat), system-ui, sans-serif;
   font-size: var(--type-body);
   line-height: var(--leading-body);
 }
@@ -958,11 +957,13 @@ a {
   margin: 0;
 }
 .progress-title button {
+  height: 40px;
+  padding: 0 14px;
   border: 0;
   border-radius: 999px;
   background: #fff;
-  padding: 11px 14px;
   font-size: 12px;
+  line-height: 1;
   box-shadow: 0 4px 12px rgba(20, 20, 30, 0.07);
 }
 .chart-card {
@@ -2671,7 +2672,8 @@ a {
   gap: 8px;
 }
 .tool-choice button {
-  min-height: 44px;
+  height: 44px;
+  line-height: 1;
   border: 0;
   border-radius: 14px;
   background: white;
@@ -2740,13 +2742,14 @@ a {
   gap: 10px;
 }
 .prompt-block button {
-  min-height: 36px;
+  height: 36px;
   padding: 0 12px;
   border: 0;
   border-radius: 999px;
   background: var(--orange);
   font-size: 10px;
   font-weight: 700;
+  line-height: 1;
   cursor: pointer;
 }
 .prompt-block > p {
@@ -3641,12 +3644,14 @@ a {
   stroke-width: 2;
 }
 .notification-top button {
+  height: 38px;
   border: 0;
   background: transparent;
   color: var(--peach);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.07em;
+  line-height: 1;
   cursor: pointer;
 }
 .notification-heading {
@@ -4819,9 +4824,9 @@ a {
   font-size: 14px;
 }
 
-/* 7. Home hero CTA — match the "Lessons done" stat card colour, black text */
+/* 7. Home hero CTA — match the My Courses card orange, black text */
 .path-hero .hero-arrow {
-  background: #fceae0;
+  background: var(--orange);
   color: #1e1f24;
 }
 
