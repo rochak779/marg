@@ -271,9 +271,13 @@ export function DuelBattle({
     return (
       <article className="duel-result">
         <h1>{title}</h1>
-        <p className="duel-result-score">
-          {result.userScore} – {result.botScore}
-        </p>
+        <div className="duel-result-score-row">
+          <span className="duel-result-score-label">You</span>
+          <p className="duel-result-score">
+            {result.userScore} – {result.botScore}
+          </p>
+          <span className="duel-result-score-label">{BOT_NAME}</span>
+        </div>
         <p className="duel-result-xp">+{result.xp} XP</p>
         <div className="duel-result-chips">
           <span>{summary?.rank ? `Rank #${summary.rank}` : 'Unranked'}</span>

@@ -15,7 +15,7 @@ export const BOT_MAX_DELAY_MS = 18000;
 
 export type DuelOutcome = 'win' | 'loss' | 'draw';
 export const XP_BY_OUTCOME: Record<DuelOutcome, number> = {
-  win: 60,
+  win: 100,
   draw: 40,
   loss: 20,
 };
