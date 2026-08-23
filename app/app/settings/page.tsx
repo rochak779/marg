@@ -362,7 +362,7 @@ export default function SettingsPage() {
             onClick={(event) => event.stopPropagation()}
           >
             {feedbackSent ? (
-              <p className="feedback-thanks">Thanks — got it! 🙌</p>
+              <p className="feedback-thanks">Thanks, got it! 🙌</p>
             ) : (
               <>
                 <div className="feedback-sheet-head">

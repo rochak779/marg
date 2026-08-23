@@ -1992,11 +1992,6 @@ a {
 .sixa-lesson-hook {
   margin-top: 12px;
 }
-.sixa-lesson-audio {
-  width: 100%;
-  margin-top: 12px;
-  height: 40px;
-}
 .sixa-example-card,
 .sixa-task-card,
 .sixa-save-card {
@@ -3561,9 +3556,8 @@ a {
   border-radius: 22px;
   background: white;
 }
-.build-hub-card:first-of-type {
-  background: var(--peach-soft);
-  border-color: #f1cdaf;
+.build-hub-card.complete {
+  border-color: #7dc49a;
 }
 .build-hub-card.locked {
   opacity: 0.55;
@@ -3579,7 +3573,7 @@ a {
   box-shadow: 0 3px 10px rgba(217, 157, 121, 0.18);
 }
 .build-card-icon svg,
-.build-hub-card > a svg,
+.build-card-chevron svg,
 .build-lock svg,
 .build-continue svg {
   width: 20px;
@@ -3600,7 +3594,7 @@ a {
   color: var(--muted);
   font-size: 9px;
 }
-.build-hub-card > a,
+.build-card-chevron,
 .build-lock {
   display: grid;
   place-items: center;
