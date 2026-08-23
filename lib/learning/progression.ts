@@ -24,6 +24,21 @@ export function isModuleComplete(state: LearningState, moduleId: number) {
 export function isFirstAssignedModule(state: LearningState, moduleId: number) {
   return state.path?.assignedModuleIds[0] === moduleId;
 }
+// 1-based position of a module within this learner's assigned order — not
+// the module's raw id, since paths are personalized (assessment.ts can
+// assign modules in any order). This is what "Module 1", "Module 2" in the
+// UI should count off of.
+export function assignedModulePosition(state: LearningState, moduleId: number) {
+  return assignedModules(state).findIndex((module) => module.id === moduleId) + 1;
+}
+export function nextAssignedModule(state: LearningState, moduleId: number) {
+  const modules = assignedModules(state);
+  const index = modules.findIndex((module) => module.id === moduleId);
+  return index >= 0 ? modules[index + 1] : undefined;
+}
+export function isLastAssignedModule(state: LearningState, moduleId: number) {
+  return nextAssignedModule(state, moduleId) === undefined;
+}
 export function nextUnit(state: LearningState): LearningUnit | undefined {
   return assignedUnits(state).find((unit) => !isUnitComplete(state, unit.id));
 }

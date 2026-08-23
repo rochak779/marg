@@ -1,10 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { derivePath } from '../assessment';
 import {
+  assignedModulePosition,
   completeUnit,
+  isLastAssignedModule,
   isUnitUnlocked,
   learningStreak,
   monthlyLessonActivity,
+  nextAssignedModule,
   nextUnit,
   progressSummary,
   weeklyLessonActivity,
@@ -57,5 +60,24 @@ describe('progression', () => {
       completionDates: { 'module-1-monday': '2026-08-20' },
     };
     expect(learningStreak(state, new Date(2026, 7, 21, 12))).toBe(0);
+  });
+
+  it('numbers modules by assigned position, not raw module id', () => {
+    // Reduced-guidance path starts at module 3, not module 1.
+    const state: LearningState = {
+      ...freshState(),
+      path: derivePath({
+        beyondDrafting: true,
+        context: 'feedback',
+        builtWorkflow: true,
+      }),
+    };
+    expect(state.path?.assignedModuleIds).toEqual([3, 4, 5, 6]);
+    expect(assignedModulePosition(state, 3)).toBe(1);
+    expect(assignedModulePosition(state, 4)).toBe(2);
+    expect(nextAssignedModule(state, 3)?.id).toBe(4);
+    expect(isLastAssignedModule(state, 3)).toBe(false);
+    expect(isLastAssignedModule(state, 6)).toBe(true);
+    expect(nextAssignedModule(state, 6)).toBeUndefined();
   });
 });

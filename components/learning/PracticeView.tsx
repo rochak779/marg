@@ -1,9 +1,11 @@
 'use client';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useLearning } from '@/app/providers';
 import {
   isFirstAssignedModule,
+  isLastAssignedModule,
   isModuleComplete,
   isUnitUnlocked,
 } from '@/lib/learning/progression';
@@ -30,6 +32,7 @@ export function PracticeView({
   courseModule: CurriculumModule;
   unit: PracticeUnit;
 }) {
+  const router = useRouter();
   const { state, ready, setState } = useLearning();
   const [progress, setProgress] = useState<PracticeProgress>(
     () => state.practices[unit.id] ?? emptyProgress,
@@ -91,6 +94,13 @@ export function PracticeView({
         moduleId: courseModule.id,
         isFirstModule: isFirstAssignedModule(result.state, courseModule.id),
       });
+      // Last assigned module: skip the "proceed to Module N+1?" screen
+      // (there is no next module) and go straight to the all-done screen.
+      if (isLastAssignedModule(result.state, courseModule.id)) {
+        router.push('/app/course-complete');
+      } else {
+        router.push(`/app/modules/${courseModule.slug}/${unit.day}/result`);
+      }
     }
   };
   return (

@@ -10,17 +10,25 @@ const FEEDBACK_RATINGS = [
   { value: 5, emoji: '😍' },
 ] as const;
 
-// Shared by Settings > Help & feedback (generic, no context) and the
+// Shared by Settings > Help & feedback (generic, no context), the
 // quiz-result prompt (Day 1/Day 2, tagged with moduleId/unitId — an
-// early-insight signal, see PRD 11.1, not the North Star's rating).
+// early-insight signal, see PRD 11.1, not the North Star's rating), and the
+// course-complete screen (tagged with the last module's id, copy overridden
+// via title/subtitle/placeholder below).
 export function FeedbackForm({
   onClose,
   moduleId,
   unitId,
+  title = 'Help & feedback',
+  subtitle = "How's the app working for you?",
+  placeholder = 'Tell us more (optional)',
 }: {
   onClose: () => void;
   moduleId?: number;
   unitId?: string;
+  title?: string;
+  subtitle?: string;
+  placeholder?: string;
 }) {
   const [rating, setRating] = useState<number | null>(null);
   const [message, setMessage] = useState('');
@@ -55,8 +63,8 @@ export function FeedbackForm({
           <>
             <div className="feedback-sheet-head">
               <div>
-                <h2>Help & feedback</h2>
-                <p>How&apos;s the app working for you?</p>
+                <h2>{title}</h2>
+                <p>{subtitle}</p>
               </div>
               <button
                 type="button"
@@ -84,7 +92,7 @@ export function FeedbackForm({
             <textarea
               value={message}
               onChange={(event) => setMessage(event.target.value)}
-              placeholder="Tell us more (optional)"
+              placeholder={placeholder}
               maxLength={2000}
             />
             <button
