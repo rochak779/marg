@@ -2367,6 +2367,16 @@ a {
 .learning-page {
   padding: 24px 20px 34px;
 }
+.build-page,
+.practice-page {
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.build-page::-webkit-scrollbar,
+.practice-page::-webkit-scrollbar {
+  display: none;
+}
 .text-back {
   display: inline-block;
   color: var(--purple-dark);
@@ -2589,18 +2599,12 @@ a {
   background: var(--ink);
   box-shadow: 0 8px 24px rgba(30, 31, 36, 0.18);
 }
-.practice-head {
-  background: var(--orange);
-}
 .build-head > span,
 .practice-head > span {
   color: var(--orange);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.08em;
-}
-.practice-head > span {
-  color: #7f2e19;
 }
 .build-head h1,
 .practice-head h1 {
@@ -2702,18 +2706,6 @@ a {
   margin-top: 3px;
   accent-color: var(--purple-dark);
 }
-.build-steps label span {
-  display: flex;
-  gap: 8px;
-}
-.build-steps label b {
-  display: grid;
-  place-items: center;
-  flex: 0 0 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--lavender);
-}
 .prompt-block {
   padding: 14px;
   background: var(--ink);
@@ -2755,7 +2747,7 @@ a {
   background: white;
   border-radius: 14px;
   color: var(--purple-dark);
-  font-size: 10px;
+  font-size: var(--type-card);
   font-weight: 700;
 }
 .ran-check {
