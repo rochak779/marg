@@ -44,18 +44,11 @@ export default function BuildHub() {
           <i />
           {open.length} open
         </span>
-        <svg viewBox="0 0 140 130" aria-hidden>
-          <path d="M56 22h28v30l22 44a10 10 0 0 1-9 15H43a10 10 0 0 1-9-15l22-44V22Z" />
-          <path d="M42 92h56l10 20a8 8 0 0 1-7 12H39a8 8 0 0 1-7-12l10-20Z" />
-          <path d="M52 20h36" />
-          <circle cx="60" cy="106" r="5" />
-          <circle cx="84" cy="112" r="3.5" />
-        </svg>
         <div className="build-title">
           <h1>
             Build it,
             <br />
-            don’t just read it
+            just don’t read it.
           </h1>
         </div>
       </header>

@@ -53,38 +53,6 @@ export default function HomePage() {
         avatarSeed={state.profile?.avatarSeed}
       />
       <div className="app-hero path-hero">
-        <svg className="float path-orbit" viewBox="0 0 130 120" aria-hidden>
-          <circle cx="66" cy="44" r="27" fill="#FCD197" />
-          <circle
-            cx="66"
-            cy="44"
-            r="36"
-            fill="none"
-            stroke="#fff"
-            strokeWidth="1.2"
-            opacity=".3"
-            strokeDasharray="4 6"
-          />
-          <text
-            x="66"
-            y="51"
-            textAnchor="middle"
-            fontSize="17"
-            fontWeight="700"
-            fill="#6669B8"
-          >
-            AI
-          </text>
-          <path
-            d="M66 44 26 84m40-40 44 38M26 84l84-2"
-            stroke="#FCD197"
-            strokeWidth="1.5"
-            opacity=".55"
-            fill="none"
-          />
-          <circle cx="26" cy="84" r="11" fill="#FDA366" />
-          <circle cx="110" cy="82" r="9" fill="#F8F8F8" />
-        </svg>
         <h1>
           {unit
             ? `${summary.total - summary.completed} units ahead of you`

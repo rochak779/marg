@@ -24,20 +24,6 @@ export default function CoursesPage() {
   return (
     <div className="courses-view routed-courses">
       <header className="courses-head">
-        <svg viewBox="0 0 180 130" aria-hidden>
-          <path
-            d="M18 44 92 12l74 32-74 32Z"
-            fill="#7B82E8"
-            stroke="#555BBB"
-            strokeWidth="2"
-          />
-          <path
-            d="M60 58v38c0 14 64 14 64 0V58"
-            fill="#AAB2FA"
-            stroke="#6669B8"
-            strokeWidth="2"
-          />
-        </svg>
         <h1>My courses</h1>
         <div className="course-counts">
           <span>{modules.length} modules</span>
