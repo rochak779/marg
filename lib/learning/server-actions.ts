@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { curriculum } from '@/content/modules';
 import { derivePath } from './assessment';
 import { freshState } from './persistence';
+import { DEFAULT_AVATAR_SEED } from '@/lib/avatar';
 import type {
   AppliedContext,
   AssessmentAnswers,
@@ -56,7 +57,7 @@ export async function loadSnapshot(): Promise<LearningState> {
   state.profile = {
     firstName: profile?.first_name ?? user.email?.split('@')[0] ?? 'Learner',
     email: user.email ?? '',
-    avatarSeed: profile?.avatar_seed ?? user.id,
+    avatarSeed: profile?.avatar_seed ?? DEFAULT_AVATAR_SEED,
   };
 
   if (assessment) {
