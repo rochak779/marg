@@ -1,6 +1,7 @@
 'use server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
+import { captureServerEvent } from '@/lib/analytics/posthog-server';
 
 export type SubmitFeedbackResult = { ok: true } | { ok: false; error: string };
 
@@ -23,6 +24,10 @@ export async function submitFeedback(
   if (!parsed.success) return { ok: false, error: 'invalid_input' };
 
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   const { error } = await supabase.rpc('submit_feedback', {
     p_rating: parsed.data.rating,
     p_message: parsed.data.message ?? null,
@@ -32,6 +37,18 @@ export async function submitFeedback(
   if (error) {
     console.error('submit_feedback failed', { code: error.code });
     return { ok: false, error: 'unavailable' };
+  }
+
+  // Rating + context only — never the free-text message, which is
+  // user-generated content and stays in Supabase, not PostHog.
+  if (user) {
+    await captureServerEvent(user.id, 'feedback_submitted', {
+      rating: parsed.data.rating,
+      ...(parsed.data.moduleId !== undefined && {
+        moduleId: parsed.data.moduleId,
+      }),
+      ...(parsed.data.unitId !== undefined && { unitId: parsed.data.unitId }),
+    });
   }
 
   return { ok: true };
