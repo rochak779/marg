@@ -469,15 +469,15 @@ This appendix is the learner-content source of truth. Convert it into the projec
 
 **Audience:** Basic learners only
 
-**End-of-week capability:** By Sunday, the learner can turn messy meeting notes into a clear, reusable set of actions using ChatGPT or Claude, and can explain why the output still needs human review.
+**End-of-week capability:** By Day 7, the learner can turn messy meeting notes into a clear, reusable set of actions using ChatGPT or Claude, and can explain why the output still needs human review.
 
 **Weekday build components:**
 
-- Monday: AI capability map
-- Tuesday: Prompt goal
-- Wednesday: Context and constraints
-- Thursday: Verification checklist
-- Friday: Reusable prompt structure
+- Day 1: AI capability map
+- Day 2: Prompt goal
+- Day 3: Context and constraints
+- Day 4: Verification checklist
+- Day 5: Reusable prompt structure
 
 ### Monday: AI is a prediction engine, not a knowledgeable colleague
 
@@ -541,7 +541,7 @@ Do not add unnecessary role-play such as 'You are the world's best product manag
 
 **Do this now:** Rewrite this vague prompt: 'Help me with my meeting.' Include a goal, input and output.
 
-**Keep for Saturday:** A one-sentence goal for Saturday: turn meeting notes into decisions and actions.
+**Keep for Saturday:** A one-sentence goal for Day 6: turn meeting notes into decisions and actions.
 
 #### Three-question check
 
@@ -585,7 +585,7 @@ More context is not always better. Include what changes the answer and remove ir
 
 **Do this now:** Add two constraints to yesterday's meeting prompt: one about unsupported information and one about the response format.
 
-**Keep for Saturday:** The context and constraint section of Saturday's prompt.
+**Keep for Saturday:** The context and constraint section of Day 6's prompt.
 
 #### Three-question check
 
@@ -671,7 +671,7 @@ Save prompts as reusable templates with placeholders such as [PASTE NOTES] and [
 
 **Example:** Trigger: meeting ends. Input: notes. AI task: extract decisions and actions. Output: structured table. Human review: meeting owner checks it before sharing.
 
-**Do this now:** Write the five elements of Saturday's meeting-notes workflow.
+**Do this now:** Write the five elements of Day 6's meeting-notes workflow.
 
 **Keep for Saturday:** The complete workflow outline and a reusable prompt template.
 
@@ -767,7 +767,7 @@ When you are ready, ask me to paste the meeting notes.
 
 ### Sunday Practice: Adapt it yourself: email thread to decisions and actions
 
-**Independent challenge:** Without copying Saturday's instructions word for word, adapt the workflow to turn an email thread into decisions, actions and unresolved questions.
+**Independent challenge:** Without copying Day 6's instructions word for word, adapt the workflow to turn an email thread into decisions, actions and unresolved questions.
 
 #### Rules
 
@@ -792,15 +792,15 @@ When you are ready, ask me to paste the meeting notes.
 
 **Audience:** Week 2 for basic learners; Week 1 entry point for advanced learners
 
-**End-of-week capability:** By Sunday, the learner can use ChatGPT or Claude to analyse a set of customer comments, connect each insight to evidence and test whether the result is trustworthy.
+**End-of-week capability:** By Day 7, the learner can use ChatGPT or Claude to analyse a set of customer comments, connect each insight to evidence and test whether the result is trustworthy.
 
 **Weekday build components:**
 
-- Monday: Grounding rules
-- Tuesday: Retrieval mental model
-- Wednesday: Meaning-based grouping
-- Thursday: Source preparation plan
-- Friday: Evaluation checklist
+- Day 1: Grounding rules
+- Day 2: Retrieval mental model
+- Day 3: Meaning-based grouping
+- Day 4: Source preparation plan
+- Day 5: Evaluation checklist
 
 ### Monday: Grounding: make the answer stand on evidence
 
@@ -820,7 +820,7 @@ Useful rules include: use only the supplied feedback, separate observation from 
 
 **Do this now:** Rewrite the unsupported insight so it states the evidence, scope and uncertainty.
 
-**Keep for Saturday:** Four grounding rules for Saturday's workflow.
+**Keep for Saturday:** Four grounding rules for Day 6's workflow.
 
 #### Three-question check
 
@@ -882,7 +882,7 @@ This week's ChatGPT/Claude exercise will imitate the grounded behaviour using a 
    - D. Correct a spelling mistake
    - **Correct option:** B
    - **Explanation:** RAG helps when responses need relevant evidence from a larger, changing source collection.
-3. **Will Saturday create a production RAG system?**
+3. **Will Day 6 create a production RAG system?**
    - A. Yes
    - B. No; it demonstrates grounded behaviour with a small source set
    - C. Yes, including a vector database
@@ -952,7 +952,7 @@ Never split evidence in a way that disconnects a quotation from its source ID. T
 
 **Do this now:** Turn one paragraph of feedback into a clean record with ID, date, segment, topic and full comment.
 
-**Keep for Saturday:** The feedback record format that will be used on Saturday.
+**Keep for Saturday:** The feedback record format that will be used on Day 6.
 
 #### Three-question check
 
@@ -1095,7 +1095,7 @@ Before answering, confirm how many comments you received.
 
 ### Sunday Practice: Adapt it yourself: research notes to evidence-backed findings
 
-**Independent challenge:** Adapt Saturday's workflow to analyse short research notes rather than customer comments.
+**Independent challenge:** Adapt Day 6's workflow to analyse short research notes rather than customer comments.
 
 #### Rules
 
@@ -1120,15 +1120,15 @@ Before answering, confirm how many comments you received.
 
 **Audience:** Applied module for both learner paths
 
-**End-of-week capability:** By Sunday, the learner can create and test a repeatable ChatGPT/Claude workflow that classifies incoming requests, explains its reasoning and sends uncertain items for human review.
+**End-of-week capability:** By Day 7, the learner can create and test a repeatable ChatGPT/Claude workflow that classifies incoming requests, explains its reasoning and sends uncertain items for human review.
 
 **Weekday build components:**
 
-- Monday: Taxonomy
-- Tuesday: Classification criteria
-- Wednesday: Structured schema
-- Thursday: Confidence and review rules
-- Friday: Routing tests
+- Day 1: Taxonomy
+- Day 2: Classification criteria
+- Day 3: Structured schema
+- Day 4: Confidence and review rules
+- Day 5: Routing tests
 
 ### Monday: A taxonomy gives AI a shared filing system
 
@@ -1234,7 +1234,7 @@ Use allowed values where consistency matters. For example, confidence must be Hi
 
 **Example:** ID: R04 | Category: Reporting export | Confidence: High | Evidence: 'Need PDF download' | Review: No.
 
-**Do this now:** Create a seven-field output schema for the Saturday workflow.
+**Do this now:** Create a seven-field output schema for the Day 6 workflow.
 
 **Keep for Saturday:** The final request-classification schema.
 
@@ -1324,7 +1324,7 @@ A good routing output explains the reason and makes escalation visible. It shoul
 
 **Do this now:** Create five IF/THEN routing rules and one rule that always requires human review.
 
-**Keep for Saturday:** Routing rules plus a Friday test set.
+**Keep for Saturday:** Routing rules plus a Day 5 test set.
 
 #### Three-question check
 
@@ -1454,15 +1454,15 @@ After the table, list possible duplicates and inputs that need a new category.
 
 **Audience:** Applied module for both learner paths
 
-**End-of-week capability:** By Sunday, the learner can build a reusable ChatGPT/Claude workflow that converts verified product inputs into different stakeholder updates without inventing progress or hiding risk.
+**End-of-week capability:** By Day 7, the learner can build a reusable ChatGPT/Claude workflow that converts verified product inputs into different stakeholder updates without inventing progress or hiding risk.
 
 **Weekday build components:**
 
-- Monday: Audience contract
-- Tuesday: Source hierarchy
-- Wednesday: Synthesis rules
-- Thursday: Output templates
-- Friday: Quality checks
+- Day 1: Audience contract
+- Day 2: Source hierarchy
+- Day 3: Synthesis rules
+- Day 4: Output templates
+- Day 5: Quality checks
 
 ### Monday: The audience changes the answer
 
@@ -1760,7 +1760,7 @@ Rules:
 
 ### Sunday Practice: Adapt it yourself: convert the workflow into a launch update
 
-**Independent challenge:** Adapt Saturday's workflow for a product launch update sent to commercial, support and operations leaders.
+**Independent challenge:** Adapt Day 6's workflow for a product launch update sent to commercial, support and operations leaders.
 
 #### Rules
 
@@ -1785,15 +1785,15 @@ Rules:
 
 **Audience:** Applied module for both learner paths
 
-**End-of-week capability:** By Sunday, the learner can use ChatGPT or Claude to simulate an AI product behaviour, test it with realistic cases and distinguish a conversational prototype from a production product.
+**End-of-week capability:** By Day 7, the learner can use ChatGPT or Claude to simulate an AI product behaviour, test it with realistic cases and distinguish a conversational prototype from a production product.
 
 **Weekday build components:**
 
-- Monday: User problem
-- Tuesday: Behaviour contract
-- Wednesday: Interaction flow
-- Thursday: Guardrails
-- Friday: Test plan
+- Day 1: User problem
+- Day 2: Behaviour contract
+- Day 3: Interaction flow
+- Day 4: Guardrails
+- Day 5: Test plan
 
 ### Monday: Prototype the risky behaviour, not the entire product
 
@@ -1989,7 +1989,7 @@ A prototype is successful when it answers the learning question, even if the res
 
 **Do this now:** Write five test conversations and expected behaviours.
 
-**Keep for Saturday:** The Friday test plan and success criteria.
+**Keep for Saturday:** The Day 5 test plan and success criteria.
 
 #### Three-question check
 

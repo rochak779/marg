@@ -82,9 +82,9 @@ test('advanced path with full guidance includes AI Foundations first', async ({
   await expect(page.getByText('5 modules')).toBeVisible();
 });
 
-test('weekday quiz reveals results and unlocks Tuesday', async ({ page }) => {
+test('day quiz reveals results and unlocks Day 2', async ({ page }) => {
   await seed(page, [], 'reduced');
-  await page.goto('/app/modules/module-3/monday');
+  await page.goto('/app/modules/module-3/day1');
   await page.getByRole('button', { name: /Check my understanding/ }).click();
   const groups = page.locator('fieldset');
   for (let index = 0; index < 3; index++)
@@ -96,17 +96,17 @@ test('weekday quiz reveals results and unlocks Tuesday', async ({ page }) => {
     page.getByText('Answer:', { exact: false }).first(),
   ).toBeVisible();
   await page.goto('/app/modules/module-3');
-  await expect(page.getByText('Tuesday').locator('..')).toContainText('Ready');
+  await expect(page.getByText('Day 2').locator('..')).toContainText('Ready');
 });
 
 test('Build and Practice enforce their completion requirements', async ({
   page,
 }) => {
-  const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].map(
+  const days = ['day1', 'day2', 'day3', 'day4', 'day5'].map(
     (day) => `module-3-${day}`,
   );
-  await seed(page, weekdays, 'reduced');
-  await page.goto('/app/modules/module-3/saturday');
+  await seed(page, days, 'reduced');
+  await page.goto('/app/modules/module-3/day6');
   await expect(page.getByText('Protect workplace data')).toBeVisible();
   const buildChecks = page.getByRole('checkbox');
   for (let index = 0; index < (await buildChecks.count()); index++)
@@ -115,7 +115,7 @@ test('Build and Practice enforce their completion requirements', async ({
   await expect(
     page.getByRole('button', { name: 'Build complete' }),
   ).toBeDisabled();
-  await page.goto('/app/modules/module-3/sunday');
+  await page.goto('/app/modules/module-3/day7');
   await expect(page.getByText('Make it your own')).toBeVisible();
   const ruleChecks = page.getByRole('checkbox');
   for (let index = 0; index < (await ruleChecks.count()); index++)

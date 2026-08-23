@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useLearning } from '@/app/providers';
-import { moduleDetailTitle } from '@/content/modules';
+import { moduleDetailTitle, shortModuleTitle } from '@/content/modules';
 import {
   assignedModules,
   isUnitComplete,
@@ -64,8 +64,10 @@ export function ModuleOverview({ module }: { module: CurriculumModule }) {
           <path d="m86 76 6 6 11-12" />
         </svg>
         <div className="sixa-module-title">
-          <span>MODULE {position || module.id}</span>
-          <h1>{moduleDetailTitle(module.id)}</h1>
+          <h1>
+            Module {position || module.id}: {shortModuleTitle(module.id)}
+          </h1>
+          <p>{moduleDetailTitle(module.id)}</p>
         </div>
       </header>
       <div className="sixa-module-sheet">

@@ -9,6 +9,13 @@ const chunks = appendix
   .split(/(?=^## Module \d+:)/m)
   .filter((part) => /^## Module \d+:/.test(part));
 const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+const daySlug = {
+  Monday: 'day1',
+  Tuesday: 'day2',
+  Wednesday: 'day3',
+  Thursday: 'day4',
+  Friday: 'day5',
+};
 const clean = (value = '') =>
   value
     .trim()
@@ -68,8 +75,8 @@ const modules = chunks.map((chunk) => {
         );
         const nums = [...estimate.matchAll(/\d+/g)].map((m) => Number(m[0]));
         return {
-          id: `module-${id}-saturday`,
-          day: 'saturday',
+          id: `module-${id}-day6`,
+          day: 'day6',
           kind: 'build',
           title: heading.replace('Saturday Build: ', ''),
           outcome: clean(section.match(/\*\*Outcome:\*\* (.*)/)?.[1]),
@@ -109,8 +116,8 @@ const modules = chunks.map((chunk) => {
           between(section, '#### Rules', /(?=^#### Reflection)/m),
         );
         return {
-          id: `module-${id}-sunday`,
-          day: 'sunday',
+          id: `module-${id}-day7`,
+          day: 'day7',
           kind: 'practice',
           title: heading.replace('Sunday Practice: ', ''),
           challenge: clean(
@@ -132,7 +139,7 @@ const modules = chunks.map((chunk) => {
       }
       const day = weekdays.find((name) => heading.startsWith(`${name}:`));
       if (!day) return null;
-      const slug = day.toLowerCase();
+      const slug = daySlug[day];
       const parts = paragraphs(
         between(section, '#### Theory', /(?=^#### Three-question check)/m),
       );

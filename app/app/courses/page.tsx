@@ -38,11 +38,7 @@ export default function CoursesPage() {
             strokeWidth="2"
           />
         </svg>
-        <h1>
-          My
-          <br />
-          courses
-        </h1>
+        <h1>My courses</h1>
         <div className="course-counts">
           <span>{modules.length} modules</span>
           <span>{modules.length * 7} units</span>
