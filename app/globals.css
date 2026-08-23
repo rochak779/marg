@@ -1426,8 +1426,8 @@ a {
 .path-orbit {
   position: absolute;
   z-index: 1;
-  right: -2px;
-  top: 3px;
+  right: 8px;
+  top: 12px;
   width: 112px;
   height: 103px;
 }
@@ -1740,7 +1740,7 @@ a {
 }
 .sixa-module-outcome {
   margin: 0;
-  padding: 16px 20px 0;
+  padding: 16px 18px 0;
   color: #3a3c44;
   font-size: 13px;
   font-weight: 500;
@@ -1751,7 +1751,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px 0;
+  padding: 18px 18px 0;
 }
 .sixa-unit-heading h2 {
   margin: 0;
@@ -2212,6 +2212,17 @@ a {
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
+}
+.sixa-answer-explanation strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--purple-dark);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.sixa-answer-explanation p {
+  margin: 0;
 }
 .sixa-quiz .sixa-flow-footer {
   position: relative;
@@ -2951,20 +2962,23 @@ a {
   z-index: 10;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 8px;
-  width: 100px;
+  gap: 5px;
+  padding: 7px;
+  width: 84px;
+  max-height: 176px;
+  overflow-y: auto;
   border-radius: 16px;
   background: #fff;
   box-shadow: 0 10px 30px rgba(20, 20, 30, 0.18);
 }
 .module-select-option {
-  padding: 9px 10px;
+  flex: none;
+  padding: 7px 8px;
   border: 0;
   border-radius: 999px;
   background: #f1f1f4;
   color: var(--ink);
-  font-size: 12px;
+  font-size: 10.5px;
   font-weight: 600;
   text-align: center;
   cursor: pointer;
@@ -4811,4 +4825,113 @@ a {
 .duel-result-actions {
   width: 100%;
   margin-top: 24px;
+}
+
+/* ---------------------------------------------------------------------
+   PM punch-list fixes (Aug 23)
+   ------------------------------------------------------------------- */
+
+/* 1. Product name (top-left brand mark) */
+.brand {
+  font-size: 24px;
+}
+
+/* 2. Landing subcopy ("Not a chatbot...") */
+.landing-copy {
+  font-size: 14px;
+}
+
+/* 3. Primary button label size */
+.btn {
+  font-size: 16px;
+}
+
+/* 4. "Already learning here? Sign in" and similar bottom-actions copy */
+.bottom-actions {
+  font-size: 14px;
+}
+
+/* 7. Home hero CTA — match the "Lessons done" stat card colour, black text */
+.path-hero .hero-arrow {
+  background: #fceae0;
+  color: #1e1f24;
+}
+
+/* 8/27. Bottom nav — restore visible labels so Home/Courses/etc. are
+   identifiable, and shrink the icon to make room. */
+.app-nav .nav-btn {
+  align-content: center;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  gap: 3px;
+  color: rgba(255, 255, 255, 0.55);
+}
+.app-nav .nav-btn.active {
+  color: var(--peach);
+}
+.app-nav .nav-icon {
+  width: 30px;
+  height: 30px;
+}
+.app-nav .nav-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* 13. "Day N complete" pill on the quiz result screen — green card, black text */
+.sixa-result-main > div span.sixa-result-day-complete {
+  background: #e1f3e7;
+  color: #1e1f24;
+}
+
+/* 17. Progress chart — text to black, active slide dot to white */
+.period-toggle button {
+  color: #1e1f24;
+}
+.progress-empty {
+  color: #1e1f24;
+}
+.chart-slide-nav span {
+  color: #1e1f24;
+}
+.chart-slide-nav button.active {
+  background: #fff;
+}
+
+/* 18. Build hub card title — match the module lesson row title size */
+.build-hub-card b {
+  font-size: 13px;
+}
+
+/* 21. Matching screen — no back button, centered title matching "Challenges" */
+.duel-matching-header {
+  justify-content: center;
+}
+.duel-matching-header span {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* 22. Duel battle exit (X) button — more breathing room above the player row */
+.duel-exit-btn {
+  top: -6px;
+}
+
+/* 23. Duel result — label which score belongs to which player */
+.duel-result-score-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.duel-result-score-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* 26. Duel battle countdown timer */
+.duel-battle-timer span:last-child {
+  font-size: 12px;
 }

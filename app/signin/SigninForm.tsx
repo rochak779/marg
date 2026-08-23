@@ -27,7 +27,7 @@ export default function SigninForm() {
         <span style={{ width: 36 }} />
       </div>
       <div className="signin-title">
-        <h1>Welcome back.</h1>
+        <h1>Welcome back</h1>
         <p className="muted">Your path is waiting exactly where you left it.</p>
       </div>
       <form

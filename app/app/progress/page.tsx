@@ -86,7 +86,6 @@ export default function ProgressPage() {
       />
       <div className="progress-title">
         <h1>Progress</h1>
-        <span>{summary.percentage}% complete</span>
       </div>
       <div className="chart-card">
         <div

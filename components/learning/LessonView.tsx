@@ -111,9 +111,10 @@ export function LessonView({
           })}
         </fieldset>
         {answered && (
-          <p className="sixa-answer-explanation">
-            {currentQuestion.explanation}
-          </p>
+          <div className="sixa-answer-explanation">
+            <strong>FEEDBACK</strong>
+            <p>{currentQuestion.explanation}</p>
+          </div>
         )}
         <footer className="sixa-flow-footer">
           <button
@@ -129,7 +130,9 @@ export function LessonView({
             {questionIndex === unit.quiz.length - 1
               ? submitting
                 ? 'Submitting…'
-                : 'See my result'
+                : unit.quiz.length > 1
+                  ? 'See my results'
+                  : 'See my result'
               : 'Next'}
           </button>
         </footer>
@@ -173,7 +176,7 @@ export function LessonView({
         </section>
         <section className="sixa-task-card">
           <div>
-            <strong>Your task · 4 min</strong>
+            <strong>YOUR TASK · 4 min</strong>
           </div>
           <p>{unit.action}</p>
         </section>

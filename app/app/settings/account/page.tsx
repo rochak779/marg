@@ -75,7 +75,6 @@ export default function AccountSettings() {
         {!showDeleteForm ? (
           <button
             className="btn ghost"
-            style={{ color: '#b3261e' }}
             onClick={() => setShowDeleteForm(true)}
           >
             Delete my account

@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useLearning } from '@/app/providers';
 import { signOut } from '@/lib/auth/actions';
-import { deleteAccount } from '@/lib/auth/account-actions';
 import { saveAvatar } from '@/lib/learning/server-actions';
 import { submitFeedback } from '@/lib/feedback/server-actions';
 import { Avatar } from '@/components/ui';
@@ -21,7 +20,7 @@ const FEEDBACK_RATINGS = [
 const Icon = ({
   type,
 }: {
-  type: 'clock' | 'chart' | 'path' | 'bell' | 'help' | 'logout' | 'trash';
+  type: 'clock' | 'chart' | 'path' | 'bell' | 'help' | 'logout';
 }) => (
   <svg viewBox="0 0 24 24" aria-hidden>
     {type === 'clock' && (
@@ -55,11 +54,6 @@ const Icon = ({
         <path d="M19 12H9m10 0-3.5-3.5M19 12l-3.5 3.5" />
       </>
     )}
-    {type === 'trash' && (
-      <>
-        <path d="M5 7h14M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m-9 0 1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13" />
-      </>
-    )}
   </svg>
 );
 export default function SettingsPage() {
@@ -68,11 +62,6 @@ export default function SettingsPage() {
   const [reminders, setReminders] = useState(true);
   const [notifications, setNotifications] = useState(true);
   const [pickingAvatar, setPickingAvatar] = useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [showDeleteForm, setShowDeleteForm] = useState(false);
-  const [confirmText, setConfirmText] = useState('');
-  const [deleting, setDeleting] = useState(false);
-  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackRating, setFeedbackRating] = useState<number | null>(null);
   const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -82,30 +71,6 @@ export default function SettingsPage() {
   const choices = avatarSeed
     ? avatarChoices(avatarSeed.replace(/-\d+$/, ''))
     : [];
-
-  const closeDeleteFlow = () => {
-    setShowDeleteConfirm(false);
-    setShowDeleteForm(false);
-    setConfirmText('');
-    setDeleteError(null);
-  };
-
-  const handleDelete = async () => {
-    setDeleteError(null);
-    setDeleting(true);
-    const result = await deleteAccount(confirmText);
-    setDeleting(false);
-    if (!result.ok) {
-      setDeleteError(
-        result.error === 'confirmation_required'
-          ? 'Type DELETE exactly to confirm.'
-          : 'Could not delete your account. Try again.',
-      );
-      return;
-    }
-    r.push('/signup');
-    r.refresh();
-  };
 
   const closeFeedback = () => {
     setShowFeedback(false);
@@ -266,89 +231,7 @@ export default function SettingsPage() {
             <b>Log out</b>
           </span>
         </button>
-        <button
-          type="button"
-          className="settings-row settings-row-danger"
-          onClick={() => setShowDeleteConfirm(true)}
-        >
-          <i>
-            <Icon type="trash" />
-          </i>
-          <span>
-            <b>Delete my account</b>
-          </span>
-        </button>
       </div>
-
-      {showDeleteConfirm && (
-        <div className="confirm-overlay" role="dialog" aria-modal="true">
-          <div className="confirm-sheet">
-            <h2>Delete your account?</h2>
-            <p>
-              This permanently deletes your account and all learning
-              progress. This cannot be undone.
-            </p>
-            <div className="confirm-sheet-actions">
-              <button
-                type="button"
-                className="confirm-no"
-                onClick={closeDeleteFlow}
-              >
-                No
-              </button>
-              <button
-                type="button"
-                className="confirm-yes danger"
-                onClick={() => {
-                  setShowDeleteConfirm(false);
-                  setShowDeleteForm(true);
-                }}
-              >
-                Yes
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {showDeleteForm && (
-        <div className="confirm-overlay" role="dialog" aria-modal="true">
-          <div className="confirm-sheet">
-            <h2>Type DELETE to confirm</h2>
-            <p>Last check before we permanently delete everything.</p>
-            <label className="confirm-delete-input">
-              <input
-                className="field"
-                value={confirmText}
-                onChange={(event) => setConfirmText(event.target.value)}
-                placeholder="DELETE"
-              />
-            </label>
-            {deleteError && (
-              <div role="alert" className="confirm-delete-error">
-                {deleteError}
-              </div>
-            )}
-            <div className="confirm-sheet-actions">
-              <button
-                type="button"
-                className="confirm-no"
-                onClick={closeDeleteFlow}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="confirm-yes danger"
-                disabled={confirmText !== 'DELETE' || deleting}
-                onClick={handleDelete}
-              >
-                {deleting ? 'Deleting…' : 'Delete'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {showFeedback && (
         <div

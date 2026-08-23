@@ -68,18 +68,8 @@ export default function DuelsHub() {
   if (screen === 'matching' && selected) {
     return (
       <article className="duel-matching">
-        <header className="duel-flow-header">
-          <button
-            type="button"
-            onClick={() => setScreen('brief')}
-            aria-label="Back"
-          >
-            <svg viewBox="0 0 24 24">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-          </button>
+        <header className="duel-flow-header duel-matching-header">
           <span>Finding an opponent</span>
-          <i />
         </header>
         <div className="duel-matching-vs">
           <div className="duel-matching-side">
@@ -112,7 +102,6 @@ export default function DuelsHub() {
               <path d="m15 18-6-6 6-6" />
             </svg>
           </button>
-          <span>Daily duel</span>
           <i />
         </header>
         <h1>
@@ -136,7 +125,7 @@ export default function DuelsHub() {
           </div>
           <div>
             <span>REWARD</span>
-            <strong>60</strong>
+            <strong>100</strong>
           </div>
         </div>
         <div className="duel-house-rules">
@@ -203,9 +192,8 @@ export default function DuelsHub() {
               setScreen('brief');
             }}
           >
-            <span className="duel-hero-eyebrow">DAILY DUEL</span>
             <h3>{current.module.title}</h3>
-            <p>5 questions · 20s each · 60 XP</p>
+            <p>5 questions · 20s each · 100 XP</p>
             <span className="duel-hero-cta">Start</span>
           </div>
         )}
@@ -220,7 +208,7 @@ export default function DuelsHub() {
           >
             <div>
               <b>{entry.module.title}</b>
-              <p>5 questions · 60 XP</p>
+              <p>5 questions · 100 XP</p>
             </div>
           </div>
         ))}
