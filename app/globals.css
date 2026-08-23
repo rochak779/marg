@@ -4824,9 +4824,9 @@ a {
   font-size: 14px;
 }
 
-/* 7. Home hero CTA — match the "Lessons done" stat card colour, black text */
+/* 7. Home hero CTA — match the My Courses card orange, black text */
 .path-hero .hero-arrow {
-  background: #fceae0;
+  background: var(--orange);
   color: #1e1f24;
 }
 
