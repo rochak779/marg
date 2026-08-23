@@ -55,6 +55,7 @@ export async function loadSnapshot(): Promise<LearningState> {
 
   const state = freshState();
   state.profile = {
+    id: user.id,
     firstName: profile?.first_name ?? user.email?.split('@')[0] ?? 'Learner',
     email: user.email ?? '',
     avatarSeed: profile?.avatar_seed ?? DEFAULT_AVATAR_SEED,

@@ -39,9 +39,10 @@ export const learningStateSchema = z.object({
     .object({
       firstName: z.string(),
       email: z.string(),
-      // Optional/defaulted: older localStorage snapshots (pre-avatar
-      // feature) never had this field.
+      // Optional/defaulted: older localStorage snapshots (pre-avatar /
+      // pre-PostHog-identify features) never had these fields.
       avatarSeed: z.string().optional().default(''),
+      id: z.string().optional().default(''),
     })
     .nullable()
     .default(null),

@@ -2,6 +2,7 @@
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
+import { captureServerEvent } from '@/lib/analytics/posthog-server';
 
 export type AuthActionResult =
   | { ok: true }
@@ -23,8 +24,13 @@ export async function signInWithPassword(
   if (!parsed.success) return { ok: false, error: 'invalid_input' };
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithPassword(parsed.data);
+  const { data, error } = await supabase.auth.signInWithPassword(parsed.data);
   if (error) return { ok: false, error: mapAuthError(error.message) };
+  if (data.user) {
+    await captureServerEvent(data.user.id, 'user_signed_in', {
+      method: 'password',
+    });
+  }
   return { ok: true };
 }
 
@@ -36,7 +42,7 @@ export async function signUpWithPassword(
 
   const supabase = await createClient();
   const { email, password, firstName } = parsed.data;
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -45,6 +51,11 @@ export async function signUpWithPassword(
     },
   });
   if (error) return { ok: false, error: mapAuthError(error.message) };
+  if (data.user) {
+    await captureServerEvent(data.user.id, 'user_signed_up', {
+      method: 'password',
+    });
+  }
   return { ok: true };
 }
 
@@ -98,8 +109,16 @@ export async function signInWithGoogle(): Promise<void> {
 
 export async function signOut(): Promise<AuthActionResult> {
   const supabase = await createClient();
+  // Capture before signing out — no session left to identify the user by
+  // afterwards.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   const { error } = await supabase.auth.signOut();
   if (error) return { ok: false, error: mapAuthError(error.message) };
+  if (user) {
+    await captureServerEvent(user.id, 'user_signed_out');
+  }
   return { ok: true };
 }
 
