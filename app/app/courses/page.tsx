@@ -55,15 +55,27 @@ export default function CoursesPage() {
             Learn in order. Completed material always stays available.
           </span>
         </div>
-        {modules.map((module, index) => (
-          <CourseCard
-            key={module.id}
-            module={module}
-            position={index + 1}
-            progress={moduleProgress(state, module).percentage}
-            state={courseState(state, module)}
-          />
-        ))}
+        {(['Current', 'Upcoming', 'Complete'] as const).map((section) => {
+          const inSection = modules
+            .map((module, index) => ({ module, position: index + 1 }))
+            .filter(({ module }) => courseState(state, module) === section);
+          if (inSection.length === 0) return null;
+          return (
+            <div className="course-section" key={section}>
+              <h3 className="course-section-heading">
+                {section === 'Complete' ? 'Done' : section}
+              </h3>
+              {inSection.map(({ module, position }) => (
+                <CourseCard
+                  key={module.id}
+                  module={module}
+                  position={position}
+                  progress={moduleProgress(state, module).percentage}
+                />
+              ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

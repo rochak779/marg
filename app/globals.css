@@ -2339,6 +2339,17 @@ a {
   color: var(--muted);
   font-size: 10px;
 }
+.course-section-heading {
+  margin: 18px 18px 4px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.course-section:first-child .course-section-heading {
+  margin-top: 0;
+}
 .real-course {
   display: block;
   color: white;

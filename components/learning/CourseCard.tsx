@@ -48,12 +48,10 @@ export function CourseCard({
   module,
   position,
   progress,
-  state,
 }: {
   module: CurriculumModule;
   position: number;
   progress: number;
-  state: string;
 }) {
   return (
     <Link
@@ -70,10 +68,9 @@ export function CourseCard({
         </svg>
       </span>
       <div className="track-copy">
-        <small>
-          MODULE {position} · {state.toUpperCase()}
-        </small>
-        <h2>{shortModuleTitle(module.id)}</h2>
+        <h2>
+          Module {position}: {shortModuleTitle(module.id)}
+        </h2>
       </div>
       <div className="track-foot">
         <div className="course-meta">
