@@ -1,9 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { useLearning } from '@/app/providers';
 import { assignedUnits, learningStreak } from '@/lib/learning/progression';
+import { FeedbackForm } from './FeedbackForm';
 import type { CurriculumModule, LessonUnit } from '@/lib/learning/types';
+
+// One-time-per-unit local marker so a page refresh doesn't re-prompt after
+// the learner already dismissed or submitted it. Not server-verified — this
+// is an early-insight signal (PRD 11.1), not the North Star, so an
+// occasional re-prompt on a new device is an acceptable gap, not a bug.
+const feedbackShownKey = (unitId: string) => `marg-feedback-shown-${unitId}`;
 
 export function QuizResult({
   module,
@@ -13,8 +21,27 @@ export function QuizResult({
   unit: LessonUnit;
 }) {
   const { state, ready } = useLearning();
-  if (!ready) return <div className="state-message">Loading result…</div>;
+  const [showFeedback, setShowFeedback] = useState(false);
   const result = state.quizResults[unit.id];
+  const moduleUnitIndex = module.units.findIndex((item) => item.id === unit.id);
+  // Day 1 and Day 2 result screens only — see PRD 11.1's product dependency
+  // note. Not gated to the first module: it's an early-insight signal about
+  // the lesson experience itself, not tied to module completion.
+  const isFeedbackDay = moduleUnitIndex === 0 || moduleUnitIndex === 1;
+
+  useEffect(() => {
+    if (!ready || !result || !isFeedbackDay) return;
+    if (window.localStorage.getItem(feedbackShownKey(unit.id))) return;
+    const timer = window.setTimeout(() => setShowFeedback(true), 0);
+    return () => window.clearTimeout(timer);
+  }, [ready, result, isFeedbackDay, unit.id]);
+
+  const closeFeedback = () => {
+    window.localStorage.setItem(feedbackShownKey(unit.id), '1');
+    setShowFeedback(false);
+  };
+
+  if (!ready) return <div className="state-message">Loading result…</div>;
   if (!result)
     return (
       <div className="state-message">
@@ -26,7 +53,6 @@ export function QuizResult({
     );
   const units = assignedUnits(state);
   const index = units.findIndex((item) => item.id === unit.id);
-  const moduleUnitIndex = module.units.findIndex((item) => item.id === unit.id);
   const next = units[index + 1];
   const nextHref = next
     ? `/app/modules/module-${next.id.split('-')[1]}/${next.day}`
@@ -80,6 +106,13 @@ export function QuizResult({
           Re-read the lesson
         </Link>
       </footer>
+      {showFeedback && (
+        <FeedbackForm
+          onClose={closeFeedback}
+          moduleId={module.id}
+          unitId={unit.id}
+        />
+      )}
     </article>
   );
 }

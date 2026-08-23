@@ -2,7 +2,11 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useLearning } from '@/app/providers';
-import { isUnitUnlocked } from '@/lib/learning/progression';
+import {
+  isFirstAssignedModule,
+  isModuleComplete,
+  isUnitUnlocked,
+} from '@/lib/learning/progression';
 import { savePractice } from '@/lib/learning/server-actions';
 import { track } from '@/lib/learning/analytics';
 import type {
@@ -80,6 +84,14 @@ export function PracticeView({
     if (!result.ok) return;
     setState(result.state);
     track('practice_completed', { moduleId: courseModule.id, unitId: unit.id });
+    // Practice (Sunday) is always the last unit unlocked in a module, so
+    // this is the one place a module's completion can be detected.
+    if (isModuleComplete(result.state, courseModule.id)) {
+      track('module_completed', {
+        moduleId: courseModule.id,
+        isFirstModule: isFirstAssignedModule(result.state, courseModule.id),
+      });
+    }
   };
   return (
     <article className="learning-page practice-page">

@@ -533,6 +533,24 @@ Must-haves: 3-question assessment with explainable path recommendation; Monday�
 
 ## 11. Success Metrics
 
+### 11.1 North Star Metric
+
+**% of active learners who complete the first module of their assessed path *and* rate the app 4 or 5 (of 5) via the in-app feedback form, within 30 days of signup.**
+
+This is a compound metric by design: module completion alone can be optimized by making the product easier without making it better, and a satisfaction rating alone can be optimized by asking only the people already inclined to be generous. Together they require the same thing the narrowed problem statement (Section 14) is actually about — learners doing real work in the product *and* judging it worth their time.
+
+Definitions, to keep this comparable across reporting periods:
+- **Active learner** — a signed-up user with at least one lesson, quiz, practice, or build event in the 30-day window (same cohort basis as the rest of this table).
+- **First module** — the first module of the path assigned at `/assessment` → `/recommendation`, not any module the learner picks — this keeps the metric anchored to activation on their actual assigned path, not to cherry-picking an easy module for a good rating.
+- **Rating** — the existing 1–5 `submit_feedback` rating (`lib/feedback/server-actions.ts`); non-responders do not count toward the numerator, but response rate is tracked as a supporting metric (below) so a low sample size doesn't quietly distort the headline number.
+
+| 30-day target | Kill signal |
+| :-- | :-- |
+| ≥30% of active learners hit both conditions | &lt;10% |
+
+**Product dependency, not just a measurement change:** the feedback form today lives under Settings → Help & feedback — opt-in, pull-only, and only reachable by learners who go looking for it. Left as-is, the rating half of this metric will be low-volume and skewed toward already-satisfied users, which undermines the metric before it's tracked. This North Star requires prompting for the rating contextually — a lightweight one-tap prompt right after first module completion — in addition to keeping the Settings entry point for anytime feedback. That prompt is a build item that should land alongside the analytics work in Section 12, not an afterthought.
+
+### 11.2 Supporting Metrics
 
 | Metric                                                                     | 30-day target                                                           | Kill signal                                                                                 |
 | :-------------------------------------------------------------------------- | :----------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
@@ -541,13 +559,14 @@ Must-haves: 3-question assessment with explainable path recommendation; Monday�
 | Sunday Practice completion rate                                            | ≥40% of learners who completed that week's Build also complete Practice | &lt;15% (signals the least-scaffolded step, Section 4.5, is where the loop actually breaks) |
 | Self-reported confidence delta (pre vs. post 30 days, in-app micro-survey) | +0.5 or more on a 5-point scale                                         | No measurable change                                                                        |
 | 7-day return rate after first completed week                               | ≥35%                                                                    | &lt;15%                                                                                     |
+| Feedback response rate (of learners completing first module)               | ≥50% submit a rating within 7 days of completion                        | &lt;20% (means the North Star's rating half is running on too small a sample to trust)      |
 
 
-**Sources:** target bands informed by *THEMES* (Theme 2/6 baseline confidence figures) and standard early-stage activation benchmarks; no external report gives an AI-learning-specific completion benchmark, so these are set from the team's own research baseline rather than cited externally.
+**Sources:** target bands informed by *THEMES* (Theme 2/6 baseline confidence figures) and standard early-stage activation benchmarks; no external report gives an AI-learning-specific completion benchmark, so these are set from the team's own research baseline rather than cited externally. The North Star target (≥30%) is a launch-stage placeholder, not a benchmarked figure — revisit once the contextual feedback prompt is live and response-rate data exists to sanity-check it.
 
 
-| **Insight &amp; Conclusion.** If only one metric could be tracked, it would be the confidence delta — every other metric (completion, return rate) is a proxy for whether the core loop is working, but confidence delta is the actual outcome the narrowed problem statement (Section 14) is about. |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Insight &amp; Conclusion.** The North Star (Section 11.1) is the one metric that matters — everything in Section 11.2 is a proxy for one half or the other of it: completion-side metrics (assessment start, weekly loop, practice completion) explain *why* module completion is or isn't happening, and confidence delta is the closest available proxy for satisfaction before the contextual rating prompt ships. Once the prompt is live and the rating sample is trustworthy (see feedback response rate), the North Star should be reported on its own, not buried in a metrics table. |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 
 ## 12. Implementation Plan

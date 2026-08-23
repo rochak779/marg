@@ -1,6 +1,7 @@
 'use server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
+import { captureServerEvent } from '@/lib/analytics/posthog-server';
 import { DUEL_QUESTION_COUNT, XP_BY_OUTCOME } from './duel';
 
 export type DuelSummary = {
@@ -89,5 +90,10 @@ export async function recordDuelResult(
     console.error('record_duel_result failed', { code: error.code });
     return { ok: false, error: 'unavailable' };
   }
+  await captureServerEvent(user.id, 'duel_completed', {
+    moduleId: parsed.data.moduleId,
+    outcome: parsed.data.outcome,
+    xpAwarded,
+  });
   return { ok: true };
 }

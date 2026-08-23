@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import './globals.css';
 import { Providers } from './providers';
+import { PostHogPageView } from '@/components/PostHogPageView';
 export const metadata = {
   title: 'Marg',
   description: 'A personalised path to practical AI skills.',
@@ -19,6 +21,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Suspense fallback={null}>
+          <PostHogPageView />
+        </Suspense>
         <Providers>{children}</Providers>
       </body>
     </html>

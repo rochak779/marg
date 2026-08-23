@@ -5,17 +5,9 @@ import { useState } from 'react';
 import { useLearning } from '@/app/providers';
 import { signOut } from '@/lib/auth/actions';
 import { saveAvatar } from '@/lib/learning/server-actions';
-import { submitFeedback } from '@/lib/feedback/server-actions';
+import { FeedbackForm } from '@/components/learning/FeedbackForm';
 import { Avatar } from '@/components/ui';
 import { avatarChoices } from '@/lib/avatar';
-
-const FEEDBACK_RATINGS = [
-  { value: 1, emoji: '😡' },
-  { value: 2, emoji: '🙁' },
-  { value: 3, emoji: '😐' },
-  { value: 4, emoji: '🙂' },
-  { value: 5, emoji: '😍' },
-] as const;
 
 const Icon = ({
   type,
@@ -63,35 +55,10 @@ export default function SettingsPage() {
   const [notifications, setNotifications] = useState(true);
   const [pickingAvatar, setPickingAvatar] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [feedbackRating, setFeedbackRating] = useState<number | null>(null);
-  const [feedbackMessage, setFeedbackMessage] = useState('');
-  const [submittingFeedback, setSubmittingFeedback] = useState(false);
-  const [feedbackSent, setFeedbackSent] = useState(false);
   const avatarSeed = state.profile?.avatarSeed;
   const choices = avatarSeed
     ? avatarChoices(avatarSeed.replace(/-\d+$/, ''))
     : [];
-
-  const closeFeedback = () => {
-    setShowFeedback(false);
-    setFeedbackRating(null);
-    setFeedbackMessage('');
-    setFeedbackSent(false);
-  };
-
-  const handleFeedbackSubmit = async () => {
-    if (feedbackRating === null) return;
-    setSubmittingFeedback(true);
-    const result = await submitFeedback({
-      rating: feedbackRating,
-      message: feedbackMessage,
-    });
-    setSubmittingFeedback(false);
-    if (result.ok) {
-      setFeedbackSent(true);
-      setTimeout(closeFeedback, 1400);
-    }
-  };
 
   return (
     <div className="settings-view">
@@ -234,66 +201,7 @@ export default function SettingsPage() {
       </div>
 
       {showFeedback && (
-        <div
-          className="feedback-overlay"
-          role="dialog"
-          aria-modal="true"
-          onClick={closeFeedback}
-        >
-          <div
-            className="feedback-sheet"
-            onClick={(event) => event.stopPropagation()}
-          >
-            {feedbackSent ? (
-              <p className="feedback-thanks">Thanks, got it! 🙌</p>
-            ) : (
-              <>
-                <div className="feedback-sheet-head">
-                  <div>
-                    <h2>Help & feedback</h2>
-                    <p>How&apos;s the app working for you?</p>
-                  </div>
-                  <button
-                    type="button"
-                    className="feedback-sheet-close"
-                    aria-label="Close"
-                    onClick={closeFeedback}
-                  >
-                    ×
-                  </button>
-                </div>
-                <div className="feedback-rating">
-                  {FEEDBACK_RATINGS.map(({ value, emoji }) => (
-                    <button
-                      type="button"
-                      key={value}
-                      className={feedbackRating === value ? 'selected' : ''}
-                      aria-label={`Rate ${value} out of 5`}
-                      aria-pressed={feedbackRating === value}
-                      onClick={() => setFeedbackRating(value)}
-                    >
-                      {emoji}
-                    </button>
-                  ))}
-                </div>
-                <textarea
-                  value={feedbackMessage}
-                  onChange={(event) => setFeedbackMessage(event.target.value)}
-                  placeholder="Tell us more (optional)"
-                  maxLength={2000}
-                />
-                <button
-                  type="button"
-                  className="btn"
-                  disabled={feedbackRating === null || submittingFeedback}
-                  onClick={handleFeedbackSubmit}
-                >
-                  {submittingFeedback ? 'Sending…' : 'Send feedback'}
-                </button>
-              </>
-            )}
-          </div>
-        </div>
+        <FeedbackForm onClose={() => setShowFeedback(false)} />
       )}
     </div>
   );

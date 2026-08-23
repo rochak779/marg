@@ -12,6 +12,18 @@ export function assignedUnits(state: LearningState) {
 export function isUnitComplete(state: LearningState, unitId: string) {
   return state.completedUnitIds.includes(unitId);
 }
+// A module is complete once every one of its units (Day 1-5 lessons,
+// Saturday Build, Sunday Practice) is in completedUnitIds. Practice is
+// always the last unit unlocked in a module, so callers only need to check
+// this right after a Practice completion — see PracticeView.
+export function isModuleComplete(state: LearningState, moduleId: number) {
+  const courseModule = moduleById(moduleId);
+  if (!courseModule) return false;
+  return courseModule.units.every((unit) => isUnitComplete(state, unit.id));
+}
+export function isFirstAssignedModule(state: LearningState, moduleId: number) {
+  return state.path?.assignedModuleIds[0] === moduleId;
+}
 export function nextUnit(state: LearningState): LearningUnit | undefined {
   return assignedUnits(state).find((unit) => !isUnitComplete(state, unit.id));
 }

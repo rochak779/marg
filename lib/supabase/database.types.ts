@@ -163,21 +163,27 @@ export type Database = {
           created_at: string
           id: string
           message: string | null
+          module_id: number | null
           rating: number
+          unit_id: string | null
           user_id: string
         }
         Insert: {
           created_at?: string
           id?: string
           message?: string | null
+          module_id?: number | null
           rating: number
+          unit_id?: string | null
           user_id: string
         }
         Update: {
           created_at?: string
           id?: string
           message?: string | null
+          module_id?: number | null
           rating?: number
+          unit_id?: string | null
           user_id?: string
         }
         Relationships: []
@@ -457,7 +463,12 @@ export type Database = {
         Returns: string
       }
       submit_feedback: {
-        Args: { p_message: string | null; p_rating: number }
+        Args: {
+          p_message: string | null
+          p_module_id?: number | null
+          p_rating: number
+          p_unit_id?: string | null
+        }
         Returns: string
       }
       submit_quiz_attempt: {

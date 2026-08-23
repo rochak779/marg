@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { captureServerEvent } from '@/lib/analytics/posthog-server';
 
 // Handles the PKCE code exchange for email verification, password recovery
 // and OAuth (Google) sign-in. See docs/SUPABASE_IMPLEMENTATION_PLAN.md
@@ -39,6 +40,15 @@ export async function GET(request: Request) {
 
   if (profileError) {
     console.error('profile upsert failed', { code: profileError.code });
+  }
+
+  // This route also handles password-reset and email-confirmation code
+  // exchanges, both under the 'email' provider — only tag it as OAuth when
+  // it actually is one, so those flows don't get mislabeled.
+  if (data.user.app_metadata?.provider === 'google') {
+    await captureServerEvent(data.user.id, 'oauth_sign_in_completed', {
+      method: 'google',
+    });
   }
 
   // Phase C will make this route to /assessment or /recommendation based on
