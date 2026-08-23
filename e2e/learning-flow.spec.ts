@@ -112,10 +112,8 @@ test('Build and Practice enforce their completion requirements', async ({
   for (let index = 0; index < (await buildChecks.count()); index++)
     await buildChecks.nth(index).check();
   await page.getByRole('button', { name: /Complete Build/ }).click();
-  await expect(
-    page.getByRole('button', { name: 'Build complete' }),
-  ).toBeDisabled();
-  await page.goto('/app/modules/module-3/day7');
+  // Build complete redirects straight to Day 7 (Practice) — feedback 1.
+  await expect(page).toHaveURL(/module-3\/day7/);
   await expect(page.getByText('Make it your own')).toBeVisible();
   const ruleChecks = page.getByRole('checkbox');
   for (let index = 0; index < (await ruleChecks.count()); index++)
@@ -127,9 +125,49 @@ test('Build and Practice enforce their completion requirements', async ({
       'I changed the evidence rule and checked the output against its source.',
     );
   await page.getByRole('button', { name: /Complete Practice/ }).click();
+  // Practice complete on a non-final module redirects to the module-complete
+  // congrats screen — feedback 2. Reduced path here is [3,4,5,6], so module 3
+  // is position 1 and module 4 is position 2.
+  await expect(page).toHaveURL(/module-3\/day7\/result/);
+  await expect(page.getByText('Congratulations!', { exact: true })).toBeVisible();
+  await expect(page.getByText('You’ve completed Module 1.')).toBeVisible();
   await expect(
-    page.getByRole('button', { name: 'Practice complete' }),
-  ).toBeDisabled();
+    page.getByRole('link', { name: 'Continue to Module 2' }),
+  ).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Take me Home' })).toBeVisible();
+});
+
+test('completing the last assigned module goes straight to the course-complete screen', async ({
+  page,
+}) => {
+  const priorUnits = ['module-3', 'module-4', 'module-5'].flatMap((slug) =>
+    ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'].map(
+      (day) => `${slug}-${day}`,
+    ),
+  );
+  const module6Prelude = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6'].map(
+    (day) => `module-6-${day}`,
+  );
+  await seed(page, [...priorUnits, ...module6Prelude], 'reduced');
+  await page.goto('/app/modules/module-6/day7');
+  const ruleChecks = page.getByRole('checkbox');
+  for (let index = 0; index < (await ruleChecks.count()); index++)
+    await ruleChecks.nth(index).check();
+  await page
+    .getByPlaceholder('Your reflection')
+    .first()
+    .fill('Changed the rule set and verified the output myself.');
+  await page.getByRole('button', { name: /Complete Practice/ }).click();
+  // Last assigned module (module 6, position 4 of 4) skips the
+  // "proceed to Module N?" screen and goes straight here — feedback 3.
+  await expect(page).toHaveURL(/course-complete/);
+  await expect(page.getByText('Congratulations!')).toBeVisible();
+  await expect(
+    page.getByText('What do you want to learn next?'),
+  ).toBeVisible();
+  await page.getByRole('button', { name: 'Close' }).click();
+  await page.getByRole('link', { name: 'Take me Home' }).click();
+  await expect(page).toHaveURL(/\/app$/);
 });
 
 test('corrupted persisted state recovers safely', async ({ page }) => {

@@ -28,7 +28,7 @@ export default function NotificationsPage() {
       body:
         unit && courseModule
           ? `${courseModule.title}: ${unit.title}`
-          : 'Every assigned unit has been completed.',
+          : 'Every assigned lesson has been completed.',
       time: 'Now',
       href:
         unit && courseModule
@@ -38,7 +38,7 @@ export default function NotificationsPage() {
     {
       kind: 'progress',
       title: `${summary.percentage}% of your path complete`,
-      body: `${summary.completed} of ${summary.total} units · ${summary.minutes} learning minutes`,
+      body: `${summary.completed} of ${summary.total} lessons · ${summary.minutes} learning minutes`,
       time: 'Today',
       href: '/app/progress',
     },

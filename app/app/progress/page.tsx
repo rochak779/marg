@@ -78,7 +78,7 @@ export default function ProgressPage() {
   return (
     <div className="progress-view real-progress">
       <DashboardHeader
-        subtitle={`${summary.completed}/${summary.total} units`}
+        subtitle={`${summary.completed}/${summary.total} lessons`}
         progress={summary.percentage}
         firstName={state.profile?.firstName}
         streak={learningStreak(state)}
@@ -124,7 +124,7 @@ export default function ProgressPage() {
               </div>
               <div className="chart-totals">
                 <strong>
-                  {summary.completed} <i>units</i>
+                  {summary.completed} <i>lessons</i>
                 </strong>
                 <strong>
                   {summary.minutes} <i>minutes</i>

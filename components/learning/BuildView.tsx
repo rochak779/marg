@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useLearning } from '@/app/providers';
 import { isUnitUnlocked } from '@/lib/learning/progression';
 import { saveBuild } from '@/lib/learning/server-actions';
@@ -28,6 +29,7 @@ export function BuildView({
   courseModule: CurriculumModule;
   unit: BuildUnit;
 }) {
+  const router = useRouter();
   const { state, ready, setState } = useLearning();
   const [copied, setCopied] = useState(false);
   const [progress, setProgress] = useState<BuildProgress>(
@@ -78,6 +80,13 @@ export function BuildView({
       unitId: unit.id,
       tool: progress.tool,
     });
+    // Build is always second-to-last in a module, right before Practice
+    // (Day 7) — send the learner straight on rather than leaving them
+    // stranded on the now-disabled Build screen.
+    const nextIndex =
+      courseModule.units.findIndex((item) => item.id === unit.id) + 1;
+    const nextUnit = courseModule.units[nextIndex];
+    if (nextUnit) router.push(`/app/modules/${courseModule.slug}/${nextUnit.day}`);
   };
   const copyPrompt = async () => {
     try {

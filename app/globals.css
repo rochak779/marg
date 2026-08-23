@@ -2232,6 +2232,24 @@ a {
   height: 112px;
   animation: sixa-float 5s ease-in-out infinite;
 }
+.sixa-result-main > .sixa-congrats-icon {
+  width: 96px;
+  height: auto;
+  animation: sixa-float 5s ease-in-out infinite;
+}
+.sixa-congrats-title {
+  margin-top: 18px;
+  font-size: 34px;
+  letter-spacing: -0.03em;
+}
+.sixa-result-main > p.sixa-congrats-subtitle {
+  max-width: none;
+  margin: 6px 0 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
 .sixa-result-main svg circle {
   fill: none;
 }
@@ -2307,7 +2325,8 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .sixa-module-art,
-  .sixa-result-main > svg {
+  .sixa-result-main > svg,
+  .sixa-result-main > .sixa-congrats-icon {
     animation: none;
   }
 }

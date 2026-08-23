@@ -58,7 +58,7 @@ export default function BuildHub() {
             className="build-continue build-unlock-notice"
             href={`/app/modules/module-${current.id.split('-')[1]}/${current.day}`}
           >
-            <span>Complete the current unit to unlock your first Build</span>
+            <span>Complete the current lesson to unlock your first Build</span>
             <svg viewBox="0 0 24 24">
               <path d="m9 6 6 6-6 6" />
             </svg>

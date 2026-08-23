@@ -55,7 +55,7 @@ export default function HomePage() {
       <div className="app-hero path-hero">
         <h1>
           {unit
-            ? `${summary.total - summary.completed} units ahead of you`
+            ? `${summary.total - summary.completed} lessons ahead of you`
             : 'Your path is complete'}
         </h1>
         <p>
@@ -64,7 +64,7 @@ export default function HomePage() {
               <b>Day {dayNumber}:</b> {shortModuleTitle(currentModule.id)}
             </>
           ) : (
-            'You completed every assigned unit.'
+            'You completed every assigned lesson.'
           )}
         </p>
         <Link className="hero-arrow" href={href}>
