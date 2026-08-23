@@ -180,13 +180,11 @@ a {
     #4285f4 0
   );
 }
-.orbital {
-  position: relative;
-  height: 180px;
-}
-.orbital svg {
-  width: 100%;
-  height: 100%;
+.hero-art {
+  display: block;
+  width: 220px;
+  height: auto;
+  margin: 14px auto 0;
 }
 @keyframes float {
   50% {
@@ -774,13 +772,6 @@ a {
   position: relative;
   overflow: hidden;
 }
-.courses-head > svg {
-  position: absolute;
-  right: -6px;
-  top: 86px;
-  width: 176px;
-  height: 126px;
-}
 .course-spark {
   position: absolute;
   top: 48px;
@@ -1142,9 +1133,6 @@ a {
   place-items: center;
   cursor: pointer;
 }
-.courses-head > svg {
-  top: 74px;
-}
 .courses-head h1 {
   top: 110px;
 }
@@ -1422,14 +1410,6 @@ a {
   max-width: 100%;
   font-size: 11.5px;
   line-height: 1.45;
-}
-.path-orbit {
-  position: absolute;
-  z-index: 1;
-  right: 8px;
-  top: 12px;
-  width: 112px;
-  height: 103px;
 }
 .path-star {
   position: absolute;
@@ -3194,11 +3174,6 @@ a {
   top: 112px;
   font-size: 32px;
 }
-.courses-head > svg {
-  top: 72px;
-  width: 150px;
-  height: 108px;
-}
 .course-counts {
   bottom: 46px;
 }
@@ -3499,32 +3474,6 @@ a {
   height: 7px;
   border-radius: 50%;
   background: #9bd8b0;
-}
-.build-hub > header > svg {
-  position: absolute;
-  top: 74px;
-  right: 7px;
-  width: 132px;
-  height: 122px;
-}
-.build-hub > header > svg path:first-child {
-  fill: #a5adf8;
-  stroke: var(--purple-dark);
-  stroke-width: 2.4;
-}
-.build-hub > header > svg path:nth-child(2) {
-  fill: var(--orange);
-  stroke: #c0703c;
-  stroke-width: 2.4;
-}
-.build-hub > header > svg path:nth-child(3) {
-  fill: none;
-  stroke: var(--purple-dark);
-  stroke-width: 4;
-  stroke-linecap: round;
-}
-.build-hub > header > svg circle {
-  fill: #fff3e2;
 }
 .build-title {
   position: absolute;
