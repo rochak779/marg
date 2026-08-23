@@ -142,10 +142,7 @@ export function BuildView({
                 })
               }
             />
-            <span>
-              <b>{index + 1}</b>
-              {step}
-            </span>
+            <span>{step}</span>
           </label>
         ))}
       </section>
