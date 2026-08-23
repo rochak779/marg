@@ -48,7 +48,7 @@ export default function BuildHub() {
           <h1>
             Build it,
             <br />
-            don’t just read it
+            just don’t read it.
           </h1>
         </div>
       </header>
