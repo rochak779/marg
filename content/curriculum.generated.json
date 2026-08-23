@@ -384,18 +384,18 @@
     "slug": "module-2",
     "title": "From Asking AI to Directing AI",
     "audience": "Basic learners only",
-    "outcome": "By Sunday, the learner can turn messy meeting notes into a clear, reusable set of actions using ChatGPT or Claude, and can explain why the output still needs human review.",
+    "outcome": "By Day 7, the learner can turn messy meeting notes into a clear, reusable set of actions using ChatGPT or Claude, and can explain why the output still needs human review.",
     "weekdayComponents": [
-      "Monday: AI capability map",
-      "Tuesday: Prompt goal",
-      "Wednesday: Context and constraints",
-      "Thursday: Verification checklist",
-      "Friday: Reusable prompt structure"
+      "Day 1: AI capability map",
+      "Day 2: Prompt goal",
+      "Day 3: Context and constraints",
+      "Day 4: Verification checklist",
+      "Day 5: Reusable prompt structure"
     ],
     "units": [
       {
-        "id": "module-2-monday",
-        "day": "monday",
+        "id": "module-2-day1",
+        "day": "day1",
         "kind": "lesson",
         "title": "AI is a prediction engine, not a knowledgeable colleague",
         "hook": "You ask AI a confident question. It gives a confident answer. The dangerous assumption is that confidence means correctness.",
@@ -449,8 +449,8 @@
         ]
       },
       {
-        "id": "module-2-tuesday",
-        "day": "tuesday",
+        "id": "module-2-day2",
+        "day": "day2",
         "kind": "lesson",
         "title": "A good prompt begins with a job, not clever wording",
         "hook": "Most weak prompts are not badly written. They are missing a clear job.",
@@ -462,7 +462,7 @@
         ],
         "example": "Before: 'Summarise these notes.' After: 'From the meeting notes below, extract decisions, action items, owners and deadlines. If an owner or deadline is missing, write Not specified.'",
         "action": "Rewrite this vague prompt: 'Help me with my meeting.' Include a goal, input and output.",
-        "savedComponent": "A one-sentence goal for Saturday: turn meeting notes into decisions and actions.",
+        "savedComponent": "A one-sentence goal for Day 6: turn meeting notes into decisions and actions.",
         "estimatedMinutes": 10,
         "quiz": [
           {
@@ -504,8 +504,8 @@
         ]
       },
       {
-        "id": "module-2-wednesday",
-        "day": "wednesday",
+        "id": "module-2-day3",
+        "day": "day3",
         "kind": "lesson",
         "title": "Context and constraints turn a generic answer into a useful one",
         "hook": "Two people can use the same AI tool and get very different value. Usually, one has supplied the missing context.",
@@ -517,7 +517,7 @@
         ],
         "example": "Context: 'This update is for directors who were not in the meeting.' Constraint: 'Use only the notes. Mark missing information instead of guessing.'",
         "action": "Add two constraints to yesterday's meeting prompt: one about unsupported information and one about the response format.",
-        "savedComponent": "The context and constraint section of Saturday's prompt.",
+        "savedComponent": "The context and constraint section of Day 6's prompt.",
         "estimatedMinutes": 10,
         "quiz": [
           {
@@ -559,8 +559,8 @@
         ]
       },
       {
-        "id": "module-2-thursday",
-        "day": "thursday",
+        "id": "module-2-day4",
+        "day": "day4",
         "kind": "lesson",
         "title": "A polished answer can still be wrong",
         "hook": "AI errors are often easy to miss because they arrive in fluent sentences and tidy tables.",
@@ -614,8 +614,8 @@
         ]
       },
       {
-        "id": "module-2-friday",
-        "day": "friday",
+        "id": "module-2-day5",
+        "day": "day5",
         "kind": "lesson",
         "title": "A workflow is a repeatable path, not one lucky prompt",
         "hook": "If the result depends on remembering the perfect words every Friday, you have a trick. If the process can be repeated and checked, you have the beginning of a workflow.",
@@ -626,7 +626,7 @@
           "Save prompts as reusable templates with placeholders such as [PASTE NOTES] and [AUDIENCE]. This makes the process easier to repeat without pretending every input is identical."
         ],
         "example": "Trigger: meeting ends. Input: notes. AI task: extract decisions and actions. Output: structured table. Human review: meeting owner checks it before sharing.",
-        "action": "Write the five elements of Saturday's meeting-notes workflow.",
+        "action": "Write the five elements of Day 6's meeting-notes workflow.",
         "savedComponent": "The complete workflow outline and a reusable prompt template.",
         "estimatedMinutes": 10,
         "quiz": [
@@ -669,8 +669,8 @@
         ]
       },
       {
-        "id": "module-2-saturday",
-        "day": "saturday",
+        "id": "module-2-day6",
+        "day": "day6",
         "kind": "build",
         "title": "Build your first reusable prompt workflow: meeting notes to actions",
         "outcome": "Use ChatGPT or Claude to turn messy meeting notes into a checked action summary. This is a guided prompting workflow, not an automated system.",
@@ -688,11 +688,11 @@
         ]
       },
       {
-        "id": "module-2-sunday",
-        "day": "sunday",
+        "id": "module-2-day7",
+        "day": "day7",
         "kind": "practice",
         "title": "Adapt it yourself: email thread to decisions and actions",
-        "challenge": "Without copying Saturday's instructions word for word, adapt the workflow to turn an email thread into decisions, actions and unresolved questions.",
+        "challenge": "Without copying Day 6's instructions word for word, adapt the workflow to turn an email thread into decisions, actions and unresolved questions.",
         "rules": [
           "Change the input description from meeting notes to an email thread",
           "Preserve who said what",
@@ -720,18 +720,18 @@
     "slug": "module-3",
     "title": "Customer Feedback: From Comments to Evidence-Backed Insights",
     "audience": "Week 2 for basic learners; Week 1 entry point for advanced learners",
-    "outcome": "By Sunday, the learner can use ChatGPT or Claude to analyse a set of customer comments, connect each insight to evidence and test whether the result is trustworthy.",
+    "outcome": "By Day 7, the learner can use ChatGPT or Claude to analyse a set of customer comments, connect each insight to evidence and test whether the result is trustworthy.",
     "weekdayComponents": [
-      "Monday: Grounding rules",
-      "Tuesday: Retrieval mental model",
-      "Wednesday: Meaning-based grouping",
-      "Thursday: Source preparation plan",
-      "Friday: Evaluation checklist"
+      "Day 1: Grounding rules",
+      "Day 2: Retrieval mental model",
+      "Day 3: Meaning-based grouping",
+      "Day 4: Source preparation plan",
+      "Day 5: Evaluation checklist"
     ],
     "units": [
       {
-        "id": "module-3-monday",
-        "day": "monday",
+        "id": "module-3-day1",
+        "day": "day1",
         "kind": "lesson",
         "title": "Grounding: make the answer stand on evidence",
         "hook": "A polished customer insight without supporting feedback is only a plausible opinion.",
@@ -743,7 +743,7 @@
         ],
         "example": "Unsupported: 'Customers hate onboarding.' Grounded: 'Three of eight comments mention confusion during identity verification: C2, C5 and C8.'",
         "action": "Rewrite the unsupported insight so it states the evidence, scope and uncertainty.",
-        "savedComponent": "Four grounding rules for Saturday's workflow.",
+        "savedComponent": "Four grounding rules for Day 6's workflow.",
         "estimatedMinutes": 10,
         "quiz": [
           {
@@ -785,8 +785,8 @@
         ]
       },
       {
-        "id": "module-3-tuesday",
-        "day": "tuesday",
+        "id": "module-3-day2",
+        "day": "day2",
         "kind": "lesson",
         "title": "RAG: retrieve before you generate",
         "hook": "When the source collection becomes too large, the model should not guess which part matters. It needs a retrieval step.",
@@ -827,7 +827,7 @@
           },
           {
             "id": "m3-tuesday-q3",
-            "prompt": "Will Saturday create a production RAG system?",
+            "prompt": "Will Day 6 create a production RAG system?",
             "options": [
               "Yes",
               "No; it demonstrates grounded behaviour with a small source set",
@@ -840,8 +840,8 @@
         ]
       },
       {
-        "id": "module-3-wednesday",
-        "day": "wednesday",
+        "id": "module-3-day3",
+        "day": "day3",
         "kind": "lesson",
         "title": "Embeddings and vectors: finding meaning, not just matching words",
         "hook": "A customer can say 'I got stuck proving who I am' without ever using the words 'identity verification'. A keyword search may miss the connection.",
@@ -895,8 +895,8 @@
         ]
       },
       {
-        "id": "module-3-thursday",
-        "day": "thursday",
+        "id": "module-3-day4",
+        "day": "day4",
         "kind": "lesson",
         "title": "Chunking and metadata decide what the AI can find",
         "hook": "If you cut a document in the wrong places, the answer may retrieve half a thought and lose the evidence around it.",
@@ -908,7 +908,7 @@
         ],
         "example": "Useful feedback record: C07 | 14 Aug | New customer | Onboarding | 'The selfie check failed three times.'",
         "action": "Turn one paragraph of feedback into a clean record with ID, date, segment, topic and full comment.",
-        "savedComponent": "The feedback record format that will be used on Saturday.",
+        "savedComponent": "The feedback record format that will be used on Day 6.",
         "estimatedMinutes": 10,
         "quiz": [
           {
@@ -950,8 +950,8 @@
         ]
       },
       {
-        "id": "module-3-friday",
-        "day": "friday",
+        "id": "module-3-day5",
+        "day": "day5",
         "kind": "lesson",
         "title": "Evals: test the workflow, not just the demo",
         "hook": "A workflow that succeeds on one carefully chosen example has shown a demo, not reliability.",
@@ -1005,8 +1005,8 @@
         ]
       },
       {
-        "id": "module-3-saturday",
-        "day": "saturday",
+        "id": "module-3-day6",
+        "day": "day6",
         "kind": "build",
         "title": "Build a grounded customer-feedback analysis workflow",
         "outcome": "Use ChatGPT or Claude to turn a small feedback dataset into themes with traceable evidence. This is a manual, source-grounded workflow inside a chat tool, not a production RAG implementation.",
@@ -1024,11 +1024,11 @@
         ]
       },
       {
-        "id": "module-3-sunday",
-        "day": "sunday",
+        "id": "module-3-day7",
+        "day": "day7",
         "kind": "practice",
         "title": "Adapt it yourself: research notes to evidence-backed findings",
-        "challenge": "Adapt Saturday's workflow to analyse short research notes rather than customer comments.",
+        "challenge": "Adapt Day 6's workflow to analyse short research notes rather than customer comments.",
         "rules": [
           "Replace customer IDs with source-note IDs",
           "Separate observed behaviour from participant opinion",
@@ -1056,18 +1056,18 @@
     "slug": "module-4",
     "title": "Feature Requests: Classify, Prioritise and Route Work",
     "audience": "Applied module for both learner paths",
-    "outcome": "By Sunday, the learner can create and test a repeatable ChatGPT/Claude workflow that classifies incoming requests, explains its reasoning and sends uncertain items for human review.",
+    "outcome": "By Day 7, the learner can create and test a repeatable ChatGPT/Claude workflow that classifies incoming requests, explains its reasoning and sends uncertain items for human review.",
     "weekdayComponents": [
-      "Monday: Taxonomy",
-      "Tuesday: Classification criteria",
-      "Wednesday: Structured schema",
-      "Thursday: Confidence and review rules",
-      "Friday: Routing tests"
+      "Day 1: Taxonomy",
+      "Day 2: Classification criteria",
+      "Day 3: Structured schema",
+      "Day 4: Confidence and review rules",
+      "Day 5: Routing tests"
     ],
     "units": [
       {
-        "id": "module-4-monday",
-        "day": "monday",
+        "id": "module-4-day1",
+        "day": "day1",
         "kind": "lesson",
         "title": "A taxonomy gives AI a shared filing system",
         "hook": "If your categories overlap, AI will not repair them. It will simply make the inconsistency faster.",
@@ -1121,8 +1121,8 @@
         ]
       },
       {
-        "id": "module-4-tuesday",
-        "day": "tuesday",
+        "id": "module-4-day2",
+        "day": "day2",
         "kind": "lesson",
         "title": "Classification needs criteria, not vibes",
         "hook": "Two requests can use different words and still belong to the same category. The classifier needs rules for meaning.",
@@ -1176,8 +1176,8 @@
         ]
       },
       {
-        "id": "module-4-wednesday",
-        "day": "wednesday",
+        "id": "module-4-day3",
+        "day": "day3",
         "kind": "lesson",
         "title": "Structured output makes AI results usable",
         "hook": "A paragraph can sound smart and still be difficult to sort, compare or pass to another step.",
@@ -1188,7 +1188,7 @@
           "Use allowed values where consistency matters. For example, confidence must be High, Medium or Low rather than any phrase the model chooses."
         ],
         "example": "ID: R04 | Category: Reporting export | Confidence: High | Evidence: 'Need PDF download' | Review: No.",
-        "action": "Create a seven-field output schema for the Saturday workflow.",
+        "action": "Create a seven-field output schema for the Day 6 workflow.",
         "savedComponent": "The final request-classification schema.",
         "estimatedMinutes": 10,
         "quiz": [
@@ -1231,8 +1231,8 @@
         ]
       },
       {
-        "id": "module-4-thursday",
-        "day": "thursday",
+        "id": "module-4-day4",
+        "day": "day4",
         "kind": "lesson",
         "title": "Confidence should change what happens next",
         "hook": "A confidence label is decoration unless it changes the workflow.",
@@ -1286,8 +1286,8 @@
         ]
       },
       {
-        "id": "module-4-friday",
-        "day": "friday",
+        "id": "module-4-day5",
+        "day": "day5",
         "kind": "lesson",
         "title": "Routing turns classification into action",
         "hook": "Sorting a ticket is not the outcome. The outcome is getting it to the right next step.",
@@ -1299,7 +1299,7 @@
         ],
         "example": "Category: Access. Security indicator: Possible. Confidence: Medium. Route: Security review before product backlog.",
         "action": "Create five IF/THEN routing rules and one rule that always requires human review.",
-        "savedComponent": "Routing rules plus a Friday test set.",
+        "savedComponent": "Routing rules plus a Day 5 test set.",
         "estimatedMinutes": 10,
         "quiz": [
           {
@@ -1341,8 +1341,8 @@
         ]
       },
       {
-        "id": "module-4-saturday",
-        "day": "saturday",
+        "id": "module-4-day6",
+        "day": "day6",
         "kind": "build",
         "title": "Build a request classification and routing workflow",
         "outcome": "Use ChatGPT or Claude to classify mock product requests, return a structured result and create an exception queue for uncertain or sensitive items.",
@@ -1360,8 +1360,8 @@
         ]
       },
       {
-        "id": "module-4-sunday",
-        "day": "sunday",
+        "id": "module-4-day7",
+        "day": "day7",
         "kind": "practice",
         "title": "Adapt it yourself: support tickets to product signals",
         "challenge": "Adapt the workflow to classify support tickets by issue type and route them either to support, engineering, product review or urgent escalation.",
@@ -1392,18 +1392,18 @@
     "slug": "module-5",
     "title": "Product Communication: Turn Messy Inputs into Clear Updates",
     "audience": "Applied module for both learner paths",
-    "outcome": "By Sunday, the learner can build a reusable ChatGPT/Claude workflow that converts verified product inputs into different stakeholder updates without inventing progress or hiding risk.",
+    "outcome": "By Day 7, the learner can build a reusable ChatGPT/Claude workflow that converts verified product inputs into different stakeholder updates without inventing progress or hiding risk.",
     "weekdayComponents": [
-      "Monday: Audience contract",
-      "Tuesday: Source hierarchy",
-      "Wednesday: Synthesis rules",
-      "Thursday: Output templates",
-      "Friday: Quality checks"
+      "Day 1: Audience contract",
+      "Day 2: Source hierarchy",
+      "Day 3: Synthesis rules",
+      "Day 4: Output templates",
+      "Day 5: Quality checks"
     ],
     "units": [
       {
-        "id": "module-5-monday",
-        "day": "monday",
+        "id": "module-5-day1",
+        "day": "day1",
         "kind": "lesson",
         "title": "The audience changes the answer",
         "hook": "A useful engineering update and a useful executive update may describe the same week without using the same detail.",
@@ -1457,8 +1457,8 @@
         ]
       },
       {
-        "id": "module-5-tuesday",
-        "day": "tuesday",
+        "id": "module-5-day2",
+        "day": "day2",
         "kind": "lesson",
         "title": "Source hierarchy: tell AI what wins when inputs disagree",
         "hook": "The roadmap says launch is Friday. The delivery notes say the security review is unfinished. Which source should the update trust?",
@@ -1512,8 +1512,8 @@
         ]
       },
       {
-        "id": "module-5-wednesday",
-        "day": "wednesday",
+        "id": "module-5-day3",
+        "day": "day3",
         "kind": "lesson",
         "title": "Synthesis is selection with accountability",
         "hook": "Summarising removes information. Good synthesis explains what deserves to survive that removal.",
@@ -1567,8 +1567,8 @@
         ]
       },
       {
-        "id": "module-5-thursday",
-        "day": "thursday",
+        "id": "module-5-day4",
+        "day": "day4",
         "kind": "lesson",
         "title": "Templates create consistency without making every update identical",
         "hook": "A blank page asks the writer to remember the format, the audience and every risk, every single week.",
@@ -1622,8 +1622,8 @@
         ]
       },
       {
-        "id": "module-5-friday",
-        "day": "friday",
+        "id": "module-5-day5",
+        "day": "day5",
         "kind": "lesson",
         "title": "Critique before polish",
         "hook": "Once AI has polished the prose, missing evidence becomes harder to see.",
@@ -1677,8 +1677,8 @@
         ]
       },
       {
-        "id": "module-5-saturday",
-        "day": "saturday",
+        "id": "module-5-day6",
+        "day": "day6",
         "kind": "build",
         "title": "Build a two-pass stakeholder update workflow",
         "outcome": "Use ChatGPT or Claude to review mixed product inputs, flag conflicts and then produce an executive update and a delivery-team update from one factual core.",
@@ -1696,11 +1696,11 @@
         ]
       },
       {
-        "id": "module-5-sunday",
-        "day": "sunday",
+        "id": "module-5-day7",
+        "day": "day7",
         "kind": "practice",
         "title": "Adapt it yourself: convert the workflow into a launch update",
-        "challenge": "Adapt Saturday's workflow for a product launch update sent to commercial, support and operations leaders.",
+        "challenge": "Adapt Day 6's workflow for a product launch update sent to commercial, support and operations leaders.",
         "rules": [
           "Add readiness areas such as product, operations, support and compliance",
           "Keep one shared factual core",
@@ -1728,18 +1728,18 @@
     "slug": "module-6",
     "title": "AI Prototyping: Turn an Idea into Testable Behaviour",
     "audience": "Applied module for both learner paths",
-    "outcome": "By Sunday, the learner can use ChatGPT or Claude to simulate an AI product behaviour, test it with realistic cases and distinguish a conversational prototype from a production product.",
+    "outcome": "By Day 7, the learner can use ChatGPT or Claude to simulate an AI product behaviour, test it with realistic cases and distinguish a conversational prototype from a production product.",
     "weekdayComponents": [
-      "Monday: User problem",
-      "Tuesday: Behaviour contract",
-      "Wednesday: Interaction flow",
-      "Thursday: Guardrails",
-      "Friday: Test plan"
+      "Day 1: User problem",
+      "Day 2: Behaviour contract",
+      "Day 3: Interaction flow",
+      "Day 4: Guardrails",
+      "Day 5: Test plan"
     ],
     "units": [
       {
-        "id": "module-6-monday",
-        "day": "monday",
+        "id": "module-6-day1",
+        "day": "day1",
         "kind": "lesson",
         "title": "Prototype the risky behaviour, not the entire product",
         "hook": "The fastest prototype is not the one with the fewest screens. It is the one that tests the biggest uncertainty.",
@@ -1793,8 +1793,8 @@
         ]
       },
       {
-        "id": "module-6-tuesday",
-        "day": "tuesday",
+        "id": "module-6-day2",
+        "day": "day2",
         "kind": "lesson",
         "title": "A behaviour contract tells the AI how to act",
         "hook": "A prototype becomes testable when expected behaviour is explicit enough to pass or fail.",
@@ -1848,8 +1848,8 @@
         ]
       },
       {
-        "id": "module-6-wednesday",
-        "day": "wednesday",
+        "id": "module-6-day3",
+        "day": "day3",
         "kind": "lesson",
         "title": "Design the interaction as states",
         "hook": "A good AI conversation is not one endless prompt. It moves through recognisable stages.",
@@ -1903,8 +1903,8 @@
         ]
       },
       {
-        "id": "module-6-thursday",
-        "day": "thursday",
+        "id": "module-6-day4",
+        "day": "day4",
         "kind": "lesson",
         "title": "Guardrails define what the prototype must not do",
         "hook": "The most important prototype instruction may be the action it refuses to take.",
@@ -1958,8 +1958,8 @@
         ]
       },
       {
-        "id": "module-6-friday",
-        "day": "friday",
+        "id": "module-6-day5",
+        "day": "day5",
         "kind": "lesson",
         "title": "Test conversations reveal more than one perfect demo",
         "hook": "Your prototype is not the happy path. It is how the behaviour changes when the input becomes messy.",
@@ -1971,7 +1971,7 @@
         ],
         "example": "Test: user says 'Everyone wants this feature' but provides no evidence. Expected: label it as an assumption and ask for the source.",
         "action": "Write five test conversations and expected behaviours.",
-        "savedComponent": "The Friday test plan and success criteria.",
+        "savedComponent": "The Day 5 test plan and success criteria.",
         "estimatedMinutes": 10,
         "quiz": [
           {
@@ -2013,8 +2013,8 @@
         ]
       },
       {
-        "id": "module-6-saturday",
-        "day": "saturday",
+        "id": "module-6-day6",
+        "day": "day6",
         "kind": "build",
         "title": "Build a conversational Feature Brief Copilot prototype",
         "outcome": "Use ChatGPT or Claude to simulate an AI feature that questions a rough product idea before creating an evidence-aware feature brief. This tests conversational behaviour; it is not a coded or production-ready product.",
@@ -2032,8 +2032,8 @@
         ]
       },
       {
-        "id": "module-6-sunday",
-        "day": "sunday",
+        "id": "module-6-day7",
+        "day": "day7",
         "kind": "practice",
         "title": "Adapt it yourself: create a different AI behaviour prototype",
         "challenge": "Choose one behaviour to prototype: PRD critic, research-plan coach or experiment-design assistant. Adapt the behaviour contract rather than starting from a blank prompt.",

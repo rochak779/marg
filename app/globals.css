@@ -1691,11 +1691,18 @@ a {
   opacity: 0.65;
 }
 .sixa-module-title h1 {
-  margin: 8px 0 0;
+  margin: 0;
   color: var(--ink);
   font-size: clamp(20px, 6.6vw, 25px);
   line-height: 1.14;
   letter-spacing: -0.025em;
+}
+.sixa-module-title p {
+  margin: 6px 0 0;
+  color: var(--ink);
+  opacity: 0.65;
+  font-size: 13px;
+  line-height: 1.3;
 }
 .sixa-module-sheet {
   position: relative;
@@ -3170,7 +3177,7 @@ a {
   height: 252px;
 }
 .courses-head h1 {
-  top: 96px;
+  top: 112px;
   font-size: 32px;
 }
 .courses-head > svg {
@@ -3185,7 +3192,7 @@ a {
   margin-top: -30px;
 }
 .real-course {
-  height: 200px;
+  height: 168px;
   margin: 14px 18px 0;
   border-radius: 26px;
 }
@@ -3194,16 +3201,16 @@ a {
   height: 46px;
 }
 .real-course .track-copy {
-  top: 86px;
+  top: 62px;
 }
 .real-course .track-copy h2 {
-  width: 205px;
-  max-height: 43px;
-  overflow: hidden;
+  width: 100%;
+  max-height: none;
+  overflow: visible;
+  white-space: normal;
 }
 .real-course .track-foot {
-  height: 50px;
-  bottom: 10px;
+  bottom: 16px;
 }
 .track-card.dark.real-course {
   background: var(--orange);
@@ -3999,7 +4006,7 @@ a {
   stroke-linejoin: round;
 }
 .real-course .track-copy h2 {
-  width: 190px;
+  width: 100%;
   overflow-wrap: normal;
 }
 .period-toggle {
