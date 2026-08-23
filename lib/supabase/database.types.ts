@@ -158,6 +158,30 @@ export type Database = {
         }
         Relationships: []
       }
+      feedback: {
+        Row: {
+          created_at: string
+          id: string
+          message: string | null
+          rating: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          rating: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          rating?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       learning_path_modules: {
         Row: {
           module_id: number
@@ -430,6 +454,10 @@ export type Database = {
           p_module_ids: number[]
           p_work_context: string
         }
+        Returns: string
+      }
+      submit_feedback: {
+        Args: { p_message: string | null; p_rating: number }
         Returns: string
       }
       submit_quiz_attempt: {
