@@ -2,6 +2,7 @@
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { captureServerEvent } from '@/lib/analytics/posthog-server';
 
 export type AuthActionResult =
@@ -52,6 +53,28 @@ export async function signUpWithPassword(
   });
   if (error) return { ok: false, error: mapAuthError(error.message) };
   if (data.user) {
+    // Write the profile row now rather than waiting on /auth/callback's
+    // upsert. That route only runs if the confirmation link's PKCE code
+    // exchange succeeds in the same browser that started signup — opening
+    // the link on another device/browser silently skips it, which was
+    // leaving password-signup users with no profiles row and the UI
+    // falling back to their email as the display name. Session isn't
+    // established yet pre-confirmation, so RLS would reject this from the
+    // request-scoped client; use the admin client to bypass it. The
+    // callback's own upsert (ignoreDuplicates: true) is a no-op once this
+    // has run.
+    const admin = createAdminClient();
+    const { error: profileError } = await admin
+      .from('profiles')
+      .upsert(
+        { user_id: data.user.id, first_name: firstName },
+        { onConflict: 'user_id', ignoreDuplicates: true },
+      );
+    if (profileError) {
+      console.error('profile upsert failed on signup', {
+        code: profileError.code,
+      });
+    }
     await captureServerEvent(data.user.id, 'user_signed_up', {
       method: 'password',
     });
