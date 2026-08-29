@@ -5,6 +5,7 @@ import { Brand, Stage } from '@/components/ui';
 import { useLearning } from '@/app/providers';
 import { saveAssessment } from '@/lib/learning/server-actions';
 import { track } from '@/lib/learning/analytics';
+import { moduleById } from '@/content/modules';
 import type { AppliedContext, AssessmentAnswers } from '@/lib/learning/types';
 
 type AnswerValue = boolean | AppliedContext;
@@ -84,10 +85,20 @@ export default function Assessment() {
     setSubmitting(false);
     if (!result.ok) return;
     setState(result.state);
+    const assignedModuleIds = result.state.path?.assignedModuleIds ?? [];
+    const firstModule = assignedModuleIds[0]
+      ? moduleById(assignedModuleIds[0])
+      : undefined;
     track('assessment_completed', {
       context: answers.context,
       beyondDrafting: answers.beyondDrafting,
       builtWorkflow: answers.builtWorkflow,
+      entryLevel: result.state.path?.entryLevel ?? '',
+      guidanceLevel: result.state.path?.guidanceLevel ?? '',
+      assignedModuleIds,
+      firstModuleId: firstModule?.id ?? '',
+      firstModuleTitle: firstModule?.title ?? '',
+      firstModuleLessonIds: firstModule?.units.map((unit) => unit.id) ?? [],
     });
     router.push('/recommendation');
   };
