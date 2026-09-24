@@ -21,8 +21,11 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/signin?error=auth_callback_failed`);
   }
 
-  // Ensure a profile row exists on first login (email or Google).
-  const { error: profileError } = await supabase
+  // Ensure a profile row exists on first login (email or Google). With
+  // ignoreDuplicates: true this is INSERT ... ON CONFLICT DO NOTHING, so
+  // .select() comes back non-empty only when a row was actually inserted —
+  // that's how we tell a first-ever login from a returning one below.
+  const { data: upsertedProfile, error: profileError } = await supabase
     .from('profiles')
     .upsert(
       {
@@ -38,7 +41,8 @@ export async function GET(request: Request) {
           'Learner',
       },
       { onConflict: 'user_id', ignoreDuplicates: true },
-    );
+    )
+    .select('user_id');
 
   if (profileError) {
     console.error('profile upsert failed', { code: profileError.code });
@@ -51,6 +55,15 @@ export async function GET(request: Request) {
     await captureServerEvent(data.user.id, 'oauth_sign_in_completed', {
       method: 'google',
     });
+    // Google signup never goes through signUpWithPassword, so this is the
+    // only place a first-time Google login can be tagged as a signup — gate
+    // it on the upsert actually inserting a row, or every return visit would
+    // count as a new signup too.
+    if (!profileError && (upsertedProfile?.length ?? 0) > 0) {
+      await captureServerEvent(data.user.id, 'user_signed_up', {
+        method: 'google',
+      });
+    }
   }
 
   // Phase C will make this route to /assessment or /recommendation based on

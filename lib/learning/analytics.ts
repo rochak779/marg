@@ -12,7 +12,10 @@ export type LearningEvent =
 
 export function track(
   event: LearningEvent,
-  payload: Record<string, string | number | boolean> = {},
+  payload: Record<
+    string,
+    string | number | boolean | string[] | number[]
+  > = {},
 ) {
   if (typeof window === 'undefined') return;
   posthog.capture(event, payload);
