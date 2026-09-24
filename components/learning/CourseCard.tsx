@@ -75,7 +75,7 @@ export function CourseCard({
       <div className="track-foot">
         <div className="course-meta">
           <b>{progress}%</b>
-          <span>7 units</span>
+          <span>7 lessons</span>
         </div>
         <span className="track-arrow" aria-hidden>
           <svg viewBox="0 0 24 24">

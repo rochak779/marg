@@ -4795,6 +4795,13 @@ a {
   color: #d9534f;
   margin-top: 8px;
 }
+/* Shown when completing a quiz, Build or Practice fails to save. */
+.save-error {
+  font-size: 13px;
+  color: #b3261e;
+  margin: 8px 0;
+  text-align: center;
+}
 .duel-result-actions {
   width: 100%;
   margin-top: 24px;

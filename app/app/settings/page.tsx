@@ -131,9 +131,9 @@ export default function SettingsPage() {
           </i>
           <span>
             <b>Weekly goal</b>
-            <small>Complete five learning units</small>
+            <small>Complete five lessons</small>
           </span>
-          <strong>5 units</strong>
+          <strong>5 lessons</strong>
         </div>
         <Link className="settings-row" href="/assessment">
           <i>
@@ -141,7 +141,7 @@ export default function SettingsPage() {
           </i>
           <span>
             <b>Retake the assessment</b>
-            <small>Your completed units stay saved</small>
+            <small>Your completed lessons stay saved</small>
           </span>
         </Link>
       </div>
@@ -157,7 +157,7 @@ export default function SettingsPage() {
           </i>
           <span>
             <b>Notifications</b>
-            <small>Nudges and new unit updates</small>
+            <small>Nudges and new lesson updates</small>
           </span>
           <em
             className={`toggle ${notifications ? 'on' : ''}`}
@@ -200,9 +200,7 @@ export default function SettingsPage() {
         </button>
       </div>
 
-      {showFeedback && (
-        <FeedbackForm onClose={() => setShowFeedback(false)} />
-      )}
+      {showFeedback && <FeedbackForm onClose={() => setShowFeedback(false)} />}
     </div>
   );
 }
