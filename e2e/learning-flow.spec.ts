@@ -163,7 +163,7 @@ test('screen 5a navigation opens every refined destination', async ({
   for (const [name, route, heading] of [
     ['Courses', '/app/courses', 'My courses'],
     ['Progress', '/app/progress', 'Progress'],
-    ['Build', '/app/build', /^Build it/],
+    ['Build', '/app/build', 'Build it, don’t just read it.'],
     ['Settings', '/app/settings', 'Settings'],
   ] as const) {
     await page
