@@ -12,9 +12,12 @@ export function createAdminClient() {
   if (!key) {
     throw new Error('SUPABASE_SERVICE_ROLE_KEY is not configured');
   }
-  return createSupabaseClient<Database>(
+  return createSupabaseClient<Database, 'marg'>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     key,
-    { auth: { autoRefreshToken: false, persistSession: false } },
+    {
+      db: { schema: 'marg' },
+      auth: { autoRefreshToken: false, persistSession: false },
+    },
   );
 }

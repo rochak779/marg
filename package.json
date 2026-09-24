@@ -7,7 +7,8 @@
     "typecheck": "tsc --noEmit",
     "format:check": "prettier --check app components content lib test e2e scripts package.json tsconfig.json playwright.config.ts *.mts *.mjs",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:migrate": "scripts/db-migrate.sh"
   },
   "dependencies": {
     "@dicebear/collection": "^9.4.2",

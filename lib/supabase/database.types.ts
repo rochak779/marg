@@ -37,7 +37,7 @@ export type Database = {
       [_ in never]: never
     }
   }
-  public: {
+  marg: {
     Tables: {
       assessment_results: {
         Row: {
@@ -492,7 +492,7 @@ export type Database = {
 
 type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
 
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "marg">]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
@@ -611,7 +611,7 @@ export const Constants = {
   graphql_public: {
     Enums: {},
   },
-  public: {
+  marg: {
     Enums: {},
   },
 } as const

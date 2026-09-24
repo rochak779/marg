@@ -47,7 +47,8 @@ export async function signUpWithPassword(
     email,
     password,
     options: {
-      data: { first_name: firstName },
+      // auth.users is shared with other apps; keep our keys under `marg`.
+      data: { marg: { first_name: firstName } },
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
     },
   });
