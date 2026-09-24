@@ -1,6 +1,6 @@
 # Marg — Design System & Screen Patterns
 
-**Status:** Updated to cover the full built product (onboarding, auth, assessment, recommendation, app shell). Supersedes the token-only version at repository root (`/design.md`) as the reference for new work; the root file's tokens are carried forward unchanged below, extended with the flow and component patterns that now exist in the codebase.
+**Status:** Updated to cover the full built product (onboarding, auth, assessment, recommendation, app shell). Supersedes the token-only version now archived at `docs/archive/design.md` as the reference for new work; the archived file's tokens are carried forward unchanged below, extended with the flow and component patterns that now exist in the codebase.
 
 ---
 

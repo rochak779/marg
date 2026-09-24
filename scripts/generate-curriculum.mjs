@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
 const source = fs.readFileSync(
-  'CODEX_END_TO_END_IMPLEMENTATION_BRIEF.md',
+  'docs/CODEX_END_TO_END_IMPLEMENTATION_BRIEF.md',
   'utf8',
 );
 const appendix = source.slice(source.indexOf('## Module 1:'));

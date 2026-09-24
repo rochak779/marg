@@ -6,7 +6,7 @@ Last reviewed: 22 August 2026
 
 ## 1. Decision
 
-Build the "Duels" feature described in `Challenge/Marg Landing.dc.html` screen `5b`
+Build the "Duels" feature described in `design/mockups/challenge/Marg Landing.dc.html` screen `5b`
 (list → brief → matchmaking → battle → result) as a bot-only head-to-head quiz mode,
 scoped to modules the learner has reached. This ships now, ahead of the audio
 narration and leaderboard/challenge-mode-vs-human items already flagged as

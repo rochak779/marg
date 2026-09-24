@@ -10,7 +10,6 @@ export default defineConfig([
     'coverage/**',
     'playwright-report/**',
     'test-results/**',
-    'Marg AI learning app onboarding/**',
-    'Home and more/**',
+    'design/**',
   ]),
 ]);
