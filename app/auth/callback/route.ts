@@ -28,6 +28,8 @@ export async function GET(request: Request) {
       {
         user_id: data.user.id,
         first_name:
+          (data.user.user_metadata?.marg?.first_name as string | undefined) ??
+          // Pre-shared-schema signups stored it at the top level.
           (data.user.user_metadata?.first_name as string | undefined) ??
           (data.user.user_metadata?.full_name as string | undefined)?.split(
             ' ',
