@@ -46,8 +46,8 @@ First-time users move from the landing page to onboarding, sign-up, and a three-
 
 ## Evidence on Hand
 
-- Screen reference and interactive design document: `Marg AI learning app onboarding/Marg Landing.dc.html`.
-- Visual references and extracted design guidance are available in the project root and `Marg AI learning app onboarding/uploads/`.
+- Screen reference and interactive design document: `design/mockups/onboarding/Marg Landing.dc.html`.
+- Visual references and extracted design guidance are available in `design/screenshots/` and `design/mockups/onboarding/uploads/`.
 - No production learning-plan content, testimonials, performance claims, or customer evidence has been supplied; future work must not fabricate them.
 
 ## Product Principles
