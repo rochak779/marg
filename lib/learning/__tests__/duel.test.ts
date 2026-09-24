@@ -100,8 +100,8 @@ describe('scoreDuel', () => {
 });
 
 describe('xpForOutcome', () => {
-  it('awards 60/40/20 for win/draw/loss', () => {
-    expect(xpForOutcome('win')).toBe(60);
+  it('awards 100/40/20 for win/draw/loss', () => {
+    expect(xpForOutcome('win')).toBe(100);
     expect(xpForOutcome('draw')).toBe(40);
     expect(xpForOutcome('loss')).toBe(20);
   });

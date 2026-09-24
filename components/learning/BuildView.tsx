@@ -36,6 +36,7 @@ export function BuildView({
     () => state.builds[unit.id] ?? emptyProgress,
   );
   const [finishing, setFinishing] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
   if (!ready) return <div className="state-message">Loading Build…</div>;
   if (
     !isUnitUnlocked(state, unit.id) &&
@@ -67,13 +68,18 @@ export function BuildView({
   const finish = async () => {
     if (!canComplete || finishing) return;
     setFinishing(true);
+    setSaveFailed(false);
+    // A dropped connection rejects rather than returning ok: false.
     const result = await saveBuild({
       unitId: unit.id,
       progress,
       complete: true,
-    });
+    }).catch(() => null);
     setFinishing(false);
-    if (!result.ok) return;
+    if (!result?.ok) {
+      setSaveFailed(true);
+      return;
+    }
     setState(result.state);
     track('build_completed', {
       moduleId: courseModule.id,
@@ -86,7 +92,8 @@ export function BuildView({
     const nextIndex =
       courseModule.units.findIndex((item) => item.id === unit.id) + 1;
     const nextUnit = courseModule.units[nextIndex];
-    if (nextUnit) router.push(`/app/modules/${courseModule.slug}/${nextUnit.day}`);
+    if (nextUnit)
+      router.push(`/app/modules/${courseModule.slug}/${nextUnit.day}`);
   };
   const copyPrompt = async () => {
     try {
@@ -201,10 +208,17 @@ export function BuildView({
           />
           <span>I ran the workflow and checked the result.</span>
         </label>
+        {saveFailed && (
+          <p role="alert" className="save-error">
+            Couldn’t save your progress. Check your connection and try again.
+          </p>
+        )}
         <button
           className="btn"
           disabled={
-            !canComplete || finishing || state.completedUnitIds.includes(unit.id)
+            !canComplete ||
+            finishing ||
+            state.completedUnitIds.includes(unit.id)
           }
           onClick={finish}
         >

@@ -27,7 +27,7 @@ export default function CoursesPage() {
         <h1>My courses</h1>
         <div className="course-counts">
           <span>{modules.length} modules</span>
-          <span>{modules.length * 7} units</span>
+          <span>{modules.length * 7} lessons</span>
         </div>
       </header>
       <div className="course-sheet">

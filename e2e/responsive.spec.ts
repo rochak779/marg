@@ -1,21 +1,32 @@
 import { expect, test } from '@playwright/test';
-const state = {
-  version: 1,
-  assessment: {
-    beyondDrafting: false,
-    context: 'communication',
-    builtWorkflow: false,
-  },
-  path: {
-    entryLevel: 'basic',
-    guidanceLevel: 'full',
-    assignedModuleIds: [1, 4, 5, 2, 3],
-  },
-  completedUnitIds: [],
-  quizResults: {},
-  builds: {},
-  practices: {},
-};
+import {
+  BASIC,
+  createUser,
+  deleteUser,
+  signIn,
+  takeAssessment,
+  type TestUser,
+} from './helpers';
+
+// One signed-in user with a basic path is shared by every viewport — these
+// tests only read screens, they never change progress.
+let user: TestUser;
+let storageState: Awaited<
+  ReturnType<import('@playwright/test').BrowserContext['storageState']>
+>;
+test.beforeAll(async ({ browser }) => {
+  user = await createUser();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  await signIn(page, user);
+  await takeAssessment(page, BASIC);
+  storageState = await context.storageState();
+  await context.close();
+});
+test.afterAll(async () => {
+  await deleteUser(user.id);
+});
+
 for (const viewport of [
   { width: 320, height: 568 },
   { width: 667, height: 375 },
@@ -24,34 +35,34 @@ for (const viewport of [
   { width: 1440, height: 1000 },
 ])
   test(`core routes fit ${viewport.width}x${viewport.height}`, async ({
-    page,
+    browser,
   }) => {
-    await page.setViewportSize(viewport);
-    await page.addInitScript(
-      (state) =>
-        localStorage.setItem('marg-learning-state-v1', JSON.stringify(state)),
-      state,
-    );
+    const context = await browser.newContext({ storageState, viewport });
+    const page = await context.newPage();
     for (const route of [
       '/app',
       '/app/courses',
       '/app/progress',
       '/app/build',
+      '/app/duels',
       '/app/settings',
       '/app/notifications',
       '/app/modules/module-1',
-      '/app/modules/module-1/monday',
+      '/app/modules/module-1/day1',
     ]) {
       await page.goto(route);
-      await expect(page.locator('body')).toBeVisible();
+      // Guard against silently measuring the sign-in page instead.
+      await expect(page).toHaveURL(new RegExp(`${route}$`));
       expect(
         await page.evaluate(
           () =>
             document.documentElement.scrollWidth <=
             document.documentElement.clientWidth,
         ),
+        `${route} scrolls horizontally`,
       ).toBe(true);
     }
+    await context.close();
   });
 
 test('short onboarding screens scroll and keep the continue action reachable', async ({

@@ -64,6 +64,7 @@ export default function Assessment() {
       : [null, null, null],
   );
   const [submitting, setSubmitting] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
   const question = questions[step];
   const selectAnswer = async (value: AnswerValue) => {
     if (submitting) return;
@@ -81,9 +82,14 @@ export default function Assessment() {
       builtWorkflow: next[2] as boolean,
     };
     setSubmitting(true);
-    const result = await saveAssessment(answers);
+    setSaveFailed(false);
+    // A dropped connection rejects rather than returning ok: false.
+    const result = await saveAssessment(answers).catch(() => null);
     setSubmitting(false);
-    if (!result.ok) return;
+    if (!result?.ok) {
+      setSaveFailed(true);
+      return;
+    }
     setState(result.state);
     const assignedModuleIds = result.state.path?.assignedModuleIds ?? [];
     const firstModule = assignedModuleIds[0]
@@ -162,6 +168,12 @@ export default function Assessment() {
           </button>
         ))}
       </div>
+      {saveFailed && (
+        <p role="alert" className="save-error">
+          Couldn’t save your answers. Check your connection and tap your answer
+          again.
+        </p>
+      )}
     </Stage>
   );
 }

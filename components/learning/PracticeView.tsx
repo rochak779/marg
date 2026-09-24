@@ -38,6 +38,7 @@ export function PracticeView({
     () => state.practices[unit.id] ?? emptyProgress,
   );
   const [finishing, setFinishing] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   if (!ready) return <div className="state-message">Loading Practice…</div>;
   if (
@@ -53,17 +54,16 @@ export function PracticeView({
         </Link>
       </div>
     );
-  const patchProgress = (
-    next: Partial<PracticeProgress>,
-    debounceMs = 0,
-  ) => {
+  const patchProgress = (next: Partial<PracticeProgress>, debounceMs = 0) => {
     const updated = { ...progress, ...next };
     setProgress(updated);
     if (saveTimer.current) clearTimeout(saveTimer.current);
     const save = () =>
-      savePractice({ unitId: unit.id, progress: updated, complete: false }).catch(
-        () => {},
-      );
+      savePractice({
+        unitId: unit.id,
+        progress: updated,
+        complete: false,
+      }).catch(() => {});
     if (debounceMs > 0) {
       saveTimer.current = setTimeout(save, debounceMs);
     } else {
@@ -78,13 +78,18 @@ export function PracticeView({
   const finish = async () => {
     if (!canComplete || finishing) return;
     setFinishing(true);
+    setSaveFailed(false);
+    // A dropped connection rejects rather than returning ok: false.
     const result = await savePractice({
       unitId: unit.id,
       progress,
       complete: true,
-    });
+    }).catch(() => null);
     setFinishing(false);
-    if (!result.ok) return;
+    if (!result?.ok) {
+      setSaveFailed(true);
+      return;
+    }
     setState(result.state);
     track('practice_completed', { moduleId: courseModule.id, unitId: unit.id });
     // Practice (Sunday) is always the last unit unlocked in a module, so
@@ -159,8 +164,8 @@ export function PracticeView({
       <section className="reflections">
         <h2>Reflect</h2>
         <p className="muted">
-          Write at least one short response. Saved to your account so
-          it&rsquo;s there if you switch devices.
+          Write at least one short response. Saved to your account so it&rsquo;s
+          there if you switch devices.
         </p>
         {unit.reflections.map((reflection, index) => (
           <label key={reflection}>
@@ -184,6 +189,11 @@ export function PracticeView({
           </label>
         ))}
       </section>
+      {saveFailed && (
+        <p role="alert" className="save-error">
+          Couldn’t save your progress. Check your connection and try again.
+        </p>
+      )}
       <button
         className="btn"
         disabled={

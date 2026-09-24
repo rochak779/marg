@@ -24,6 +24,7 @@ export function LessonView({
   const [showQuiz, setShowQuiz] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [submitting, setSubmitting] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
   if (!ready) return <div className="state-message">Loading lesson…</div>;
   if (
     !isUnitUnlocked(state, unit.id) &&
@@ -46,9 +47,16 @@ export function LessonView({
   const submit = async () => {
     if (submitting) return;
     setSubmitting(true);
-    const result = await submitQuiz({ unitId: unit.id, answers });
+    setSaveFailed(false);
+    // A dropped connection rejects rather than returning ok: false.
+    const result = await submitQuiz({ unitId: unit.id, answers }).catch(
+      () => null,
+    );
     setSubmitting(false);
-    if (!result.ok) return;
+    if (!result?.ok) {
+      setSaveFailed(true);
+      return;
+    }
     setState(result.state);
     const score = result.state.quizResults[unit.id]?.score ?? 0;
     track('quiz_submitted', { moduleId: module.id, unitId: unit.id, score });
@@ -116,6 +124,11 @@ export function LessonView({
             <p>{currentQuestion.explanation}</p>
           </div>
         )}
+        {saveFailed && (
+          <p role="alert" className="save-error">
+            Couldn’t save your progress. Check your connection and try again.
+          </p>
+        )}
         <footer className="sixa-flow-footer">
           <button
             type="button"
@@ -158,9 +171,7 @@ export function LessonView({
         </div>
       </header>
       <div className="sixa-lesson-scroll">
-        <span className="sixa-section-label">
-          DAY {lessonIndex + 1} LESSON
-        </span>
+        <span className="sixa-section-label">DAY {lessonIndex + 1} LESSON</span>
         <h1>{unit.title}</h1>
         <p className="sixa-lesson-hook">{unit.hook}</p>
         {unit.theory.map((paragraph) => (
