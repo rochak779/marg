@@ -28,11 +28,10 @@ export default function Onboarding() {
       <div className="value-list">
         {[
           ['10-minute steps', 'Prompting, models, agents, plain language.'],
-          ['A live playground', 'Write a real prompt, get real feedback.'],
           ['Progress that adds up', 'Streaks, milestones, one path to finish.'],
         ].map((v, i) => (
           <div className="value" key={v[0]}>
-            <span className="value-icon">{['10', '✓', '↗'][i]}</span>
+            <span className="value-icon">{['10', '↗'][i]}</span>
             <div>
               <strong>{v[0]}</strong>
               <p>{v[1]}</p>
