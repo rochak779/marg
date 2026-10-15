@@ -17,7 +17,7 @@ export default function Landing() {
           aria-hidden
         />
         <div className="hero-copy">
-          <span className="pill">12 tracks · 140 lessons</span>
+          <span className="pill">6 modules · 30 lessons</span>
           <h1>Learn AI, one clear step at a time.</h1>
         </div>
       </div>
