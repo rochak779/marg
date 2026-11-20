@@ -51,3 +51,7 @@ Non-technical professionals are being told to "use AI at work", but most stop at
 Next.js (App Router), TypeScript, Supabase (Auth, Postgres, Row Level Security), PostHog, Vitest and Playwright, deployed on Vercel. Installable as a home-screen web app.
 
 </details>
+
+---
+
+Built by [Rochak Agarwal](https://www.rochakagarwal.com). Read the full case study: [Marg on rochakagarwal.com](https://www.rochakagarwal.com/projects/marg).
