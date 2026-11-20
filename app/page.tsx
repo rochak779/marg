@@ -35,6 +35,12 @@ export default function Landing() {
             Sign in
           </Link>
         </span>
+        <span className="muted">
+          Built by{' '}
+          <a href="https://www.rochakagarwal.com" style={{ color: 'inherit', textDecoration: 'underline' }}>
+            Rochak Agarwal
+          </a>
+        </span>
       </div>
     </Stage>
   );
